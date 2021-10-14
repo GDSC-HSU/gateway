@@ -1,0 +1,3 @@
+[submodule "ble_devices"]
+	path = ble_devices
+	url = https://github.com/truonghoangduy/esp32-gateway-devices.git
