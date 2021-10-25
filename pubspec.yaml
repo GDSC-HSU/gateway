@@ -34,9 +34,12 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  flutter_reactive_ble: '4.0.1'
+  # flutter_reactive_ble: ^5.0.0
   flutter_bloc: ^7.3.1
   equatable: ^2.0.3
+  rxdart: ^0.27.2
+  flutter_reactive_ble: ^5.0.0
+  reactive_ble_mobile: ^5.0.0
 
 dev_dependencies:
   flutter_test:
@@ -49,9 +52,9 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
   bloc_test: ^8.3.0
+  mockito: ^5.0.16
+  build_runner: ^2.1.4
 
-dependency_overrides:
-  reactive_ble_mobile: '4.0.0'
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
