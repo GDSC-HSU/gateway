@@ -8,7 +8,7 @@ Boxes model|Adapted model
 |---|---|
 ![Boxes model](docs/img/boxes_model.jpg) | ![Adapted model](docs/img/final_model.jpg)
 &nbsp;
-*WIP spoiler alert* 🤟:If your guys are Vietnamese just come and watch ours [idea illustration]() **English subtitle* will coming soon if your folks interested just open an issue[en-sub], we gonna do it. *We're not saying it yet*, we're open the project to everyone who care about the problem.
+*WIP spoiler alert* 🤟:If your guys are Vietnamese just come and watch ours [idea illustration](https://www.youtube.com/watch?v=RvnyX0l7zPM) **English subtitle* will coming soon if your folks interested just open an issue[en-sub], we gonna do it. *We're not saying it yet*, we're open the project to everyone who care about the problem.
 
 ## Getting to know
 
