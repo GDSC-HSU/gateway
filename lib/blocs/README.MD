@@ -1,11 +1,11 @@
-####```[BLOC]```
-#####```[-> : meaning has a dependency]```
+#### ```[BLOC]```
+##### ```[-> : meaning has a dependency]```
 
 - Inner Bloc impl contain inner bloc dependency communication (bloc->bloc) as state subscriber and emit inner event.
 
 - ```Folder/architecture``` refactor will be on fly when proof of concept (pseudo impl)
 
-####```[Bluetooth Low Energy]```
+#### ```[Bluetooth Low Energy]```
 - ble_repository [Provide RxBLE as highest dependency] (id:0)
 ```
 -- ble_scan [Scanning for device_id] (id:1) ->(0)
@@ -16,7 +16,7 @@
             Hexo state class use to mange and valid state, bloc only for emit state
 ```
 
-####```[Application normal bloc]```
+#### ```[Application normal bloc]```
 architectures still in working process heavy depend on backend impl
 ```
 -- mqtt_bloc
