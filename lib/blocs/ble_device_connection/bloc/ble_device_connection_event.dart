@@ -7,7 +7,7 @@ abstract class BleDeviceConnectionEvent extends Equatable {
 class BLEDeviceConnectionUpdateEvent extends BleDeviceConnectionEvent {
   final ConnectionStateUpdate stateUpdate;
 
-  BLEDeviceConnectionUpdateEvent(this.stateUpdate);
+  const BLEDeviceConnectionUpdateEvent(this.stateUpdate);
 
   @override
   // TODO: implement props
@@ -17,7 +17,7 @@ class BLEDeviceConnectionUpdateEvent extends BleDeviceConnectionEvent {
 class BLEDeviceConnectionRequestEvent extends BleDeviceConnectionEvent {
   final String scannedDeviceId;
 
-  BLEDeviceConnectionRequestEvent(this.scannedDeviceId);
+  const BLEDeviceConnectionRequestEvent(this.scannedDeviceId);
 
   @override
   // TODO: implement props

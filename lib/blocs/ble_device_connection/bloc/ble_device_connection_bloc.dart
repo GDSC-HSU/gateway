@@ -39,7 +39,9 @@ class BleDeviceConnectionBloc
     emit(BleDeviceConnectionState(event.stateUpdate));
   }
 
-  listenBLEDeviceConnectionEvent() {
+  /// Status update for a BLE device.
+  /// precondition is [BLEDeviceConnectionRequestEvent]
+  void listenBLEDeviceConnectionEvent() {
     // hidden notifier
     connectionStateSub = repository.deviceConnectionStream.listen((value) {
       add(BLEDeviceConnectionUpdateEvent(value));
