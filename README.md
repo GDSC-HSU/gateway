@@ -14,8 +14,8 @@ Boxes model|Adapted model
 This project is a not starting point for a  an usual Flutter application. **Just kidding 😭*
 #### ```README.MD PER FOLDER ABSTRACT IMPL```
 ##### ```~solution/approach architecture~ ⬇️```
-1. [BLOC README]("./lib/blocs/") wip
-2. [CONFIG]("./lib/config") wip
+1. [BLOC README](./lib/blocs/) wip
+2. [CONFIG](./lib/config) wip
 3. PAGE
 
 ~~ work-in-progress 🤕
