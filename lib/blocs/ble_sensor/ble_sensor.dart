@@ -1,7 +1,7 @@
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:gateway/blocs/ble_device_connection/bloc/ble_device_connection_bloc.dart';
-import 'package:gateway/business_logic/ble_sensor/sensor/interface.dart';
-import 'package:gateway/business_logic/ble_sensor/sensor/ble_sensor.dart';
+import 'package:gateway/blocs/ble_sensor/sensor/ble_sensor.dart';
+import 'package:gateway/blocs/ble_sensor/sensor/interface.dart';
 import 'package:gateway/config/constants/ble_desgin_constants.g.dart';
 
 enum SensorType { proximity, temp, distance }

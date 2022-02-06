@@ -12,7 +12,7 @@ class BleScanBloc extends Bloc<BleScanEvent, BleScanState> {
   final BLERepository repository;
   late DiscoveredDevice device;
 
-  BleScanBloc(this.repository) : super(BleScanState.init()) {
+  BleScanBloc({required this.repository}) : super(BleScanState.init()) {
     on<BLEScanRequestEvent>(onScanning);
   }
   Future<void> onScanning(
