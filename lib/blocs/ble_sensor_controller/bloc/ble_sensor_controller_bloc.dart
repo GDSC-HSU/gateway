@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:gateway/blocs/ble_sensor/ble_sensor.dart';
+import 'package:gateway/blocs/ble_sensor/bloc/ble_sensor_bloc.dart';
 import 'package:gateway/blocs/ble_sensor_controller/controller_state.dart';
-import 'package:gateway/business_logic/ble_sensor/ble_sensor.dart';
-import 'package:gateway/business_logic/ble_sensor/bloc/ble_sensor_bloc.dart';
 
 part 'ble_sensor_controller_event.dart';
 part 'ble_sensor_controller_state.dart';

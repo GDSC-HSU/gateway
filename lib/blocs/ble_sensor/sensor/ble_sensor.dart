@@ -1,6 +1,6 @@
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:gateway/blocs/ble_device_connection/bloc/ble_device_connection_bloc.dart';
-import 'package:gateway/business_logic/ble_sensor/sensor/interface.dart';
+import 'package:gateway/blocs/ble_sensor/sensor/interface.dart';
 
 class BLESensor extends BaseBLESensor {
   BLESensor(BleDeviceConnectionBloc bloc, Uuid ble_char_uuid, Uuid ble_ser_uuid)

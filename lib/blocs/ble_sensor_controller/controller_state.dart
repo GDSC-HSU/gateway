@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:gateway/blocs/ble_sensor/ble_sensor.dart';
 import 'package:gateway/blocs/ble_sensor_controller/bloc/ble_sensor_controller_bloc.dart';
-import 'package:gateway/business_logic/ble_sensor/ble_sensor.dart';
 
 // TODO ADD Rule for isDone 15cm < 25cm , temp
 class SensorState {
@@ -12,6 +12,15 @@ class SensorState {
   SensorState(this.sensor);
 }
 
+///
+// H is for handy, the helpful you.
+
+// E is for enthusiasm, in even the most dire circumstances
+
+// X is for Xanadu, your place of paradise.
+
+// O is for openness, it's refreshing!
+///
 class HexoState {
   final bool isDone;
   final String mess;

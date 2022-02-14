@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:gateway/blocs/ble_device_connection/bloc/ble_device_connection_bloc.dart';
-import 'package:gateway/blocs/ble_repository.dart';
 import 'package:gateway/blocs/ble_scan/bloc/ble_scan_bloc.dart';
-import 'package:gateway/business_logic/ble/ble_connector/bloc/ble_connector_bloc.dart';
-import 'package:provider/src/provider.dart';
-import 'package:reactive_ble_platform_interface/src/model/discovered_device.dart';
+import 'package:gateway/blocs/ble_sensor/ble_sensor.dart';
+import 'package:gateway/blocs/ble_sensor/bloc/ble_sensor_bloc.dart';
 
 class TestPage extends StatefulWidget {
   const TestPage({Key? key}) : super(key: key);
@@ -17,20 +16,25 @@ class TestPage extends StatefulWidget {
 class _TestPageState extends State<TestPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<BleScanBloc>(
-      create: (context) => BleScanBloc(context.read<BLERepository>()),
-      child: BlocProvider(
-        create: (context) =>
-            BleDeviceConnectionBloc(repository: context.read<BLERepository>()),
-        child: Scaffold(
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ScanPage(),
-            ],
-          ),
-        ),
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ScanPage(),
+          StreamBuilder<BleDeviceConnectionState>(
+              stream: context.read<BleDeviceConnectionBloc>().stream,
+              builder: (context, snapshot) {
+                if (snapshot.data?.connectionSate ==
+                    DeviceConnectionState.connected) {
+                  return BlocProvider(
+                      create: (context) => BleSensorBloc(SensorType.temp,
+                          context.read<BleDeviceConnectionBloc>()),
+                      child: SensorData());
+                }
+                return Container();
+              }),
+        ],
       ),
     );
   }
@@ -109,5 +113,40 @@ class _DeviceConnectionState extends State<DeviceConnection> {
         })
       ],
     );
+  }
+}
+
+class SensorData extends StatefulWidget {
+  const SensorData({Key? key}) : super(key: key);
+
+  @override
+  _SensorDataState createState() => _SensorDataState();
+}
+
+class _SensorDataState extends State<SensorData> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<BleSensorBloc, BleSensorState>(
+        builder: (builder, state) {
+      if (state is BleSensorOnData) {
+        return Column(
+          children: [
+            Container(
+              child: Text(
+                String.fromCharCodes(state.data),
+                style: TextStyle(color: Colors.red, fontSize: 30),
+              ),
+            ),
+            Container(
+              child: Text(
+                state.data.toString(),
+                style: TextStyle(color: Colors.black, fontSize: 15),
+              ),
+            ),
+          ],
+        );
+      }
+      return const Text("SensorData Loading");
+    });
   }
 }

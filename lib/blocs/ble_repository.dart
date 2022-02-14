@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:rxdart/subjects.dart';
 
