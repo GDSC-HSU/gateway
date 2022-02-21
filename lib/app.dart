@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gateway/di.dart';
-import 'package:gateway/di_repository.dart';
-import 'package:gateway/pages/test/test_page.dart';
+import 'package:gateway/screens/test/test_page.dart';
+
+import 'di/di.dart';
+import 'di/di_repository.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
