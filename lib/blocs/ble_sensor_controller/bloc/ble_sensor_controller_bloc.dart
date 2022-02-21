@@ -19,6 +19,7 @@ class BleSensorControllerBloc
 
   BleSensorControllerBloc(this.listOfSensor)
       : super(BleSensorControllerInitial()) {
+    streamBleSensorDataConsumer = StreamController();
     hexoStateProcessing = HexoStateProcessing();
     _initListenSenorData();
     _listenHexoState();
@@ -38,14 +39,11 @@ class BleSensorControllerBloc
     on<BleSensorControllerHexoEvent>((event, emit) => {
           // TODO How to add Debounce
           if (event.state.isDone)
-            {emit(BleSensorControllerValidState())}
+            {emit(BleSensorControllerValidState(event.state))}
           else
             {
-              if (event.state.currentError != null)
-                {
-                  emit(BleSensorControllerInValidState(
-                      event.state.currentError!.sensorType, event.state.mess))
-                }
+              emit(BleSensorControllerInValidState(
+                  event.state.currentError!.sensorType, event.state.mess ?? ""))
             }
         });
 
@@ -66,9 +64,11 @@ class BleSensorControllerBloc
       add(BleSensorControllerSensorDataEvent(sensor.data, sensor.sensorType));
     });
     for (var sensor in listOfSensor) {
-      sensor.stream
-          .where((event) => event is BleSensorOnData)
-          .pipe(streamBleSensorDataConsumer);
+      sensor.stream.where((event) => event is BleSensorOnData).listen((sensor) {
+        sensor = sensor as BleSensorOnData;
+        add(BleSensorControllerSensorDataEvent(sensor.data, sensor.sensorType));
+      });
+      // .pipe(streamBleSensorDataConsumer);
     }
   }
 

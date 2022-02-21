@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_function_literals_in_foreach_calls
+
 import 'dart:async';
 
 import 'package:gateway/blocs/ble_sensor/ble_sensor.dart';
@@ -23,19 +25,20 @@ class SensorState {
 ///
 class HexoState {
   final bool isDone;
-  final String mess;
+  final String? mess;
   final SensorState? currentError;
   final List<SensorState> listOfSensorState;
 
   HexoState(
       {required this.isDone,
-      required this.mess,
+      this.mess,
       required this.listOfSensorState,
       this.currentError});
 }
 
 class HexoStateProcessing {
-  late Map<SensorType, SensorState> _state;
+  Map<SensorType, SensorState> _state = {};
+  late Map<SensorType, bool> _stateTracking = {};
 
   final StreamController<HexoState> streamStateController = StreamController();
 
@@ -51,38 +54,78 @@ class HexoStateProcessing {
     });
   }
 
+  resetState() {
+    if (isReset) {
+      _initState();
+    }
+  }
+
   addEvent(BleSensorControllerSensorDataEvent event) {
     if (_state[event.sensorType] == null) {
       _state[event.sensorType] = SensorState(event);
     }
   }
 
-  // TODO use formbinding @@ insteed of this implamation
-  _processState() {
-    Map<SensorType, bool> _stateTracking = {};
-    _state.keys.toList().map((e) => _stateTracking[e] = false);
+  _initState() {
+    // _state.keys.toList().map((e) => _stateTracking[e] = false);
+    // _state.forEach((key, value) {
+    //   if (value.isNull) {
+    //     streamStateController.sink.add(HexoState(
+    //         mess: "",
+    //         isDone: false,
+    //         listOfSensorState: _state.values.toList(),
+    //         currentError: value));
+    //     // emit base on that sensor
+    //     return;
+    //   } else {
+    //     // condition like proximity 15-20cm
+    //     _stateTracking[key] = true;
+    //   }
+    // });
+    _state.keys.forEach((e) => _stateTracking[e] = false);
+  }
+
+  _processSensorHasData() {
     _state.forEach((key, value) {
-      if (value.isNull) {
-        streamStateController.sink.add(HexoState(
-            mess: "",
-            isDone: false,
-            listOfSensorState: _state.values.toList(),
-            currentError: value));
-        // emit base on that sensor
-        return;
-      } else {
+      if (!value.isNull) {
         _stateTracking[key] = true;
       }
     });
-    bool allDone = _stateTracking.values.toList().every((element) => true);
+  }
+
+  // TODO use formbinding @@ insteed of this implamation
+  processState() {
+    _processSensorHasData();
+    bool isAllSensorHasData =
+        _stateTracking.values.toList().every((element) => true);
+    bool allDone = _sensorRule();
     if (allDone) {
       streamStateController.sink.add(HexoState(
         mess: "",
         isDone: true,
         listOfSensorState: _state.values.toList(),
       ));
+    } else {
+      _stepTracking();
     }
   }
 
-  _stepTracking() {}
+  _stepTracking() {
+    // step tracking error code
+    final failedStep =
+        _stateTracking.entries.where((element) => element.value == false);
+    if (failedStep.isNotEmpty) {
+      final firstFailedStep = _state[failedStep.first.key];
+      streamStateController.add(HexoState(
+        isDone: false,
+        mess: "MOCK",
+        currentError: firstFailedStep,
+        listOfSensorState: _state.values.toList(),
+      ));
+    }
+  }
+
+  bool _sensorRule() {
+    return true;
+  }
 }

@@ -9,10 +9,15 @@ class BLERepository {
       BehaviorSubject();
 
   BLERepository(this.ble);
+
+  bool get isBLEPermissionEnable => this.ble.status == BleStatus.ready;
+
 // TODO BLE STAtUS CHECK SCREEN
   connect(String deviceID) {
     try {
-      ble.connectToDevice(id: deviceID).pipe(deviceConnectionStream);
+      if (isBLEPermissionEnable) {
+        ble.connectToDevice(id: deviceID).pipe(deviceConnectionStream);
+      }
     } catch (e) {
       // Timeout is notable
     }

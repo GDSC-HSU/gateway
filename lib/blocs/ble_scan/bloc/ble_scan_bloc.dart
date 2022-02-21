@@ -21,7 +21,8 @@ class BleScanBloc extends Bloc<BleScanEvent, BleScanState> {
       emitter(BleScanState.start());
       // NOTE handle devices withServices[]
       device = await repository.ble
-          .scanForDevices(withServices: []).firstWhere((element) {
+          .scanForDevices(withServices: ble_constants.deviceServices)
+          .firstWhere((element) {
         return element.name == ble_constants.DEVICE_NAME;
       });
       //TODO Impl RSSI range

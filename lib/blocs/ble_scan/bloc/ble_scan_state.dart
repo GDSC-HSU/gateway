@@ -2,7 +2,7 @@
 
 part of 'ble_scan_bloc.dart';
 
-enum ScanSate { founded, notFound, start, init, error }
+enum ScanSate { founded, notFound, start, loading, init, error }
 
 class BleScanState extends Equatable {
   final ScanSate scanState;
@@ -14,6 +14,9 @@ class BleScanState extends Equatable {
 
   factory BleScanState.start() =>
       BleScanState(scanState: ScanSate.start, discoverdDevice: null);
+
+  factory BleScanState.load() =>
+      BleScanState(scanState: ScanSate.loading, discoverdDevice: null);
 
   factory BleScanState.notFound() =>
       BleScanState(scanState: ScanSate.notFound, discoverdDevice: null);

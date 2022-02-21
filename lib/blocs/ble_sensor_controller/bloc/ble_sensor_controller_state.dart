@@ -11,13 +11,12 @@ abstract class BleSensorControllerState extends Equatable {
 class BleSensorControllerInitial extends BleSensorControllerState {}
 
 class BleSensorControllerValidState extends BleSensorControllerState {
-  // final SensorType sensorTypeLocation;
-  // final String mess;
+  final HexoState hexoState;
 
-  // BleSensorValidState(this.sensorTypeLocation, this.mess) : super(data: null);
+  BleSensorControllerValidState(this.hexoState) : super(data: null);
 
-  // @override
-  // List<Object> get props => [sensorTypeLocation, mess];
+  @override
+  List<Object> get props => [hexoState];
 }
 
 class BleSensorControllerInValidState extends BleSensorControllerState {
