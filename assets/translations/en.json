@@ -2,6 +2,7 @@
     "setup_title": "Setup Gateway",
     "connect": "Connect",
     "scanning": "Scanning",
+    "scan": "Scan",
     "confirm": "Confirm",
     "scan_begin_text": "Now press scan button to find device"
 }

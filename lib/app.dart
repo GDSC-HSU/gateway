@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gateway/screens/test/test_page.dart';
 
@@ -12,6 +13,9 @@ class App extends StatelessWidget {
     return AppRepositoryProvider(
         child: AppDependencyProvider(
       child: MaterialApp(
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         title: 'Flutter rxBLE',
         theme: ThemeData(
           primarySwatch: Colors.blue,

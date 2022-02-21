@@ -1,7 +1,8 @@
 {
     "setup_title": "Thiết lập Gateway",
     "connect": "Kết nối",
-    "scanning": "Quyét",
+    "scanning": "Tìm kiếm thiết bị",
+    "scan": "Quyét",
     "confirm": "Xác nhận",
-    "scan_begin_text": "Bạn hãy ấn nút tìm quyét để tìm kiếm thiết bị"
+    "scan_begin_text": "Bạn hãy ấn nút quyét để tìm kiếm thiết bị"
 }
