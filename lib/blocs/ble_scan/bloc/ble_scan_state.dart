@@ -12,6 +12,9 @@ class BleScanState extends Equatable {
   factory BleScanState.init() =>
       BleScanState(scanState: ScanSate.init, discoverdDevice: null);
 
+  factory BleScanState.error() =>
+      BleScanState(scanState: ScanSate.error, discoverdDevice: null);
+
   factory BleScanState.start() =>
       BleScanState(scanState: ScanSate.start, discoverdDevice: null);
 
