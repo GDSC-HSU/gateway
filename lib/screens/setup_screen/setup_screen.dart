@@ -16,7 +16,13 @@ class _SetupScreenState extends State<SetupScreen> {
     return Scaffold(
       backgroundColor: GatewayColors.scaffoldBgLight,
       appBar: AppBar(
-        title: Text("Setup Gateway"),
+        elevation: 0.0,
+        title: Center(
+          child: Text(
+            "Setup Gateway",
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
         backgroundColor: GatewayColors.scaffoldBgLight,
       ),
       body: Stepper(
@@ -28,12 +34,12 @@ class _SetupScreenState extends State<SetupScreen> {
             currentStep = step;
           });
         },
-        onStepCancel: () {
-          currentStep > 0 ? setState(() => currentStep -= 1) : null;
-        },
-        onStepContinue: () {
-          currentStep < 2 ? setState(() => currentStep += 1) : null;
-        },
+        // onStepCancel: () {
+        //   currentStep > 0 ? setState(() => currentStep -= 1) : null;
+        // },
+        // onStepContinue: () {
+        //   currentStep < 2 ? setState(() => currentStep += 1) : null;
+        // },
       ),
     );
   }
@@ -47,7 +53,7 @@ class _SetupScreenState extends State<SetupScreen> {
         state: currentStep == 0 ? StepState.editing : StepState.complete,
       ),
       Step(
-        title: new Text('Address Details'),
+        title: new Text('Connect'),
         content: Column(
           children: <Widget>[
             TextFormField(
@@ -66,7 +72,7 @@ class _SetupScreenState extends State<SetupScreen> {
                 : StepState.complete,
       ),
       Step(
-        title: new Text("Bank Details"),
+        title: new Text("Confirm"),
         content: Column(
           children: <Widget>[
             TextFormField(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
 
 class CardSetup extends StatelessWidget {
@@ -7,22 +8,22 @@ class CardSetup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
+      //margin: EdgeInsets.symmetric(horizontal: 10.w),
       //padding: const EdgeInsets.only(left: 24, top: 3, bottom: 14),
       decoration: BoxDecoration(
         color: Colors.white,
         // border: Border.all(
         //     color: ColorAndTextStyleMode().disableButtonBackground),
-        borderRadius: BorderRadius.circular(10.0),
-        gradient: LinearGradient(stops: [
-          0.013,
-          0.013
-        ], colors: [
-          GatewayColors.buttonBgLight,
-          Colors.white,
-        ]),
+        borderRadius: BorderRadius.circular(10.r),
+        gradient: LinearGradient(
+          stops: [0.018, 0.018],
+          colors: [
+            GatewayColors.buttonBgLight,
+            Colors.white,
+          ],
+        ),
       ),
-      height: 340,
+      height: 300.h,
       child: contentCard,
     );
   }

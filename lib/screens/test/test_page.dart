@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
@@ -7,6 +8,7 @@ import 'package:gateway/blocs/ble_sensor/ble_sensor.dart';
 import 'package:gateway/blocs/ble_sensor/bloc/ble_sensor_bloc.dart';
 import 'package:gateway/screens/test/hexo_state.dart';
 
+import '../../generated/locale_keys.g.dart';
 import 'ble_sensor_grid.dart';
 
 class TestPage extends StatefulWidget {
@@ -25,16 +27,16 @@ class _TestPageState extends State<TestPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ScanPage(),
-          StreamBuilder<BleDeviceConnectionState>(
-              stream: context.read<BleDeviceConnectionBloc>().stream,
-              builder: (context, snapshot) {
-                if (snapshot.data?.connectionSate ==
-                    DeviceConnectionState.connected) {
-                  // return BleSensorGridMonitor();
-                  return HexoStateTest();
-                }
-                return Container();
-              }),
+          // StreamBuilder<BleDeviceConnectionState>(
+          //     stream: context.read<BleDeviceConnectionBloc>().stream,
+          //     builder: (context, snapshot) {
+          //       if (snapshot.data?.connectionSate ==
+          //           DeviceConnectionState.connected) {
+          //         // return BleSensorGridMonitor();
+          //         return HexoStateTest();
+          //       }
+          //       return Container();
+          //     }),
         ],
       ),
     );
@@ -49,7 +51,7 @@ class ScanPage extends StatelessWidget {
     return Column(
       children: [
         ElevatedButton(
-            child: Text("Scan"),
+            child: Text(LocaleKeys.scan).tr(),
             onPressed: () =>
                 {context.read<BleScanBloc>().add(BLEScanRequestEvent())}),
         BlocBuilder<BleScanBloc, BleScanState>(builder: (builder, state) {
@@ -57,10 +59,14 @@ class ScanPage extends StatelessWidget {
           if (state.scanState == ScanSate.init) {
             return const Text("INIT");
           }
+          if (state.scanState == ScanSate.loading) {
+            return Text(LocaleKeys.scanning.tr());
+          }
           if (state.scanState == ScanSate.notFound) {
-            return const Text("NOT FOUND");
+            return Text(LocaleKeys.ble_device_not_found.tr());
           }
           if (state.scanState == ScanSate.founded) {
+            print(state.discoverdDevice);
             return DeviceConnection(state.discoverdDevice!);
           }
           return Container(

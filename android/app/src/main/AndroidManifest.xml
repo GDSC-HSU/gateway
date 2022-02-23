@@ -1,12 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.gateway">
-    <!-- required for API 18 - 30 -->
-    <!-- <uses-permission
+
+        <!-- required for API 18 - 30 -->
+    <uses-permission
             android:name="android.permission.BLUETOOTH"
             android:maxSdkVersion="30" />
     <uses-permission
             android:name="android.permission.BLUETOOTH_ADMIN"
-            android:maxSdkVersion="30" /> -->
+            android:maxSdkVersion="30" />
 
     <!-- required for API 23 - 30 -->
     <uses-permission-sdk-23
@@ -17,10 +19,12 @@
             android:maxSdkVersion="30" />
 
     <!-- API 31+ -->
-    <!-- <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission
-            android:name="android.permission.BLUETOOTH_SCAN"
-            android:usesPermissionFlags="neverForLocation" /> -->
+    android:name="android.permission.BLUETOOTH_SCAN"
+    android:usesPermissionFlags="neverForLocation" tools:node="remove" />
+
+
    <application
         android:label="gateway"
         android:icon="@mipmap/ic_launcher">
