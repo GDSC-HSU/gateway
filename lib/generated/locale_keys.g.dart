@@ -7,5 +7,6 @@ abstract class  LocaleKeys {
   static const scan = 'scan';
   static const confirm = 'confirm';
   static const scan_begin_text = 'scan_begin_text';
+  static const ble_device_not_found = 'ble_device_not_found';
 
 }

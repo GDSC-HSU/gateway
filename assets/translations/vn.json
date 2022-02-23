@@ -4,5 +4,6 @@
     "scanning": "Tìm kiếm thiết bị",
     "scan": "Quyét",
     "confirm": "Xác nhận",
-    "scan_begin_text": "Bạn hãy ấn nút quyét để tìm kiếm thiết bị"
+    "scan_begin_text": "Bạn hãy ấn nút quyét để tìm kiếm thiết bị",
+    "ble_device_not_found": "Không tìm thấy thiết bị của bạn, hãy kiểm tra lại thiết bị đã được mở?"
 }

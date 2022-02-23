@@ -4,5 +4,6 @@
     "scanning": "Scanning",
     "scan": "Scan",
     "confirm": "Confirm",
-    "scan_begin_text": "Now press scan button to find device"
+    "scan_begin_text": "Now press scan button to find device",
+    "ble_device_not_found": "Ops the device not found! Make sure you have turn it on"
 }
