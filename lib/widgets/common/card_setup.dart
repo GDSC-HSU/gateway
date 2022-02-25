@@ -8,12 +8,10 @@ class CardSetup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //margin: EdgeInsets.symmetric(horizontal: 10.w),
+      margin: EdgeInsets.symmetric(horizontal: 12.h),
       //padding: const EdgeInsets.only(left: 24, top: 3, bottom: 14),
       decoration: BoxDecoration(
         color: Colors.white,
-        // border: Border.all(
-        //     color: ColorAndTextStyleMode().disableButtonBackground),
         borderRadius: BorderRadius.circular(10.r),
         gradient: LinearGradient(
           stops: [0.018, 0.018],
@@ -23,7 +21,8 @@ class CardSetup extends StatelessWidget {
           ],
         ),
       ),
-      height: 300.h,
+      height: 338.h,
+      width: 328.h,
       child: contentCard,
     );
   }

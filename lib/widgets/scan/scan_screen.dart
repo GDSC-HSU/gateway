@@ -17,9 +17,9 @@ class _ScanScreenState extends State<ScanScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(bottom: 16.h),
+          padding: EdgeInsets.only(bottom: 16.h, left: 16.h),
           child: Text(
-            'Scaning',
+            'SCANNING',
             style: TextStyle(
               color: GatewayColors.textDefaultBgLight,
               fontSize: 15.sp,
@@ -33,7 +33,7 @@ class _ScanScreenState extends State<ScanScreen> {
               'Now press the scan button to \nfind the device',
               style: TextStyle(
                 color: GatewayColors.textDefaultBgLight,
-                fontSize: 14.sp,
+                fontSize: 15.sp,
                 fontWeight: FontWeight.w600,
               ),
               textAlign: TextAlign.center,
@@ -41,33 +41,38 @@ class _ScanScreenState extends State<ScanScreen> {
           ),
         ),
         SizedBox(height: 40.sp),
-        Container(
-          height: 45.sp,
-          width: 300.sp,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
-            color: GatewayColors.buttonBgLight,
-          ),
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.flip,
-                  color: Colors.white,
+        Align(
+          child: InkWell(
+            onTap: () {},
+            child: Container(
+              height: 45.sp,
+              width: 300.sp,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                color: GatewayColors.buttonBgLight,
+              ),
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.flip,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: 10.h,
+                    ),
+                    Text(
+                      'Scan',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    )
+                  ],
                 ),
-                SizedBox(
-                  width: 10.h,
-                ),
-                Text(
-                  'Scan',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w700,
-                  ),
-                )
-              ],
+              ),
             ),
           ),
         )

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
-import 'package:gateway/screens/setup_screen/scan/scan_screen.dart';
+import 'package:gateway/screens/setup_screen/setup_view.dart';
 
 class SetupScreen extends StatefulWidget {
   SetupScreen({Key? key}) : super(key: key);
@@ -16,80 +16,17 @@ class _SetupScreenState extends State<SetupScreen> {
     return Scaffold(
       backgroundColor: GatewayColors.scaffoldBgLight,
       appBar: AppBar(
+        shadowColor: Colors.transparent,
         elevation: 0.0,
         title: Center(
           child: Text(
             "Setup Gateway",
-            style: TextStyle(color: Colors.black),
+            style: const TextStyle(color: Colors.black),
           ),
         ),
         backgroundColor: GatewayColors.scaffoldBgLight,
       ),
-      body: Stepper(
-        type: StepperType.horizontal,
-        steps: getSteps(),
-        currentStep: currentStep,
-        onStepTapped: (int step) {
-          setState(() {
-            currentStep = step;
-          });
-        },
-        // onStepCancel: () {
-        //   currentStep > 0 ? setState(() => currentStep -= 1) : null;
-        // },
-        // onStepContinue: () {
-        //   currentStep < 2 ? setState(() => currentStep += 1) : null;
-        // },
-      ),
+      body: SetupView(),
     );
-  }
-
-  List<Step> getSteps() {
-    return [
-      Step(
-        title: const Text('Scan'),
-        content: ScanScreen(),
-        isActive: currentStep >= 0,
-        state: currentStep == 0 ? StepState.editing : StepState.complete,
-      ),
-      Step(
-        title: new Text('Connect'),
-        content: Column(
-          children: <Widget>[
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Home Address'),
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Mobile No'),
-            ),
-          ],
-        ),
-        isActive: currentStep >= 1,
-        state: currentStep == 1
-            ? StepState.editing
-            : currentStep < 1
-                ? StepState.disabled
-                : StepState.complete,
-      ),
-      Step(
-        title: new Text("Confirm"),
-        content: Column(
-          children: <Widget>[
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Account No'),
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'IFSC Code'),
-            ),
-          ],
-        ),
-        isActive: currentStep >= 2,
-        state: currentStep == 2
-            ? StepState.editing
-            : currentStep < 2
-                ? StepState.disabled
-                : StepState.complete,
-      ),
-    ];
   }
 }
