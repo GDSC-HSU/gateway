@@ -46,10 +46,12 @@ class _SetupViewState extends State<SetupView> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
           //margin: EdgeInsets.only(top: 8 + MediaQuery.of(context).padding.top),
-          height: 64.h,
+          //padding: EdgeInsets.only(top: 20.h, bottom: 0.h),
+          height: 44.h,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -90,18 +92,20 @@ class _SetupViewState extends State<SetupView> {
                           children: [
                             for (var i = 0; i < _buildListScreen().length; i++)
                               InkWell(
-                                  onTap: () {
-                                    _onClickSelectPage(i);
-                                  },
-                                  child: Container(
-                                    height: 16.h,
-                                    width: 16.h,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: i <= _currentPage
-                                            ? GatewayColors.buttonBgLight
-                                            : GatewayColors.textDefaultBgLight),
-                                  )),
+                                onTap: () {
+                                  _onClickSelectPage(i);
+                                },
+                                child: Container(
+                                  height: 16.h,
+                                  width: 16.h,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: i <= _currentPage
+                                        ? GatewayColors.buttonBgLight
+                                        : GatewayColors.textDefaultBgLight,
+                                  ),
+                                ),
+                              ),
                           ],
                         ),
                       ),
@@ -111,23 +115,24 @@ class _SetupViewState extends State<SetupView> {
                           children: [
                             for (var i = 0; i < _buildListScreen().length; i++)
                               InkWell(
-                                  onTap: () {
-                                    _onClickSelectPage(i);
-                                  },
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                      left: i == 0 ? 5.h : 0.h,
-                                      right: i == 1 ? 5.h : 5.h,
+                                onTap: () {
+                                  _onClickSelectPage(i);
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    left: i == 0 ? 5.h : 0.h,
+                                    right: i == 1 ? 5.h : 5.h,
+                                  ),
+                                  child: Text(
+                                    (i + 1).toString(),
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12.sp,
                                     ),
-                                    child: Text(
-                                      (i + 1).toString(),
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12.sp,
-                                      ),
-                                    ),
-                                  )),
+                                  ),
+                                ),
+                              ),
                           ],
                         ),
                       ),
@@ -138,11 +143,13 @@ class _SetupViewState extends State<SetupView> {
               Padding(
                 padding: EdgeInsets.only(right: 16.h),
                 child: Text(
-                    '${_currentPage + 1}' + '/${_buildListScreen().length}',
-                    style: Theme.of(context).textTheme.headline3?.copyWith(
+                  '${_currentPage + 1}' + '/${_buildListScreen().length}',
+                  style: Theme.of(context).textTheme.headline3?.copyWith(
                         fontSize: 13.sp,
                         fontWeight: FontWeight.w500,
-                        color: GatewayColors.textDefaultBgLight)),
+                        color: GatewayColors.textDefaultBgLight,
+                      ),
+                ),
               ),
             ],
           ),
@@ -185,7 +192,7 @@ class _SetupViewState extends State<SetupView> {
       });
     } else if (i == 1) {
       if (_currentPage == 0) {
-        _pageController.jumpToPage(1);
+        _pageController.nextPage(duration: _duration, curve: _curve);
       } else if (_currentPage == 2) {
         _pageController.previousPage(duration: _duration, curve: _curve);
       }

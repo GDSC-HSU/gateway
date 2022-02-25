@@ -42,7 +42,7 @@ class OrganizationConfirm extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 14.h),
+              SizedBox(height: 18.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -64,7 +64,7 @@ class OrganizationConfirm extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 14.h),
+              SizedBox(height: 24.h),
               Align(
                 alignment: Alignment.bottomRight,
                 child: InkWell(

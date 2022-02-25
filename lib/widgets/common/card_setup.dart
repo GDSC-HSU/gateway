@@ -21,7 +21,7 @@ class CardSetup extends StatelessWidget {
           ],
         ),
       ),
-      height: 338.h,
+      height: 400.h,
       width: 328.h,
       child: contentCard,
     );
