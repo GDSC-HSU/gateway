@@ -30,7 +30,7 @@ class AppConstantsService {
   // HTTP
   static const String CONTENT_TYPE = "application/json";
   static String DEVICE_ACCESS_TOKEN_HEADER = 'access-key';
-  static const String API_KEY_HEADER = 'x-api-key';
+  static const String API_KEY_HEADER = 'api-x-key';
 
   static const String PREFIX_CONTENT_TYPE = "Content-Type";
   //
