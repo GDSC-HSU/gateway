@@ -4,7 +4,7 @@ import 'package:gateway/model/covid_identification.dart';
 
 class DeviceSensorData {
   late String did;
-  late int bodyTemperature;
+  late double bodyTemperature;
   late bool faceMask;
   late CovidIdentification? covidIdentification;
   late bool isComplete;
