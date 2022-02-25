@@ -465,28 +465,28 @@ packages:
   permission_handler:
     dependency: "direct main"
     description:
-      name: permission_handler
+      name: path_provider_linux
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "9.1.0"
-  permission_handler_android:
+    version: "2.1.5"
+  path_provider_platform_interface:
     dependency: transitive
     description:
-      name: permission_handler_android
+      name: path_provider_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "9.0.2"
-  permission_handler_apple:
+    version: "2.0.1"
+  path_provider_windows:
     dependency: transitive
     description:
-      name: permission_handler_apple
+      name: path_provider_windows
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "9.0.2"
-  permission_handler_platform_interface:
+    version: "2.0.5"
+  platform:
     dependency: transitive
     description:
-      name: permission_handler_platform_interface
+      name: platform
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.7.0"
@@ -568,7 +568,7 @@ packages:
     source: hosted
     version: "0.27.3"
   shared_preferences:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: shared_preferences
       url: "https://pub.dartlang.org"
