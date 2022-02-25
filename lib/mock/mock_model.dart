@@ -23,7 +23,7 @@ final OrganizationInfo mockOrgInfo = OrganizationInfo(
     endpoint: "http://192.168.1.6:3000");
 
 final DeviceSensorData mockDeviceSensorData = DeviceSensorData(
-    bodyTemperature: 30,
+    bodyTemperature: 30.5,
     covidIdentification: CovidIdentification(
         identificationMethod: "QR", identificationData: "xxx-covid-string-xxx"),
     did: mockDeviceInfo.id,
@@ -31,9 +31,9 @@ final DeviceSensorData mockDeviceSensorData = DeviceSensorData(
     isComplete: true);
 
 final DeviceIdentity mockDeviceIdentity = DeviceIdentity(
-    deviceAccessKey: '3lkw_ZIHk6b6De49Rsjq4',
+    deviceAccessKey: 'ce9go8K34sCipHy_AsotD',
     deviceApiKey: '123',
-    deviceId: '8Av1BeaShYt0s52WiPLz',
+    deviceId: 'z2OnUdMhstbJRpf1Wqp2',
     deviceOrgEndPoint: "http://192.168.1.6:3000",
     mqttPassword: 'xxx-xxx',
     mqttUserName: 'xxx-xxx');
