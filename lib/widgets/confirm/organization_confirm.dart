@@ -67,24 +67,27 @@ class OrganizationConfirm extends StatelessWidget {
               SizedBox(height: 14.h),
               Align(
                 alignment: Alignment.bottomRight,
-                child: Container(
-                  width: 186.w,
-                  height: 36.h,
-                  decoration: BoxDecoration(
-                    color: GatewayColors.bgButtonColorHaveBorder,
-                    borderRadius: BorderRadius.circular(8.r),
-                    border: Border.all(
-                      color: GatewayColors.buttonBgLight,
-                      width: 1.h,
-                    ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'This is my organization',
-                      style: TextStyle(
+                child: InkWell(
+                  onTap: () {},
+                  child: Container(
+                    width: 186.w,
+                    height: 36.h,
+                    decoration: BoxDecoration(
+                      color: GatewayColors.bgButtonColorHaveBorder,
+                      borderRadius: BorderRadius.circular(8.r),
+                      border: Border.all(
                         color: GatewayColors.buttonBgLight,
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
+                        width: 1.h,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'This is my organization',
+                        style: TextStyle(
+                          color: GatewayColors.buttonBgLight,
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
