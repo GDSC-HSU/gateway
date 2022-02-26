@@ -145,12 +145,21 @@ class _ConnectScreenState extends State<ConnectScreen> {
           SizedBox(height: 25.h),
           ButtonCustom(
             bgColor: GatewayColors.buttonBgLight,
-            prefixIcon: Icon(
-              Icons.compare_arrows,
-              color: Colors.white,
-            ),
-            title: 'Connect',
-            onFunction: () {},
+            iconButton: connected
+                ? Icon(
+                    Icons.arrow_forward,
+                    color: Colors.white,
+                  )
+                : Icon(
+                    Icons.compare_arrows,
+                    color: Colors.white,
+                  ),
+            title: connected ? 'Next' : 'Connect',
+            onFunction: () {
+              setState(() {
+                connected = !connected;
+              });
+            },
           ),
         ],
       ),

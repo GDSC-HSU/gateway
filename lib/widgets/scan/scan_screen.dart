@@ -45,7 +45,7 @@ class _ScanScreenState extends State<ScanScreen> {
           SizedBox(height: 25.h),
           ButtonCustom(
             bgColor: GatewayColors.buttonBgLight,
-            prefixIcon: Icon(
+            iconButton: Icon(
               Icons.flip,
               color: Colors.white,
             ),

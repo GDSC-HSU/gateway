@@ -7,15 +7,15 @@ class ButtonCustom extends StatefulWidget {
     Key? key,
     required this.bgColor,
     required this.title,
-    this.suffixIcon,
-    required this.prefixIcon,
     required this.onFunction,
+    this.isLoading,
+    required this.iconButton,
   }) : super(key: key);
   final Color bgColor;
   final String title;
-  final Icon? suffixIcon;
-  final Icon prefixIcon;
+  final Icon iconButton;
   final Function onFunction;
+  final bool? isLoading;
   @override
   _ButtonCustomState createState() => _ButtonCustomState();
 }
@@ -26,7 +26,7 @@ class _ButtonCustomState extends State<ButtonCustom> {
     return Align(
       child: InkWell(
         onTap: () {
-          widget.onFunction;
+          widget.onFunction();
         },
         child: Container(
           height: 45.sp,
@@ -36,28 +36,36 @@ class _ButtonCustomState extends State<ButtonCustom> {
             color: widget.bgColor,
           ),
           child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                widget.prefixIcon,
-                // Icon(
-                //   Icons.flip,
-                //   color: Colors.white,
-                // ),
-                SizedBox(
-                  width: 10.h,
-                ),
-
-                Text(
-                  widget.title,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w700,
+            child: widget.isLoading == true
+                ? CircularProgressIndicator()
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      widget.title == 'Next'
+                          ? Text(
+                              widget.title,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            )
+                          : widget.iconButton,
+                      SizedBox(
+                        width: 10.h,
+                      ),
+                      widget.title == 'Next'
+                          ? widget.iconButton
+                          : Text(
+                              widget.title,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                    ],
                   ),
-                ),
-              ],
-            ),
           ),
         ),
       ),

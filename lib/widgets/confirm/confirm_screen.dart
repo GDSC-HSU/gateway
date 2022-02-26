@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/widgets/common/button_custom.dart';
 import 'package:gateway/widgets/common/card_setup.dart';
+import 'package:gateway/widgets/confirm/guide_confirm.dart';
 import 'package:gateway/widgets/confirm/organization_confirm.dart';
 
 class ConfirmScreen extends StatefulWidget {
@@ -13,6 +14,7 @@ class ConfirmScreen extends StatefulWidget {
 }
 
 class _ConfirmScreenState extends State<ConfirmScreen> {
+  late bool confirmOrganization = true;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -75,20 +77,25 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                     ),
                   ),
                 ),
-                //GuideConfirm(),
-                OrganizationConfirm(),
+                confirmOrganization == false
+                    ? GuideConfirm()
+                    : OrganizationConfirm(),
               ],
             ),
           ),
           SizedBox(height: 25.h),
           ButtonCustom(
             bgColor: GatewayColors.buttonBgLight,
-            prefixIcon: Icon(
+            iconButton: Icon(
               Icons.confirmation_number_outlined,
               color: Colors.white,
             ),
             title: 'Confirm',
-            onFunction: () {},
+            onFunction: () {
+              setState(() {
+                confirmOrganization = !confirmOrganization;
+              });
+            },
           ),
         ],
       ),

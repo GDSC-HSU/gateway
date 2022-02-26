@@ -84,9 +84,9 @@ class OrganizationConfirm extends StatelessWidget {
                       child: Text(
                         'This is my organization',
                         style: TextStyle(
-                          color: GatewayColors.buttonBgLight,
+                          color: Colors.black87,
                           fontSize: 13.sp,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
@@ -95,100 +95,6 @@ class OrganizationConfirm extends StatelessWidget {
               ),
             ],
           ),
-          //  Row(
-          //   //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //   //crossAxisAlignment: CrossAxisAlignment.center,
-          //   children: [
-          //     Column(
-          //       crossAxisAlignment: CrossAxisAlignment.start,
-          //       mainAxisAlignment: MainAxisAlignment.start,
-          //       children: [
-          //         Text(
-          //           'Name',
-          //           style: TextStyle(
-          //             color: GatewayColors.textDefaultBgLight,
-          //             fontSize: 13.sp,
-          //             fontWeight: FontWeight.w700,
-          //           ),
-          //         ),
-          //         SizedBox(height: 14.h),
-          //         Text(
-          //           'Version',
-          //           style: TextStyle(
-          //             color: GatewayColors.textDefaultBgLight,
-          //             fontSize: 13.sp,
-          //             fontWeight: FontWeight.w700,
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //     Column(
-          //       children: [
-          //         Text(
-          //           'Name',
-          //           style: TextStyle(
-          //             color: GatewayColors.textDefaultBgLight,
-          //             fontSize: 13.sp,
-          //             fontWeight: FontWeight.w700,
-          //           ),
-          //         ),
-          //         SizedBox(height: 14.h),
-          //         Text(
-          //           'Version',
-          //           style: TextStyle(
-          //             color: GatewayColors.textDefaultBgLight,
-          //             fontSize: 13.sp,
-          //             fontWeight: FontWeight.w700,
-          //           ),
-          //         ),
-          //         Text(
-          //           'Version',
-          //           style: TextStyle(
-          //             color: GatewayColors.textDefaultBgLight,
-          //             fontSize: 13.sp,
-          //             fontWeight: FontWeight.w700,
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //     // Column(
-          //     //   crossAxisAlignment: CrossAxisAlignment.end,
-          //     //   mainAxisAlignment: MainAxisAlignment.start,
-          //     //   children: [
-          //     //     Text(
-          //     //       'Hoa Sen university',
-          //     //       style: TextStyle(
-          //     //         color: Colors.black,
-          //     //         fontSize: 14.sp,
-          //     //         fontWeight: FontWeight.w700,
-          //     //       ),
-          //     //     ),
-          //     //     SizedBox(height: 14.h),
-          //     //     Text(
-          //     //       'HSU',
-          //     //       style: TextStyle(
-          //     //         color: Colors.black,
-          //     //         fontSize: 14.sp,
-          //     //         fontWeight: FontWeight.w700,
-          //     //       ),
-          //     //     ),
-          //     //     SizedBox(height: 14.h),
-          //     //     Container(
-          //     //       width: 186.w,
-          //     //       height: 36.h,
-          //     //       decoration: BoxDecoration(
-          //     //         color: GatewayColors.bgButtonColorHaveBorder,
-          //     //         borderRadius: BorderRadius.circular(6.r),
-          //     //         border: Border.all(
-          //     //           color: GatewayColors.buttonBgLight,
-          //     //           width: 1.h,
-          //     //         ),
-          //     //       ),
-          //     //     ),
-          //     //   ],
-          //     // ),
-          //   ],
-          // ),
         ),
       ],
     );
