@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_study_jam/page/dictionary/dictionary_page.dart';
-import 'package:flutter_study_jam/page/user/login_page.dart';
-import 'package:flutter_study_jam/page/user/register_page.dart';
+import 'package:gateway/screens/introduction_screen/introduction_screen.dart';
+import 'package:gateway/widgets/confirm/confirm_screen.dart';
+import 'package:gateway/widgets/connect/connect_screen.dart';
+import 'package:gateway/widgets/scan/scan_screen.dart';
 
 class RouterName {
   static Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case 'LoginPage':
-        return MaterialPageRoute(builder: (context) => LoginPage());
-      case 'RegisterPage':
-        return MaterialPageRoute(builder: (context) => RegisterPage());
-      case 'DictionaryPage':
-        return MaterialPageRoute(builder: (context) => DictionaryPage());
+      case 'introduction':
+        return MaterialPageRoute(builder: (context) => IntroductionScreen());
+      case 'scanning':
+        return MaterialPageRoute(builder: (context) => ScanScreen());
+      case 'connecting':
+        return MaterialPageRoute(builder: (context) => ConnectScreen());
+      case 'confirm':
+        return MaterialPageRoute(builder: (context) => ConfirmScreen());
       default:
         return MaterialPageRoute(
           builder: (_) {

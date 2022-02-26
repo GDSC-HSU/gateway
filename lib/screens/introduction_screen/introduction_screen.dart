@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gateway/config/themes/gateway_color.dart';
 
 class IntroductionScreen extends StatefulWidget {
   IntroductionScreen({Key? key}) : super(key: key);
@@ -14,8 +15,17 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
       body: PageView(
         children: [
           Container(
-              //color: ,
-              ),
+            color: GatewayColors.scaffoldBgLight,
+            child: Center(child: Text('hello')),
+          ),
+          Container(
+            color: GatewayColors.scaffoldBgLight,
+            child: Center(child: Text('hellooooooooooooooo')),
+          ),
+          Container(
+            color: GatewayColors.scaffoldBgLight,
+            child: Center(child: Text('hellooooooo')),
+          ),
         ],
       ),
     );
