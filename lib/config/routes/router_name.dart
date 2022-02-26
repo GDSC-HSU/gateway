@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gateway/config/routes/routing.dart';
 import 'package:gateway/screens/introduction_screen/introduction_screen.dart';
+import 'package:gateway/screens/setup_screen/setup_screen.dart';
 import 'package:gateway/widgets/confirm/confirm_screen.dart';
 import 'package:gateway/widgets/connect/connect_screen.dart';
 import 'package:gateway/widgets/scan/scan_screen.dart';
@@ -7,14 +9,16 @@ import 'package:gateway/widgets/scan/scan_screen.dart';
 class RouterName {
   static Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case 'introduction':
+      case AppRouting.introduction:
         return MaterialPageRoute(builder: (context) => IntroductionScreen());
-      case 'scanning':
+      case AppRouting.scanning:
         return MaterialPageRoute(builder: (context) => ScanScreen());
-      case 'connecting':
+      case AppRouting.connecting:
         return MaterialPageRoute(builder: (context) => ConnectScreen());
-      case 'confirm':
+      case AppRouting.confirm:
         return MaterialPageRoute(builder: (context) => ConfirmScreen());
+      case AppRouting.setup:
+        return MaterialPageRoute(builder: (context) => SetupScreen());
       default:
         return MaterialPageRoute(
           builder: (_) {
