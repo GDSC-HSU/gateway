@@ -32,6 +32,9 @@ dependencies:
   easy_localization: ^3.0.0-dev.1
   # permission_handler: ^9.1.0
   flutter_screenutil: ^5.3.1
+  http: ^0.13.4
+  shared_preferences: ^2.0.13
+  # url_launcher: ^6.0.20
 
 dev_dependencies:
   flutter_test:

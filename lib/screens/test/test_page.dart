@@ -6,6 +6,7 @@ import 'package:gateway/blocs/ble_device_connection/bloc/ble_device_connection_b
 import 'package:gateway/blocs/ble_scan/bloc/ble_scan_bloc.dart';
 import 'package:gateway/blocs/ble_sensor/ble_sensor.dart';
 import 'package:gateway/blocs/ble_sensor/bloc/ble_sensor_bloc.dart';
+import 'package:gateway/screens/test/device_config.dart';
 import 'package:gateway/screens/test/hexo_state.dart';
 
 import '../../generated/locale_keys.g.dart';
@@ -26,6 +27,7 @@ class _TestPageState extends State<TestPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          DeviceIdentityTest(),
           ScanPage(),
           // StreamBuilder<BleDeviceConnectionState>(
           //     stream: context.read<BleDeviceConnectionBloc>().stream,
