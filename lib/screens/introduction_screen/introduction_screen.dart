@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gateway/config/routes/routing.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/widgets/introduction/introduction_content.dart';
 
@@ -20,6 +21,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   bool valueBle = false;
   bool valueNetwork = false;
   bool valueStroge = false;
+  bool isLastPage = false;
   int _initialIndex = 0;
 
   int _curerentPage = 0;
@@ -51,6 +53,9 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
           onPageChanged: (index) {
             _curerentPage = index;
             _streamController.sink.add(index);
+            setState(() {
+              isLastPage = index == 2;
+            });
           },
           children: [
             IntroductionCuntent(
@@ -246,6 +251,9 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                 }),
             InkWell(
               onTap: () {
+                if (isLastPage) {
+                  Navigator.pushReplacementNamed(context, AppRouting.setup);
+                }
                 _pageController.nextPage(
                     duration: const Duration(
                       milliseconds: 500,
