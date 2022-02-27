@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gateway/blocs/ble_scan/bloc/ble_scan_bloc.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/widgets/confirm/confirm_screen.dart';
 import 'package:gateway/widgets/connect/connect_screen.dart';
@@ -18,9 +20,9 @@ class _SetupViewState extends State<SetupView> {
   final _duration = const Duration(milliseconds: 500);
   final _curve = Curves.ease;
   int _currentPage = 0;
-  List<Widget> _buildListScreen() {
-    return [ScanScreen(), ConnectScreen(), ConfirmScreen()];
-  }
+
+  List<Widget> get _buildListScreen =>
+      [ScanScreen(), ConnectScreen(), ConfirmScreen()];
 
   @override
   void didChangeDependencies() {
@@ -45,124 +47,139 @@ class _SetupViewState extends State<SetupView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Container(
-          //margin: EdgeInsets.only(top: 8 + MediaQuery.of(context).padding.top),
-          //padding: EdgeInsets.only(top: 20.h, bottom: 0.h),
-          height: 44.h,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 14.h,
-              ),
-              Expanded(
-                child: Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.only(left: 12.h, right: 20.h),
-                  child: Stack(
-                    children: [
-                      Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsets.symmetric(horizontal: 12.h),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            for (var i = 0;
-                                i < _buildListScreen().length - 1;
-                                i++)
-                              Flexible(
-                                child: Container(
-                                  height: 2.h,
-                                  decoration: BoxDecoration(
-                                    color: i <= _currentPage - 1
-                                        ? GatewayColors.buttonBgLight
-                                        : GatewayColors.textDefaultBgLight,
-                                  ),
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            for (var i = 0; i < _buildListScreen().length; i++)
-                              InkWell(
-                                onTap: () {
-                                  _onClickSelectPage(i);
-                                },
-                                child: Container(
-                                  height: 16.h,
-                                  width: 16.h,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: i <= _currentPage
-                                        ? GatewayColors.buttonBgLight
-                                        : GatewayColors.textDefaultBgLight,
-                                  ),
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            for (var i = 0; i < _buildListScreen().length; i++)
-                              InkWell(
-                                onTap: () {
-                                  _onClickSelectPage(i);
-                                },
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                    left: i == 0 ? 5.h : 0.h,
-                                    right: i == 1 ? 5.h : 5.h,
-                                  ),
-                                  child: Text(
-                                    (i + 1).toString(),
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 12.sp,
+    return Container(
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<BleScanBloc, BleScanState>(
+            listener: (context, state) {
+              if (state.scanState == ScanSate.founded) {
+                _onClickSelectPage(1);
+              }
+            },
+          ),
+        ],
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              height: 44.h,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 14.h,
+                  ),
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.only(left: 12.h, right: 20.h),
+                      child: Stack(
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.symmetric(horizontal: 12.h),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                for (var i = 0;
+                                    i < _buildListScreen.length - 1;
+                                    i++)
+                                  Flexible(
+                                    child: Container(
+                                      height: 2.h,
+                                      decoration: BoxDecoration(
+                                        color: i <= _currentPage - 1
+                                            ? GatewayColors.buttonBgLight
+                                            : GatewayColors.textDefaultBgLight,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                          ],
-                        ),
+                              ],
+                            ),
+                          ),
+                          Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                for (var i = 0;
+                                    i < _buildListScreen.length;
+                                    i++)
+                                  InkWell(
+                                    onTap: () {
+                                      _onClickSelectPage(i);
+                                    },
+                                    child: Container(
+                                      height: 16.h,
+                                      width: 16.h,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: i <= _currentPage
+                                            ? GatewayColors.buttonBgLight
+                                            : GatewayColors.textDefaultBgLight,
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                          Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                for (var i = 0;
+                                    i < _buildListScreen.length;
+                                    i++)
+                                  InkWell(
+                                    onTap: () {
+                                      _onClickSelectPage(i);
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                        left: i == 0 ? 5.h : 0.h,
+                                        right: i == 1 ? 5.h : 5.h,
+                                      ),
+                                      child: Text(
+                                        (i + 1).toString(),
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12.sp,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 16.h),
+                    child: Text(
+                      '${_currentPage + 1}' + '/${_buildListScreen.length}',
+                      style: Theme.of(context).textTheme.headline3?.copyWith(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w500,
+                            color: GatewayColors.textDefaultBgLight,
+                          ),
+                    ),
+                  ),
+                ],
               ),
-              Padding(
-                padding: EdgeInsets.only(right: 16.h),
-                child: Text(
-                  '${_currentPage + 1}' + '/${_buildListScreen().length}',
-                  style: Theme.of(context).textTheme.headline3?.copyWith(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w500,
-                        color: GatewayColors.textDefaultBgLight,
-                      ),
-                ),
+            ),
+            Expanded(
+              child: PageView(
+                controller: _pageController,
+                physics: NeverScrollableScrollPhysics(),
+                onPageChanged: _onPageViewChange,
+                children: _buildListScreen,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        Expanded(
-          child: PageView(
-            controller: _pageController,
-            physics: NeverScrollableScrollPhysics(),
-            onPageChanged: _onPageViewChange,
-            children: _buildListScreen(),
-          ),
-        ),
-      ],
+      ),
     );
   }
 

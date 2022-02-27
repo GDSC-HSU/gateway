@@ -18,10 +18,10 @@ class _SetupScreenState extends State<SetupScreen> {
       appBar: AppBar(
         shadowColor: Colors.transparent,
         elevation: 0.0,
-        title: Center(
+        title: const Center(
           child: Text(
             "Setup Gateway",
-            style: const TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.black),
           ),
         ),
         backgroundColor: GatewayColors.scaffoldBgLight,

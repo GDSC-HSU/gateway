@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:gateway/blocs/ble_repository.dart';
+import 'package:gateway/mock/mock_ble.dart';
 
 class AppRepositoryProvider extends StatelessWidget {
-  final FlutterReactiveBle rxBle = FlutterReactiveBle();
+  final FlutterReactiveBle rxBle = MockFlutterReactiveBle();
   final Widget child;
   AppRepositoryProvider({Key? key, required this.child}) : super(key: key);
 
