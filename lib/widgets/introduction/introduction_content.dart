@@ -13,7 +13,7 @@ class IntroductionCuntent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
@@ -32,7 +32,7 @@ class IntroductionCuntent extends StatelessWidget {
             fontWeight: FontWeight.w700,
           ),
         ),
-        Expanded(child: content),
+        content,
       ],
     );
   }

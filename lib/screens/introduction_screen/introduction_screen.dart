@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
+import 'package:gateway/widgets/introduction/introduction_content.dart';
 
 class IntroductionScreen extends StatefulWidget {
   IntroductionScreen({Key? key}) : super(key: key);
@@ -15,7 +16,10 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   late StreamController<int> _streamController;
   //List<IntroductionItem> _introductionItems = [];
   PageController _pageController = PageController(initialPage: 0);
-
+  bool valuePolicy = false;
+  bool valueBle = false;
+  bool valueNetwork = false;
+  bool valueStroge = false;
   int _initialIndex = 0;
 
   int _curerentPage = 0;
@@ -40,7 +44,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
         backgroundColor: GatewayColors.scaffoldBgLight,
       ),
       body: Container(
-        padding: EdgeInsets.only(bottom: 140.h),
+        padding: EdgeInsets.only(bottom: 200.h),
         child: PageView(
           controller: _pageController,
           scrollDirection: Axis.horizontal,
@@ -49,23 +53,187 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
             _streamController.sink.add(index);
           },
           children: [
-            Container(
-              color: GatewayColors.buttonBgLight,
-              child: Center(child: Text('hello')),
+            IntroductionCuntent(
+              content: Padding(
+                padding: EdgeInsets.only(left: 20.h, right: 20.h),
+                child: Column(
+                  children: [
+                    Text(
+                      'We’re “google developer student clubs of hoa sen university” \n(gdsc-hsu) which create an solution for the coivd-19 out-break.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: GatewayColors.textDefaultBgLight,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(height: 40.h),
+                    Theme(
+                      data: Theme.of(context).copyWith(
+                        unselectedWidgetColor: GatewayColors.outLineCheckBox,
+                      ),
+                      child: CheckboxListTile(
+                        activeColor: GatewayColors.buttonBgLight,
+                        controlAffinity: ListTileControlAffinity.leading,
+                        title: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'I agree with gateway ',
+                                  style: TextStyle(
+                                    color: GatewayColors.textPermissionBgLight,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 13.sp,
+                                  ),
+                                ),
+                                Text(
+                                  '“Term of services”',
+                                  style: TextStyle(
+                                    color: GatewayColors.buttonBgLight,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 13.sp,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  ' and ',
+                                  style: TextStyle(
+                                    color: GatewayColors.textPermissionBgLight,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 13.sp,
+                                  ),
+                                ),
+                                Text(
+                                  '“Privacy policy”',
+                                  style: TextStyle(
+                                    color: GatewayColors.buttonBgLight,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 13.sp,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        value: valuePolicy,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            valuePolicy = value!;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              image: 'assets/images/logo_gateway.png',
+              title: 'Welcome To Gateway',
             ),
-            Container(
-              color: GatewayColors.buttonBgLight,
-              child: Center(child: Text('hellooooooooooooooo')),
+            IntroductionCuntent(
+              content: Container(
+                width: 298.w,
+                height: 164.h,
+                child: Image.asset(
+                  'assets/images/hoasen.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
+              image: 'assets/images/logo_gateway.png',
+              title: 'What Is Gateway',
             ),
-            Container(
-              color: GatewayColors.buttonBgLight,
-              child: Center(child: Text('hellooooooo')),
+            IntroductionCuntent(
+              content: Padding(
+                padding: EdgeInsets.only(left: 30.h, right: 30.h),
+                child: Column(
+                  children: [
+                    Text(
+                      'In order to gateway fully run, yours device has to agree some of our permission.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: GatewayColors.textDefaultBgLight,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(height: 40.h),
+                    Theme(
+                      data: Theme.of(context).copyWith(
+                        unselectedWidgetColor: GatewayColors.outLineCheckBox,
+                      ),
+                      child: Column(
+                        children: [
+                          CheckboxListTile(
+                            activeColor: GatewayColors.buttonBgLight,
+                            controlAffinity: ListTileControlAffinity.leading,
+                            title: Text(
+                              'I agree with BLE permission',
+                              style: TextStyle(
+                                color: GatewayColors.textPermissionBgLight,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 13.sp,
+                              ),
+                            ),
+                            value: valueBle,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                valueBle = value!;
+                              });
+                            },
+                          ),
+                          CheckboxListTile(
+                            activeColor: GatewayColors.buttonBgLight,
+                            controlAffinity: ListTileControlAffinity.leading,
+                            title: Text(
+                              'I agree with network permission',
+                              style: TextStyle(
+                                color: GatewayColors.textPermissionBgLight,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 13.sp,
+                              ),
+                            ),
+                            value: valueNetwork,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                valueNetwork = value!;
+                              });
+                            },
+                          ),
+                          CheckboxListTile(
+                            activeColor: GatewayColors.buttonBgLight,
+                            controlAffinity: ListTileControlAffinity.leading,
+                            title: Text(
+                              'I agree with create stroge',
+                              style: TextStyle(
+                                color: GatewayColors.textPermissionBgLight,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 13.sp,
+                              ),
+                            ),
+                            value: valueStroge,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                valueStroge = value!;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              image: 'assets/images/key_permission.png',
+              title: 'App Permission',
             ),
           ],
         ),
       ),
       bottomSheet: Container(
-        height: 160.h,
+        height: 200.h,
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
