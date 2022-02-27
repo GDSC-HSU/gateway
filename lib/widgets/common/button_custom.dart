@@ -37,7 +37,14 @@ class _ButtonCustomState extends State<ButtonCustom> {
           ),
           child: Center(
             child: widget.isLoading == true
-                ? CircularProgressIndicator()
+                ? SizedBox(
+                    width: 25.w,
+                    height: 25.w,
+                    child: const CircularProgressIndicator(
+                      color: Colors.white,
+                      strokeWidth: 2.0,
+                    ),
+                  )
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
