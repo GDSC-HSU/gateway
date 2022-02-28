@@ -19,8 +19,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   PageController _pageController = PageController(initialPage: 0);
   bool valuePolicy = false;
   bool valueBle = false;
-  bool valueNetwork = false;
-  bool valueStroge = false;
+  bool valueCamera = false;
+  //bool valueStroge = false;
   bool isLastPage = false;
   int _initialIndex = 0;
 
@@ -193,35 +193,17 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                             activeColor: GatewayColors.buttonBgLight,
                             controlAffinity: ListTileControlAffinity.leading,
                             title: Text(
-                              'I agree with network permission',
+                              'I agree with camera permission',
                               style: TextStyle(
                                 color: GatewayColors.textPermissionBgLight,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 13.sp,
                               ),
                             ),
-                            value: valueNetwork,
+                            value: valueCamera,
                             onChanged: (bool? value) {
                               setState(() {
-                                valueNetwork = value!;
-                              });
-                            },
-                          ),
-                          CheckboxListTile(
-                            activeColor: GatewayColors.buttonBgLight,
-                            controlAffinity: ListTileControlAffinity.leading,
-                            title: Text(
-                              'I agree with create stroge',
-                              style: TextStyle(
-                                color: GatewayColors.textPermissionBgLight,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 13.sp,
-                              ),
-                            ),
-                            value: valueStroge,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                valueStroge = value!;
+                                valueCamera = value!;
                               });
                             },
                           ),
@@ -252,7 +234,9 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
             InkWell(
               onTap: () {
                 if (isLastPage) {
-                  Navigator.pushReplacementNamed(context, AppRouting.setup);
+                  if (valueBle == true && valueCamera == true) {
+                    Navigator.pushReplacementNamed(context, AppRouting.setup);
+                  }
                 }
                 _pageController.nextPage(
                     duration: const Duration(
@@ -263,10 +247,17 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
               child: Container(
                 width: 47.h,
                 height: 47.h,
-                decoration: BoxDecoration(
-                  color: GatewayColors.buttonBgLight,
-                  shape: BoxShape.circle,
-                ),
+                decoration: isLastPage
+                    ? BoxDecoration(
+                        color: valueBle == true && valueCamera == true
+                            ? GatewayColors.buttonBgLight
+                            : GatewayColors.disablebuttonBgLight,
+                        shape: BoxShape.circle,
+                      )
+                    : BoxDecoration(
+                        color: GatewayColors.buttonBgLight,
+                        shape: BoxShape.circle,
+                      ),
                 child: Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.white,
