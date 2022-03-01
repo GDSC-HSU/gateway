@@ -18,7 +18,7 @@ class ConnectScreen extends StatefulWidget {
 
 class _ConnectScreenState extends State<ConnectScreen> {
   late bool connected;
-  late bool isWantToConnect = false;
+  late bool isWantToConnect = true;
   late bool isBeenConnect;
   @override
   Widget build(BuildContext context) {
@@ -29,6 +29,8 @@ class _ConnectScreenState extends State<ConnectScreen> {
       child: BlocBuilder<BleDeviceConnectionBloc, BleDeviceConnectionState>(
         builder: (context, state) {
           isBeenConnect = state.connectionSate != null ? true : false;
+          final isConnectingToDevice = isDisableState(state);
+          // isWantToConnect = isConnectingToDevice;
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -91,34 +93,36 @@ class _ConnectScreenState extends State<ConnectScreen> {
                 ),
               ),
               SizedBox(height: 25.h),
-              ButtonCustom(
-                bgColor: isDisableState(state)
-                    ? GatewayColors.disablebuttonBgLight
-                    : GatewayColors.buttonBgLight,
-                iconButton: isWantToConnect
-                    ? const Icon(
-                        Icons.arrow_forward,
-                        color: Colors.white,
-                      )
-                    : const Icon(
-                        Icons.compare_arrows,
-                        color: Colors.white,
-                      ),
-                isLoading: isDisableState(state),
-                title: isWantToConnect ? 'Next' : 'Connect',
-                onFunction: () {
-                  if (isDeviceConnected(state)) {
-                  } else {
-                    setState(() {
-                      isWantToConnect = true;
-                      if (connected && isWantToConnect && !isBeenConnect) {
-                        bloc.add(BLEDeviceConnectionRequestEvent(
-                            bleScanBloc.device!.id));
-                      }
-                    });
-                  }
-                },
-              ),
+              isConnectingToDevice
+                  ? loading(
+                      bgColor: GatewayColors.disablebuttonBgLight,
+                      title: "",
+                      isLoading: true,
+                      onFunction: () => {})
+                  : loading(
+                      bgColor: GatewayColors.buttonBgLight,
+                      title: isWantToConnect ? "Connect" : "Next",
+                      leftIconButton: isWantToConnect
+                          ? const Icon(
+                              Icons.compare_arrows,
+                              color: Colors.white,
+                            )
+                          : null,
+                      rightIconButton: isWantToConnect
+                          ? null
+                          : const Icon(
+                              Icons.arrow_forward,
+                              color: Colors.white,
+                            ),
+                      onFunction: () => {
+                            if (!isDeviceConnected(state))
+                              {
+                                isWantToConnect = false,
+                                bloc.add(BLEDeviceConnectionRequestEvent(
+                                    bleScanBloc.device!.id))
+                                // }
+                              }
+                          })
             ],
           );
         },
@@ -132,7 +136,15 @@ class _ConnectScreenState extends State<ConnectScreen> {
   }
 
   bool isDeviceConnected(BleDeviceConnectionState state) {
-    return isWantToConnect &&
+    return !isWantToConnect &&
         state.connectionSate == DeviceConnectionState.connected;
   }
+
+  //   setState(() {
+  //   isWantToConnect = true;
+  //   if (connected && isWantToConnect && !isBeenConnect) {
+  //     bloc.add(BLEDeviceConnectionRequestEvent(
+  //         bleScanBloc.device!.id));
+  //   }
+  // });
 }
