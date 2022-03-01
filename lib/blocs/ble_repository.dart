@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
-import 'package:rxdart/subjects.dart';
+import 'package:gateway/config/constants/ble_timmer.dart';
+import 'package:rxdart/rxdart.dart';
 
 class BLERepository {
   final FlutterReactiveBle ble;
@@ -22,7 +23,12 @@ class BLERepository {
     try {
       if (isBLEPermissionEnable) {
         // deviceConnectionStream = BehaviorSubject();
-        _subscription = ble.connectToDevice(id: deviceID).listen((event) {
+        _subscription = ble.connectToDevice(id: deviceID).asyncMap((event) {
+          if (event.connectionState == DeviceConnectionState.connected) {
+            return Future.delayed(BLETimer.scanDelay, () => event);
+          }
+          return Future.value(event);
+        }).listen((event) {
           deviceConnectionStream.add(event);
         });
       }

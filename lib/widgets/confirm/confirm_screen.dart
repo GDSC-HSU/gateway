@@ -84,9 +84,9 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
             ),
           ),
           SizedBox(height: 25.h),
-          ButtonCustom(
+          loading(
             bgColor: GatewayColors.buttonBgLight,
-            iconButton: Icon(
+            leftIconButton: Icon(
               Icons.confirmation_number_outlined,
               color: Colors.white,
             ),
