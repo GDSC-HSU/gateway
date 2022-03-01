@@ -51,8 +51,7 @@ class MockFlutterReactiveBle implements FlutterReactiveBle {
           connectionState: DeviceConnectionState.connected,
           deviceId: mock_esp32.id,
           failure: null)
-    ]).asyncMap((event) async =>
-        await Future.delayed(Duration(seconds: 2), () => event));
+    ]);
   }
 
   @override
