@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/routes/routing.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
+import 'package:gateway/utils/app_permission.dart';
+import 'package:gateway/widgets/common/dialog/dialog.dart';
 import 'package:gateway/widgets/introduction/introduction_content.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class IntroductionScreen extends StatefulWidget {
   IntroductionScreen({Key? key}) : super(key: key);
@@ -15,16 +19,13 @@ class IntroductionScreen extends StatefulWidget {
 
 class _IntroductionScreenState extends State<IntroductionScreen> {
   late StreamController<int> _streamController;
-  //List<IntroductionItem> _introductionItems = [];
-  PageController _pageController = PageController(initialPage: 0);
+  final PageController _pageController = PageController(initialPage: 0);
   bool valuePolicy = false;
   bool valueBle = false;
   bool valueCamera = false;
   //bool valueStroge = false;
   bool isLastPage = false;
-  int _initialIndex = 0;
 
-  int _curerentPage = 0;
   @override
   void initState() {
     _streamController = StreamController.broadcast();
@@ -51,7 +52,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
           controller: _pageController,
           scrollDirection: Axis.horizontal,
           onPageChanged: (index) {
-            _curerentPage = index;
             _streamController.sink.add(index);
             setState(() {
               isLastPage = index == 2;
@@ -175,7 +175,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                             activeColor: GatewayColors.buttonBgLight,
                             controlAffinity: ListTileControlAffinity.leading,
                             title: Text(
-                              'I agree with BLE permission',
+                              'I agree with bluetooth permission',
                               style: TextStyle(
                                 color: GatewayColors.textPermissionBgLight,
                                 fontWeight: FontWeight.w600,
@@ -183,9 +183,12 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                               ),
                             ),
                             value: valueBle,
-                            onChanged: (bool? value) {
+                            onChanged: (bool? value) async {
+                              bool valueChooseImage =
+                                  await PermissionUtils.chooseSourceImage(
+                                      context, PermissionType.bluetooth);
                               setState(() {
-                                valueBle = value!;
+                                valueBle = valueChooseImage;
                               });
                             },
                           ),
@@ -201,9 +204,12 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                               ),
                             ),
                             value: valueCamera,
-                            onChanged: (bool? value) {
+                            onChanged: (bool? newValueCamera) async {
+                              bool valueChooseImage =
+                                  await PermissionUtils.chooseSourceImage(
+                                      context, PermissionType.camera);
                               setState(() {
-                                valueCamera = value!;
+                                valueCamera = valueChooseImage;
                               });
                             },
                           ),
