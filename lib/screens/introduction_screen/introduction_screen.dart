@@ -5,10 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/routes/routing.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/utils/app_permission.dart';
-import 'package:gateway/widgets/common/dialog/dialog.dart';
 import 'package:gateway/widgets/introduction/introduction_content.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class IntroductionScreen extends StatefulWidget {
   IntroductionScreen({Key? key}) : super(key: key);
@@ -29,16 +26,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   @override
   void initState() {
     _streamController = StreamController.broadcast();
-    // PermissionUtils.checkIsGranted(PermissionType.camera).then((value) => {
-    //   setState(() {
-    //     valueCamera = value;
-    //   }),
-    // });
-    // if (valueCamera == true) {
-      
-    // }
-
-    print('valueCamera:' + valueCamera.toString());
     super.initState();
   }
 
