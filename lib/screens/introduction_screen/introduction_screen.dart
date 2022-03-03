@@ -86,7 +86,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                                   style: TextStyle(
                                     color: GatewayColors.textPermissionBgLight,
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 13.sp,
+                                    fontSize: 12.sp,
                                   ),
                                 ),
                                 Text(
@@ -94,7 +94,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                                   style: TextStyle(
                                     color: GatewayColors.buttonBgLight,
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 13.sp,
+                                    fontSize: 12.sp,
                                   ),
                                 ),
                               ],
@@ -106,7 +106,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                                   style: TextStyle(
                                     color: GatewayColors.textPermissionBgLight,
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 13.sp,
+                                    fontSize: 12.sp,
                                   ),
                                 ),
                                 Text(
@@ -114,7 +114,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                                   style: TextStyle(
                                     color: GatewayColors.buttonBgLight,
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 13.sp,
+                                    fontSize: 12.sp,
                                   ),
                                 ),
                               ],
@@ -169,64 +169,68 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                       child: Column(
                         children: [
                           FutureBuilder<bool>(
-                            future: PermissionUtils.checkIsGranted(PermissionType.bluetooth),
-                            builder: (context, snapshot) {
-                              if(snapshot.hasData){
-                                valueBle = snapshot.data!;
-                              }
-                              return CheckboxListTile(
-                                activeColor: GatewayColors.buttonBgLight,
-                                controlAffinity: ListTileControlAffinity.leading,
-                                title: Text(
-                                  'I agree with bluetooth permission',
-                                  style: TextStyle(
-                                    color: GatewayColors.textPermissionBgLight,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13.sp,
+                              future: PermissionUtils.checkIsGranted(
+                                  PermissionType.bluetooth),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  valueBle = snapshot.data!;
+                                }
+                                return CheckboxListTile(
+                                  activeColor: GatewayColors.buttonBgLight,
+                                  controlAffinity:
+                                      ListTileControlAffinity.leading,
+                                  title: Text(
+                                    'I agree with bluetooth permission',
+                                    style: TextStyle(
+                                      color:
+                                          GatewayColors.textPermissionBgLight,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 13.sp,
+                                    ),
                                   ),
-                                ),
-                                value: valueBle,
-                                onChanged: (bool? value) async {
-                                  bool valueChooseImage =
-                                      await PermissionUtils.chooseSourceImage(
-                                          context, PermissionType.bluetooth);
-                                  setState(() {
-                                    valueBle = valueChooseImage;
-                                  });
-                                },
-                              );
-                            }
-                          ),
+                                  value: valueBle,
+                                  onChanged: (bool? value) async {
+                                    bool valueChooseImage =
+                                        await PermissionUtils.chooseSourceImage(
+                                            context, PermissionType.bluetooth);
+                                    setState(() {
+                                      valueBle = valueChooseImage;
+                                    });
+                                  },
+                                );
+                              }),
                           FutureBuilder<bool>(
-                            future: PermissionUtils.checkIsGranted(PermissionType.camera),
-                            builder: (context, snapshot) {
-                              if(snapshot.hasData){
-                                valueCamera = snapshot.data!;
-                              }
-                              return CheckboxListTile(
-                                activeColor: GatewayColors.buttonBgLight,
-                                controlAffinity: ListTileControlAffinity.leading,
-                                title: Text(
-                                  'I agree with camera permission',
-                                  style: TextStyle(
-                                    color: GatewayColors.textPermissionBgLight,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13.sp,
+                              future: PermissionUtils.checkIsGranted(
+                                  PermissionType.camera),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  valueCamera = snapshot.data!;
+                                }
+                                return CheckboxListTile(
+                                  activeColor: GatewayColors.buttonBgLight,
+                                  controlAffinity:
+                                      ListTileControlAffinity.leading,
+                                  title: Text(
+                                    'I agree with camera permission',
+                                    style: TextStyle(
+                                      color:
+                                          GatewayColors.textPermissionBgLight,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 13.sp,
+                                    ),
                                   ),
-                                ),
-                                value: valueCamera,
-                                onChanged: (bool? newValueCamera) async {
-                                  print(valueCamera);
-                                  bool valueChooseImage =
-                                      await PermissionUtils.chooseSourceImage(
-                                          context, PermissionType.camera);
-                                  setState(() {
-                                    valueCamera = valueChooseImage;
-                                  });
-                                },
-                              );
-                            }
-                          ),
+                                  value: valueCamera,
+                                  onChanged: (bool? newValueCamera) async {
+                                    print(valueCamera);
+                                    bool valueChooseImage =
+                                        await PermissionUtils.chooseSourceImage(
+                                            context, PermissionType.camera);
+                                    setState(() {
+                                      valueCamera = valueChooseImage;
+                                    });
+                                  },
+                                );
+                              }),
                         ],
                       ),
                     ),
