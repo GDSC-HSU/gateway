@@ -140,7 +140,7 @@ class DialogUtils {
         context: context,
         barrierDismissible: barrierDismissible,
         showImageInDialog: true,
-        title: title ?? 'hello',
+        title: title ?? 'Notification',
         type: type,
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -159,22 +159,27 @@ class DialogUtils {
         buttons: [
           if (showCancelButton)
             DialogButton(
+              radius: BorderRadius.circular(16.r),
+              margin: EdgeInsets.only(left: 16.h, right: 16.h),
               child: Text(
-                'cancal',
-                style: TextStyle(color: Colors.white, fontSize: 20),
+                'Cancal',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16.sp,
+                ),
               ),
               color: Colors.redAccent,
               onPressed: onCancelPressed ?? () => Navigator.pop(context),
             ),
           DialogButton(
-            radius: BorderRadius.circular(16.0),
-            margin: EdgeInsets.only(left: 16, right: 16),
+            radius: BorderRadius.circular(16.r),
+            margin: EdgeInsets.only(left: 16.h, right: 16.h),
             onPressed: onPressed ?? () => Navigator.pop(context),
             child: Text(
-              'ok',
+              'Setting',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 16,
+                fontSize: 16.sp,
                 fontWeight: FontWeight.w500,
               ),
             ),

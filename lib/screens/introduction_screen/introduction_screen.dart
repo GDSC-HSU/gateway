@@ -25,10 +25,20 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   bool valueCamera = false;
   //bool valueStroge = false;
   bool isLastPage = false;
-
+  bool check = false;
   @override
   void initState() {
     _streamController = StreamController.broadcast();
+    // PermissionUtils.checkIsGranted(PermissionType.camera).then((value) => {
+    //   setState(() {
+    //     valueCamera = value;
+    //   }),
+    // });
+    // if (valueCamera == true) {
+      
+    // }
+
+    print('valueCamera:' + valueCamera.toString());
     super.initState();
   }
 
@@ -171,47 +181,64 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                       ),
                       child: Column(
                         children: [
-                          CheckboxListTile(
-                            activeColor: GatewayColors.buttonBgLight,
-                            controlAffinity: ListTileControlAffinity.leading,
-                            title: Text(
-                              'I agree with bluetooth permission',
-                              style: TextStyle(
-                                color: GatewayColors.textPermissionBgLight,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 13.sp,
-                              ),
-                            ),
-                            value: valueBle,
-                            onChanged: (bool? value) async {
-                              bool valueChooseImage =
-                                  await PermissionUtils.chooseSourceImage(
-                                      context, PermissionType.bluetooth);
-                              setState(() {
-                                valueBle = valueChooseImage;
-                              });
-                            },
+                          FutureBuilder<bool>(
+                            future: PermissionUtils.checkIsGranted(PermissionType.bluetooth),
+                            builder: (context, snapshot) {
+                              if(snapshot.hasData){
+                                valueBle = snapshot.data!;
+                              }
+                              return CheckboxListTile(
+                                activeColor: GatewayColors.buttonBgLight,
+                                controlAffinity: ListTileControlAffinity.leading,
+                                title: Text(
+                                  'I agree with bluetooth permission',
+                                  style: TextStyle(
+                                    color: GatewayColors.textPermissionBgLight,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 13.sp,
+                                  ),
+                                ),
+                                value: valueBle,
+                                onChanged: (bool? value) async {
+                                  bool valueChooseImage =
+                                      await PermissionUtils.chooseSourceImage(
+                                          context, PermissionType.bluetooth);
+                                  setState(() {
+                                    valueBle = valueChooseImage;
+                                  });
+                                },
+                              );
+                            }
                           ),
-                          CheckboxListTile(
-                            activeColor: GatewayColors.buttonBgLight,
-                            controlAffinity: ListTileControlAffinity.leading,
-                            title: Text(
-                              'I agree with camera permission',
-                              style: TextStyle(
-                                color: GatewayColors.textPermissionBgLight,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 13.sp,
-                              ),
-                            ),
-                            value: valueCamera,
-                            onChanged: (bool? newValueCamera) async {
-                              bool valueChooseImage =
-                                  await PermissionUtils.chooseSourceImage(
-                                      context, PermissionType.camera);
-                              setState(() {
-                                valueCamera = valueChooseImage;
-                              });
-                            },
+                          FutureBuilder<bool>(
+                            future: PermissionUtils.checkIsGranted(PermissionType.camera),
+                            builder: (context, snapshot) {
+                              if(snapshot.hasData){
+                                valueCamera = snapshot.data!;
+                              }
+                              return CheckboxListTile(
+                                activeColor: GatewayColors.buttonBgLight,
+                                controlAffinity: ListTileControlAffinity.leading,
+                                title: Text(
+                                  'I agree with camera permission',
+                                  style: TextStyle(
+                                    color: GatewayColors.textPermissionBgLight,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 13.sp,
+                                  ),
+                                ),
+                                value: valueCamera,
+                                onChanged: (bool? newValueCamera) async {
+                                  print(valueCamera);
+                                  bool valueChooseImage =
+                                      await PermissionUtils.chooseSourceImage(
+                                          context, PermissionType.camera);
+                                  setState(() {
+                                    valueCamera = valueChooseImage;
+                                  });
+                                },
+                              );
+                            }
                           ),
                         ],
                       ),
