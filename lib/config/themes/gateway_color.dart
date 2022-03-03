@@ -9,4 +9,6 @@ class GatewayColors {
   static const Color dividerColorLight = Color(0xFFF2F2F2);
   static const Color bgButtonColorHaveBorder = Color(0xFFDDE7FF);
   static const Color outLineCheckBox = Color(0xFFE4E4E4);
+  static const Color blur_background = Color(0x800D0D0D);
+  static const Color inactive_white = Color(0xBFFFFFFF);
 }

@@ -30,11 +30,12 @@ dependencies:
   rxdart: ^0.27.3
   flutter_reactive_ble: ^5.0.2
   easy_localization: ^3.0.0-dev.1
-  # permission_handler: ^9.1.0
+  permission_handler: ^9.0.1
   flutter_screenutil: ^5.3.1
   http: ^0.13.4
   shared_preferences: ^2.0.13
   # url_launcher: ^6.0.20
+  connectivity: ^3.0.6
 
 dev_dependencies:
   flutter_test:

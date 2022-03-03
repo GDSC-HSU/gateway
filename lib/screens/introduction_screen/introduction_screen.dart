@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/routes/routing.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
+import 'package:gateway/utils/app_permission.dart';
 import 'package:gateway/widgets/introduction/introduction_content.dart';
 
 class IntroductionScreen extends StatefulWidget {
@@ -15,16 +16,13 @@ class IntroductionScreen extends StatefulWidget {
 
 class _IntroductionScreenState extends State<IntroductionScreen> {
   late StreamController<int> _streamController;
-  //List<IntroductionItem> _introductionItems = [];
-  PageController _pageController = PageController(initialPage: 0);
+  final PageController _pageController = PageController(initialPage: 0);
   bool valuePolicy = false;
   bool valueBle = false;
-  bool valueNetwork = false;
-  bool valueStroge = false;
+  bool valueCamera = false;
+  //bool valueStroge = false;
   bool isLastPage = false;
-  int _initialIndex = 0;
-
-  int _curerentPage = 0;
+  bool check = false;
   @override
   void initState() {
     _streamController = StreamController.broadcast();
@@ -51,7 +49,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
           controller: _pageController,
           scrollDirection: Axis.horizontal,
           onPageChanged: (index) {
-            _curerentPage = index;
             _streamController.sink.add(index);
             setState(() {
               isLastPage = index == 2;
@@ -171,59 +168,64 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                       ),
                       child: Column(
                         children: [
-                          CheckboxListTile(
-                            activeColor: GatewayColors.buttonBgLight,
-                            controlAffinity: ListTileControlAffinity.leading,
-                            title: Text(
-                              'I agree with BLE permission',
-                              style: TextStyle(
-                                color: GatewayColors.textPermissionBgLight,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 13.sp,
-                              ),
-                            ),
-                            value: valueBle,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                valueBle = value!;
-                              });
-                            },
+                          FutureBuilder<bool>(
+                            future: PermissionUtils.checkIsGranted(PermissionType.bluetooth),
+                            builder: (context, snapshot) {
+                              if(snapshot.hasData){
+                                valueBle = snapshot.data!;
+                              }
+                              return CheckboxListTile(
+                                activeColor: GatewayColors.buttonBgLight,
+                                controlAffinity: ListTileControlAffinity.leading,
+                                title: Text(
+                                  'I agree with bluetooth permission',
+                                  style: TextStyle(
+                                    color: GatewayColors.textPermissionBgLight,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 13.sp,
+                                  ),
+                                ),
+                                value: valueBle,
+                                onChanged: (bool? value) async {
+                                  bool valueChooseImage =
+                                      await PermissionUtils.chooseSourceImage(
+                                          context, PermissionType.bluetooth);
+                                  setState(() {
+                                    valueBle = valueChooseImage;
+                                  });
+                                },
+                              );
+                            }
                           ),
-                          CheckboxListTile(
-                            activeColor: GatewayColors.buttonBgLight,
-                            controlAffinity: ListTileControlAffinity.leading,
-                            title: Text(
-                              'I agree with network permission',
-                              style: TextStyle(
-                                color: GatewayColors.textPermissionBgLight,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 13.sp,
-                              ),
-                            ),
-                            value: valueNetwork,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                valueNetwork = value!;
-                              });
-                            },
-                          ),
-                          CheckboxListTile(
-                            activeColor: GatewayColors.buttonBgLight,
-                            controlAffinity: ListTileControlAffinity.leading,
-                            title: Text(
-                              'I agree with create stroge',
-                              style: TextStyle(
-                                color: GatewayColors.textPermissionBgLight,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 13.sp,
-                              ),
-                            ),
-                            value: valueStroge,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                valueStroge = value!;
-                              });
-                            },
+                          FutureBuilder<bool>(
+                            future: PermissionUtils.checkIsGranted(PermissionType.camera),
+                            builder: (context, snapshot) {
+                              if(snapshot.hasData){
+                                valueCamera = snapshot.data!;
+                              }
+                              return CheckboxListTile(
+                                activeColor: GatewayColors.buttonBgLight,
+                                controlAffinity: ListTileControlAffinity.leading,
+                                title: Text(
+                                  'I agree with camera permission',
+                                  style: TextStyle(
+                                    color: GatewayColors.textPermissionBgLight,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 13.sp,
+                                  ),
+                                ),
+                                value: valueCamera,
+                                onChanged: (bool? newValueCamera) async {
+                                  print(valueCamera);
+                                  bool valueChooseImage =
+                                      await PermissionUtils.chooseSourceImage(
+                                          context, PermissionType.camera);
+                                  setState(() {
+                                    valueCamera = valueChooseImage;
+                                  });
+                                },
+                              );
+                            }
                           ),
                         ],
                       ),
@@ -252,7 +254,9 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
             InkWell(
               onTap: () {
                 if (isLastPage) {
-                  Navigator.pushReplacementNamed(context, AppRouting.setup);
+                  if (valueBle == true && valueCamera == true) {
+                    Navigator.pushReplacementNamed(context, AppRouting.setup);
+                  }
                 }
                 _pageController.nextPage(
                     duration: const Duration(
@@ -263,10 +267,17 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
               child: Container(
                 width: 47.h,
                 height: 47.h,
-                decoration: BoxDecoration(
-                  color: GatewayColors.buttonBgLight,
-                  shape: BoxShape.circle,
-                ),
+                decoration: isLastPage
+                    ? BoxDecoration(
+                        color: valueBle == true && valueCamera == true
+                            ? GatewayColors.buttonBgLight
+                            : GatewayColors.disablebuttonBgLight,
+                        shape: BoxShape.circle,
+                      )
+                    : BoxDecoration(
+                        color: GatewayColors.buttonBgLight,
+                        shape: BoxShape.circle,
+                      ),
                 child: Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.white,
