@@ -36,8 +36,6 @@ dependencies:
   shared_preferences: ^2.0.13
   # url_launcher: ^6.0.20
   connectivity: ^3.0.6
-  bot_toast: ^4.0.1
-  image_picker: ^0.8.4+10
 
 dev_dependencies:
   flutter_test:
