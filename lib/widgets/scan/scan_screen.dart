@@ -7,7 +7,7 @@ import 'package:gateway/widgets/common/button_custom.dart';
 import 'package:gateway/widgets/common/card_setup.dart';
 
 class ScanScreen extends StatefulWidget {
-  const ScanScreen({Key? key}) : super(key: key);
+  ScanScreen({Key? key}) : super(key: key);
 
   @override
   _ScanScreenState createState() => _ScanScreenState();
