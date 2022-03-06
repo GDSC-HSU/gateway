@@ -1,13 +1,9 @@
-import 'package:bot_toast/bot_toast.dart';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/routes/router_name.dart';
 import 'package:gateway/config/routes/routing.dart';
-import 'package:gateway/config/themes/gateway_color.dart';
-import 'package:gateway/screens/setup_screen/setup_screen.dart';
-import 'package:gateway/screens/test/test_page.dart';
-import 'package:gateway/utils/network_status.dart';
 
 import 'di/di.dart';
 import 'di/di_repository.dart';

@@ -4,6 +4,6 @@ class AppRouting {
   static const String scanning = "scanning";
   static const String connecting = "connecting";
   static const String confirm = "confirm";
-  static const String home = "home";
+  static const String gatewayCheck = "gatewayCheck";
   static const String settings = "settings";
 }

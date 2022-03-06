@@ -1,5 +1,7 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gateway/config/routes/routing.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/widgets/common/button_custom.dart';
 import 'package:gateway/widgets/common/card_setup.dart';
@@ -14,6 +16,12 @@ class ConfirmScreen extends StatefulWidget {
 }
 
 class _ConfirmScreenState extends State<ConfirmScreen> {
+  @override
+  void initState() {
+    
+    super.initState();
+  }
+
   late bool confirmOrganization = true;
   @override
   Widget build(BuildContext context) {
@@ -92,9 +100,14 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
             ),
             title: 'Confirm',
             onFunction: () {
-              setState(() {
-                confirmOrganization = !confirmOrganization;
-              });
+              Navigator.pushReplacementNamed(
+                context,
+                AppRouting.gatewayCheck,
+                //arguments: {"camera": cameras},
+              );
+              //   setState(() {
+              //     confirmOrganization = !confirmOrganization;
+              //   });
             },
           ),
         ],

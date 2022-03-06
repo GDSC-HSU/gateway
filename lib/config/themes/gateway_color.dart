@@ -11,4 +11,8 @@ class GatewayColors {
   static const Color outLineCheckBox = Color(0xFFE4E4E4);
   static const Color blur_background = Color(0x800D0D0D);
   static const Color inactive_white = Color(0xBFFFFFFF);
+  static const Color bgDark = Color(0xFF101930);
+  static const Color borderCheck = Color(0xFFE2E2E2);
+  static const Color successColor = Color(0xFF41E198);
+  static const Color failColor = Color(0xFFFF4234);
 }
