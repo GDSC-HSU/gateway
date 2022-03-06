@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
+import 'package:gateway/widgets/common/info_check_card.dart';
 
 late List<CameraDescription> cameras;
 
@@ -63,7 +64,7 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
                             color: GatewayColors.bgDark,
                             borderRadius: BorderRadius.circular(20.r)),
                         child: Padding(
-                          padding: EdgeInsets.all(5.h),
+                          padding: EdgeInsets.all(0.h),
                           child: CameraPreview(
                             _controller,
                           ),
@@ -80,7 +81,7 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
                   color: GatewayColors.bgDark,
                   borderRadius: BorderRadius.only(
                     bottomRight: Radius.circular(20.r),
-                    topLeft: Radius.circular(20.r),
+                    //topLeft: Radius.circular(20.r),
                   ),
                 ),
                 child: Center(
@@ -104,46 +105,16 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
                 ),
               ),
               Positioned(
-                right: 0,
-                top: 0,
-                child: Container(
-                  width: 20.h,
-                  height: 20.h,
-                  decoration: BoxDecoration(
-                    color: GatewayColors.bgDark,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20.r),
-                      bottomLeft: Radius.circular(20.r),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                child: Container(
-                  width: 20.h,
-                  height: 20.h,
-                  decoration: BoxDecoration(
-                    color: GatewayColors.bgDark,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20.r),
-                      topRight: Radius.circular(20.r),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
                 bottom: 0,
                 right: 0,
                 child: Container(
-                  width: 40.h,
-                  height: 40.h,
+                  width: 35.h,
+                  height: 35.h,
                   decoration: BoxDecoration(
                     color: GatewayColors.bgDark,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20.r),
-                      bottomRight: Radius.circular(20.r),
+                      //bottomRight: Radius.circular(20.r),
                     ),
                   ),
                   child: IconButton(
@@ -179,114 +150,34 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Container(
-                      width: double.infinity,
-                      height: 45.h,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: GatewayColors.borderCheck,
-                        ),
-                        borderRadius: BorderRadius.circular(10.h),
-                      ),
-                      child: ListTile(
-                        leading: Image.asset(
-                          'assets/images/thermometer-gun.png',
-                          scale: 13,
-                        ),
-                        title: Text(
-                          'RFID Temperature',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 16.sp),
-                        ),
-                        trailing: Icon(
-                          Icons.check_circle_outline,
-                          color: GatewayColors.successColor,
-                        ),
-                      ),
+                    const InfoCheckCard(
+                      iconStatus: false,
+                      imageIcon: 'assets/images/thermometer-gun.png',
+                      title: 'RFID Temperature',
                     ),
                     SizedBox(
                       height: 10.h,
                     ),
-                    Container(
-                      width: double.infinity,
-                      height: 45.h,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: GatewayColors.borderCheck,
-                        ),
-                        borderRadius: BorderRadius.circular(10.h),
-                      ),
-                      child: ListTile(
-                        leading: Image.asset(
-                          'assets/images/face-mask.png',
-                          scale: 13,
-                        ),
-                        title: Text(
-                          'Face Mask',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 16.sp),
-                        ),
-                        trailing: Icon(
-                          Icons.cancel_outlined,
-                          color: GatewayColors.failColor,
-                        ),
-                      ),
+                    const InfoCheckCard(
+                      iconStatus: false,
+                      imageIcon: 'assets/images/face-mask.png',
+                      title: 'Face Mask',
                     ),
                     SizedBox(
                       height: 10.h,
                     ),
-                    Container(
-                      width: double.infinity,
-                      height: 45.h,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: GatewayColors.borderCheck,
-                        ),
-                        borderRadius: BorderRadius.circular(10.h),
-                      ),
-                      child: ListTile(
-                        leading: Image.asset(
-                          'assets/images/petition.png',
-                          scale: 13,
-                        ),
-                        title: Text(
-                          'Health Declaration',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 16.sp),
-                        ),
-                        trailing: Icon(
-                          Icons.check_circle_outline,
-                          color: GatewayColors.successColor,
-                        ),
-                      ),
+                    const InfoCheckCard(
+                      iconStatus: false,
+                      imageIcon: 'assets/images/petition.png',
+                      title: 'Health Declaration',
                     ),
                     SizedBox(
                       height: 10.h,
                     ),
-                    Container(
-                      width: double.infinity,
-                      height: 45.h,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: GatewayColors.borderCheck,
-                        ),
-                        borderRadius: BorderRadius.circular(10.h),
-                      ),
-                      child: ListTile(
-                        leading: Image.asset(
-                          'assets/images/hand-sanitizer.png',
-                          scale: 13,
-                        ),
-                        title: Text(
-                          'Hand Sanitizer',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 16.sp),
-                        ),
-                        trailing: Icon(
-                          Icons.check_circle_outline,
-                          color: GatewayColors.successColor,
-                        ),
-                      ),
+                    const InfoCheckCard(
+                      iconStatus: true,
+                      imageIcon: 'assets/images/hand-sanitizer.png',
+                      title: 'Hand Sanitizer',
                     ),
                   ],
                 ),

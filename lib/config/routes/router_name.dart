@@ -13,8 +13,6 @@ import 'package:gateway/widgets/scan/scan_screen.dart';
 class RouterName {
   late List<CameraDescription> cameras;
   static Route generateRoute(RouteSettings settings) {
-    dynamic symbol = settings.arguments;
-    dynamic router = settings.name;
     switch (settings.name) {
       case AppRouting.introduction:
         return MaterialPageRoute(builder: (context) => IntroductionScreen());
