@@ -165,7 +165,7 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
               top: 16.h,
             ),
             child: Text(
-              'ADD ORGANIZATION',
+              'CHECK INFORMATION',
               style: TextStyle(
                 color: GatewayColors.textDefaultBgLight,
                 fontSize: 15.sp,
