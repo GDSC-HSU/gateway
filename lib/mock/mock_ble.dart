@@ -1,6 +1,7 @@
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:flutter_reactive_ble/src/discovered_devices_registry.dart';
 import 'package:gateway/mock/mock_ble_device.dart';
+import 'package:rxdart/rxdart.dart';
 
 class MockFlutterReactiveBle implements FlutterReactiveBle {
   @override
@@ -22,7 +23,17 @@ class MockFlutterReactiveBle implements FlutterReactiveBle {
       Map<Uuid, List<Uuid>>? servicesWithCharacteristicsToDiscover,
       Duration? connectionTimeout}) {
     // TODO: implement connectToAdvertisingDevice
-    throw UnimplementedError();
+    return Stream.fromIterable([
+      ConnectionStateUpdate(
+          connectionState: DeviceConnectionState.connecting,
+          deviceId: mock_esp32.id,
+          failure: null),
+      ConnectionStateUpdate(
+          connectionState: DeviceConnectionState.connected,
+          deviceId: mock_esp32.id,
+          failure: null)
+    ]).asyncMap((event) async =>
+        await Future.delayed(Duration(seconds: 2), () => event));
   }
 
   @override
@@ -31,13 +42,31 @@ class MockFlutterReactiveBle implements FlutterReactiveBle {
       Map<Uuid, List<Uuid>>? servicesWithCharacteristicsToDiscover,
       Duration? connectionTimeout}) {
     // TODO: implement connectToDevice
-    throw UnimplementedError();
+    return Stream.fromIterable([
+      ConnectionStateUpdate(
+          connectionState: DeviceConnectionState.connecting,
+          deviceId: mock_esp32.id,
+          failure: null),
+      ConnectionStateUpdate(
+          connectionState: DeviceConnectionState.connected,
+          deviceId: mock_esp32.id,
+          failure: null)
+    ]);
   }
 
   @override
   // TODO: implement connectedDeviceStream
   Stream<ConnectionStateUpdate> get connectedDeviceStream =>
-      throw UnimplementedError();
+      Stream.fromIterable([
+        ConnectionStateUpdate(
+            connectionState: DeviceConnectionState.connecting,
+            deviceId: mock_esp32.id,
+            failure: null),
+        ConnectionStateUpdate(
+            connectionState: DeviceConnectionState.connected,
+            deviceId: mock_esp32.id,
+            failure: null)
+      ]);
 
   @override
   Future<void> deinitialize() {
@@ -52,14 +81,8 @@ class MockFlutterReactiveBle implements FlutterReactiveBle {
   }
 
   @override
-  Future<void> initialize() {
-    // TODO: implement initialize
-    throw UnimplementedError();
-  }
-
-  @override
-  set logLevel(LogLevel logLevel) {
-    // TODO: implement logLevel
+  Future<void> initialize() async {
+    print("object");
   }
 
   @override
@@ -99,13 +122,15 @@ class MockFlutterReactiveBle implements FlutterReactiveBle {
 
   @override
   // TODO: implement statusStream
-  Stream<BleStatus> get statusStream => throw UnimplementedError();
+  Stream<BleStatus> get statusStream => Stream.fromIterable([BleStatus.ready]);
 
   @override
   Stream<List<int>> subscribeToCharacteristic(
       QualifiedCharacteristic characteristic) {
     // TODO: implement subscribeToCharacteristic
-    throw UnimplementedError();
+    return Stream.fromIterable([
+      [0, 1, 2, 3, 4, 5]
+    ]);
   }
 
   @override
@@ -122,5 +147,10 @@ class MockFlutterReactiveBle implements FlutterReactiveBle {
       {required List<int> value}) {
     // TODO: implement writeCharacteristicWithoutResponse
     throw UnimplementedError();
+  }
+
+  @override
+  set logLevel(LogLevel logLevel) {
+    // TODO: implement logLevel
   }
 }
