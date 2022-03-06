@@ -49,31 +49,31 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
         backgroundColor: GatewayColors.scaffoldBgLight,
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
             children: [
               FutureBuilder(
-                  future: _initializeControllerFuture,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      return Container(
-                        width: double.infinity,
-                        height: 300.h,
-                        decoration: BoxDecoration(
-                            color: GatewayColors.bgDark,
-                            borderRadius: BorderRadius.circular(20.r)),
-                        child: Padding(
-                          padding: EdgeInsets.all(0.h),
-                          child: CameraPreview(
-                            _controller,
-                          ),
+                future: _initializeControllerFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return Container(
+                      width: double.infinity,
+                      height: MediaQuery.of(context).size.height * 0.7,
+                      decoration: BoxDecoration(
+                          color: GatewayColors.bgDark,
+                          borderRadius: BorderRadius.circular(20.r)),
+                      child: Padding(
+                        padding: EdgeInsets.all(0.h),
+                        child: CameraPreview(
+                          _controller,
                         ),
-                      );
-                    } else {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                  }),
+                      ),
+                    );
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                },
+              ),
               Container(
                 width: 90.w,
                 height: 40.h,
@@ -105,84 +105,87 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
                 ),
               ),
               Positioned(
-                bottom: 0,
+                top: 0,
                 right: 0,
                 child: Container(
-                  width: 35.h,
-                  height: 35.h,
+                  width: 40.h,
+                  height: 40.h,
                   decoration: BoxDecoration(
                     color: GatewayColors.bgDark,
                     borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20.r),
+                    ),
+                  ),
+                  child:
+                      Center(child: IconButton(onPressed: () {}, icon: Icon(Icons.refresh, color: Colors.white,size: 25.sp,))),
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 150.h,
+                  decoration: BoxDecoration(
+                    color: GatewayColors.scaffoldBgLight,
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20.r),
+                      topRight: Radius.circular(20.r),
                       //bottomRight: Radius.circular(20.r),
                     ),
                   ),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.refresh,
-                      color: Colors.white,
-                      size: 25.sp,
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          bottom: 10.h,
+                          left: 16.h,
+                          top: 16.h,
+                        ),
+                        child: Text(
+                          'CHECK INFORMATION',
+                          style: TextStyle(
+                            color: GatewayColors.textDefaultBgLight,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      const InfoCheckCard(
+                        iconStatus: false,
+                        imageIcon: 'assets/images/thermometer-gun.png',
+                        title: 'RFID Temperature',
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      const InfoCheckCard(
+                        iconStatus: false,
+                        imageIcon: 'assets/images/face-mask.png',
+                        title: 'Face Mask',
+                      ),
+                    ],
                   ),
                 ),
               ),
             ],
           ),
-          Padding(
-            padding: EdgeInsets.only(
-              bottom: 10.h,
-              left: 16.h,
-              top: 16.h,
-            ),
-            child: Text(
-              'CHECK INFORMATION',
-              style: TextStyle(
-                color: GatewayColors.textDefaultBgLight,
-                fontSize: 15.sp,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
+          SizedBox(
+            height: 10.h,
           ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.h),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const InfoCheckCard(
-                      iconStatus: false,
-                      imageIcon: 'assets/images/thermometer-gun.png',
-                      title: 'RFID Temperature',
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    const InfoCheckCard(
-                      iconStatus: false,
-                      imageIcon: 'assets/images/face-mask.png',
-                      title: 'Face Mask',
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    const InfoCheckCard(
-                      iconStatus: false,
-                      imageIcon: 'assets/images/petition.png',
-                      title: 'Health Declaration',
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    const InfoCheckCard(
-                      iconStatus: true,
-                      imageIcon: 'assets/images/hand-sanitizer.png',
-                      title: 'Hand Sanitizer',
-                    ),
-                  ],
-                ),
-              ),
-            ),
+          const InfoCheckCard(
+            iconStatus: false,
+            imageIcon: 'assets/images/petition.png',
+            title: 'Health Declaration',
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          const InfoCheckCard(
+            iconStatus: true,
+            imageIcon: 'assets/images/hand-sanitizer.png',
+            title: 'Hand Sanitizer',
           ),
         ],
       ),

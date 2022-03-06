@@ -14,6 +14,7 @@ class InfoCheckCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 16.h),
       width: double.infinity,
       height: 45.h,
       decoration: BoxDecoration(
