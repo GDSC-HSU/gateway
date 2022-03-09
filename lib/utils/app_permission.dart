@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gateway/widgets/common/dialog/dialog.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'dart:io';
 
 enum PermissionType { camera, bluetooth }
 
@@ -14,8 +15,10 @@ class PermissionUtils {
         break;
       case PermissionType.bluetooth:
         isGranted = await Permission.bluetooth.isGranted;
-        isGranted = await Permission.bluetoothScan.isGranted;
-        isGranted = await Permission.bluetoothConnect.isGranted;
+        if (Platform.isAndroid) {
+          isGranted = await Permission.bluetoothScan.isGranted;
+          isGranted = await Permission.bluetoothConnect.isGranted;
+        }
         break;
       default:
     }
@@ -33,8 +36,10 @@ class PermissionUtils {
         break;
       case PermissionType.bluetooth:
         statusPermission = await Permission.bluetooth.request();
-        statusPermission = await Permission.bluetoothScan.request();
-        statusPermission = await Permission.bluetoothConnect.request();
+        if (Platform.isAndroid) {
+          statusPermission = await Permission.bluetoothScan.request();
+          statusPermission = await Permission.bluetoothConnect.request();
+        }
         break;
       default:
     }
