@@ -378,6 +378,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
+  google_ml_kit:
+    dependency: "direct main"
+    description:
+      name: google_ml_kit
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.7.3"
   graphs:
     dependency: transitive
     description:
@@ -630,6 +637,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.0.2"
+  reactive_forms:
+    dependency: "direct main"
+    description:
+      name: reactive_forms
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "11.0.1"
   rxdart:
     dependency: "direct main"
     description:
@@ -810,6 +824,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.9"
+  tflite:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: cc777a280692e44f596c67b26628d3bcf22f69c6
+      url: "https://github.com/GDSC-HSU/flutter_tflite.git"
+    source: git
+    version: "1.1.2"
   timing:
     dependency: transitive
     description:
@@ -882,4 +905,4 @@ packages:
     version: "3.1.0"
 sdks:
   dart: ">=2.14.0 <3.0.0"
-  flutter: ">=2.5.0"
+  flutter: ">=2.8.0"
