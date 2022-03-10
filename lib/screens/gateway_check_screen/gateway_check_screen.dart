@@ -2,12 +2,12 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
+import 'package:gateway/main.dart';
+import 'package:gateway/services/camera_service.dart';
 import 'package:gateway/widgets/common/info_check_card.dart';
 
-late List<CameraDescription> cameras;
-
 class GatewayCheckScreen extends StatefulWidget {
-  GatewayCheckScreen({
+  const GatewayCheckScreen({
     Key? key,
   }) : super(key: key);
   @override
@@ -15,23 +15,22 @@ class GatewayCheckScreen extends StatefulWidget {
 }
 
 class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
-  late CameraController _controller;
+  CameraService cameraService = CameraService();
   late Future<void> _initializeControllerFuture;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    _controller = CameraController(cameras.last, ResolutionPreset.medium,
-        enableAudio: false);
-    _initializeControllerFuture = _controller.initialize();
+    _initializeControllerFuture =
+        cameraService.initialize(cameraDescription: cameras.last);
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    _controller.dispose();
+    cameraService.dispose();
   }
 
   @override
@@ -41,10 +40,10 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
       appBar: AppBar(
         shadowColor: Colors.transparent,
         elevation: 0.0,
-        title: Center(
+        title: const Center(
           child: Text(
             "Gateway Check",
-            style: const TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.black),
           ),
         ),
         backgroundColor: GatewayColors.scaffoldBgLight,
@@ -66,7 +65,7 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
                       child: Padding(
                         padding: EdgeInsets.all(0.h),
                         child: CameraPreview(
-                          _controller,
+                          cameraService.controller,
                         ),
                       ),
                     );

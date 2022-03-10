@@ -1,10 +1,13 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
+import 'package:gateway/main.dart';
 import 'package:gateway/services/camera_service.dart';
 import 'package:gateway/services/tensorflow_service/extension.dart';
 import 'package:gateway/services/tensorflow_service/qr_code_service.dart';
 import 'package:gateway/widgets/common/button_custom.dart';
+
+import '../../model/device_identity.dart';
 
 class QRScanDialog extends StatefulWidget {
   const QRScanDialog({Key? key}) : super(key: key);
@@ -21,10 +24,11 @@ class _QRScanDialogState extends State<QRScanDialog> {
   @override
   void initState() {
     // OMG :>
-    _initializeControllerFuture = Future.wait(
-            [googleMLKitQRService.initModel(), cameraService.initialize()])
-        .then((value) => cameraService.controller.startImageStream(
-            (image) => googleMLKitQRService.inference(image.toInputImage())));
+    _initializeControllerFuture = Future.wait([
+      googleMLKitQRService.initModel(),
+      cameraService.initialize(cameraDescription: cameras.last)
+    ]).then((value) => cameraService.controller.startImageStream(
+        (image) => googleMLKitQRService.inference(image.toInputImage())));
     super.initState();
   }
 
