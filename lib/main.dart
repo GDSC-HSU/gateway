@@ -20,9 +20,12 @@ Future<void> main() async {
   await DeviceIdentityService.ensureInitialized();
   cameras = await availableCameras();
 
-  runApp(EasyLocalization(
-      supportedLocales: [Locale('en'), Locale('vn')],
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [Locale('en'), Locale('vi')],
       path: 'assets/translations',
-      fallbackLocale: Locale('en'),
-      child: App()));
+      fallbackLocale: const Locale('en'),
+      child: const MyApp(),
+    ),
+  );
 }

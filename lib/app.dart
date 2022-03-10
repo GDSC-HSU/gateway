@@ -3,13 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/routes/router_name.dart';
 import 'package:gateway/config/routes/routing.dart';
+import 'package:gateway/screens/introduction_screen/introduction_screen.dart';
 
 import 'di/di.dart';
 import 'di/di_repository.dart';
 
-class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return AppRepositoryProvider(
@@ -32,7 +38,7 @@ class App extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             initialRoute: AppRouting.introduction,
             onGenerateRoute: RouterName.generateRoute,
-            //home: SetupScreen(),
+            home: const IntroductionScreen(),
           ),
         ),
       ),

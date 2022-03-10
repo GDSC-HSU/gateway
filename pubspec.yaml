@@ -37,7 +37,7 @@ dependencies:
   # url_launcher: ^6.0.20
   connectivity: ^3.0.6
   camera: ^0.9.4+14
-  reactive_forms: ^11.0.1
+  reactive_forms: 10.7.0
   google_ml_kit: ^0.7.3
   tflite:
     git:

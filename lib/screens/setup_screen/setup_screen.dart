@@ -1,6 +1,10 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
+import 'package:gateway/model/language.dart';
 import 'package:gateway/screens/setup_screen/setup_view.dart';
+import 'package:gateway/utils/check_language.dart';
+import 'package:gateway/widgets/common/build_appbar.dart';
 
 class SetupScreen extends StatefulWidget {
   SetupScreen({Key? key}) : super(key: key);
@@ -13,19 +17,10 @@ class _SetupScreenState extends State<SetupScreen> {
   int currentStep = 0;
   @override
   Widget build(BuildContext context) {
+    LanguageModel languageModel = CheckLanguage.checkLanguage(context.locale.languageCode);
     return Scaffold(
       backgroundColor: GatewayColors.scaffoldBgLight,
-      appBar: AppBar(
-        shadowColor: Colors.transparent,
-        elevation: 0.0,
-        title: const Center(
-          child: Text(
-            "Setup Gateway",
-            style: TextStyle(color: Colors.black),
-          ),
-        ),
-        backgroundColor: GatewayColors.scaffoldBgLight,
-      ),
+      appBar: BuildAppBar(languageModel: languageModel, title: "Setup Gateway",),
       body: SetupView(),
     );
   }

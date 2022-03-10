@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/main.dart';
 import 'package:gateway/services/camera_service.dart';
@@ -44,7 +45,7 @@ class _QRScanDialogState extends State<QRScanDialog> {
     return Scaffold(
       body: Container(
         width: double.infinity,
-        height: double.infinity,
+        height: MediaQuery.of(context).size.height,
         child: FutureBuilder(
             future: _initializeControllerFuture,
             builder: (context, snapshot) {
@@ -57,8 +58,10 @@ class _QRScanDialogState extends State<QRScanDialog> {
                 children: [
                   Positioned.fill(
                       child: CameraPreview(cameraService.controller)),
-                  Align(
-                    alignment: Alignment.bottomCenter,
+                  Positioned(
+                    bottom: 16.h,
+                    right: 0,
+                    left: 0,
                     child: Container(
                       child: StreamBuilder<String>(
                           stream: googleMLKitQRService.stream,
