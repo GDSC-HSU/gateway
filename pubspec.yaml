@@ -44,6 +44,7 @@ dependencies:
       url: https://github.com/GDSC-HSU/flutter_tflite.git
       ref: master
   mqtt_client: ^9.6.5
+  firebase_core:
 
 dev_dependencies:
   flutter_test:
