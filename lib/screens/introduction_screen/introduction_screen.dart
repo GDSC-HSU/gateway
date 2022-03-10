@@ -1,14 +1,19 @@
 import 'dart:async';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/routes/routing.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
+import 'package:gateway/generated/locale_keys.g.dart';
+import 'package:gateway/model/language.dart';
 import 'package:gateway/utils/app_permission.dart';
+import 'package:gateway/utils/check_language.dart';
+import 'package:gateway/widgets/common/build_appbar.dart';
 import 'package:gateway/widgets/introduction/introduction_content.dart';
 
 class IntroductionScreen extends StatefulWidget {
-  IntroductionScreen({Key? key}) : super(key: key);
+  const IntroductionScreen({Key? key}) : super(key: key);
 
   @override
   _IntroductionScreenState createState() => _IntroductionScreenState();
@@ -37,12 +42,9 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    LanguageModel languageModel = CheckLanguage.checkLanguage(context.locale.languageCode);
     return Scaffold(
-      appBar: AppBar(
-        shadowColor: Colors.transparent,
-        elevation: 0.0,
-        backgroundColor: GatewayColors.scaffoldBgLight,
-      ),
+      appBar: BuildAppBar(languageModel: languageModel, title: '',),
       body: Container(
         padding: EdgeInsets.only(bottom: 200.h),
         child: PageView(
@@ -61,7 +63,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                 child: Column(
                   children: [
                     Text(
-                      'We’re “google developer student clubs of hoa sen university” \n(gdsc-hsu) which create an solution for the coivd-19 out-break.',
+                      LocaleKeys.content_welcome.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: GatewayColors.textDefaultBgLight,
@@ -133,7 +135,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                 ),
               ),
               image: 'assets/images/logo_gateway.png',
-              title: 'Welcome To Gateway',
+              title: LocaleKeys.welcome_to_gateway.tr(),
+              //'Welcome To Gateway',
             ),
             IntroductionCuntent(
               content: Container(
@@ -316,3 +319,4 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
     );
   }
 }
+

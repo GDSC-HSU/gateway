@@ -4,5 +4,5 @@ import 'package:gateway/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const App());
+  runApp(MaterialApp(home: const MyApp()));
 }
