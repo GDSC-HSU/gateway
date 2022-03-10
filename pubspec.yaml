@@ -43,6 +43,7 @@ dependencies:
     git:
       url: https://github.com/GDSC-HSU/flutter_tflite.git
       ref: master
+  mqtt_client: ^9.6.5
 
 dev_dependencies:
   flutter_test:
