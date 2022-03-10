@@ -22,7 +22,8 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
     // TODO: implement initState
     super.initState();
 
-    _controller = CameraController(cameras.last, ResolutionPreset.high);
+    _controller = CameraController(cameras.last, ResolutionPreset.medium,
+        enableAudio: false);
     _initializeControllerFuture = _controller.initialize();
   }
 
@@ -116,8 +117,14 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
                       bottomLeft: Radius.circular(20.r),
                     ),
                   ),
-                  child:
-                      Center(child: IconButton(onPressed: () {}, icon: Icon(Icons.refresh, color: Colors.white,size: 25.sp,))),
+                  child: Center(
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.refresh,
+                            color: Colors.white,
+                            size: 25.sp,
+                          ))),
                 ),
               ),
               Positioned(

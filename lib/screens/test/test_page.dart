@@ -23,23 +23,26 @@ class _TestPageState extends State<TestPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          DeviceIdentityTest(),
-          ScanPage(),
-          // StreamBuilder<BleDeviceConnectionState>(
-          //     stream: context.read<BleDeviceConnectionBloc>().stream,
-          //     builder: (context, snapshot) {
-          //       if (snapshot.data?.connectionSate ==
-          //           DeviceConnectionState.connected) {
-          //         // return BleSensorGridMonitor();
-          //         return HexoStateTest();
-          //       }
-          //       return Container();
-          //     }),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            DeviceIdentityTest(),
+            ScanPage(),
+            StreamBuilder<BleDeviceConnectionState>(
+                stream: context.read<BleDeviceConnectionBloc>().stream,
+                builder: (context, snapshot) {
+                  if (snapshot.data?.connectionSate ==
+                      DeviceConnectionState.connected) {
+                    return Column(
+                      children: [BleSensorGridMonitor(), HexoStateTest()],
+                    );
+                  }
+                  return Container();
+                }),
+          ],
+        ),
       ),
     );
   }

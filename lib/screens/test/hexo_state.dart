@@ -17,15 +17,30 @@ class _HexoStateTestState extends State<HexoStateTest> {
       child: Container(
         child: Column(
           children: [
-            Builder(builder: (context) {
-              return FloatingActionButton(
-                  onPressed: () => {
-                        context
-                            .read<BleSensorControllerBloc>()
-                            .hexoStateProcessing
-                            .processState()
-                      });
-            }),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Builder(builder: (context) {
+                  return TextButton(
+                      child: Text("Validate hexo state"),
+                      onPressed: () => {
+                            context
+                                .read<BleSensorControllerBloc>()
+                                .hexoStateProcessing
+                                .processState()
+                          });
+                }),
+                Builder(builder: (context) {
+                  return TextButton(
+                      child: Text("Hexo resest"),
+                      onPressed: () => {
+                            context
+                                .read<BleSensorControllerBloc>()
+                                .add(BleSensorControllerResetEvent())
+                          });
+                }),
+              ],
+            ),
             Builder(builder: (context) {
               return BlocBuilder<BleSensorControllerBloc,
                   BleSensorControllerState>(builder: (builder, state) {
