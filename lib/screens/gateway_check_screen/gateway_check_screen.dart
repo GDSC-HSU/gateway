@@ -6,12 +6,12 @@ import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/model/language.dart';
 import 'package:gateway/utils/check_language.dart';
 import 'package:gateway/widgets/common/build_appbar.dart';
+import 'package:gateway/main.dart';
+import 'package:gateway/services/camera_service.dart';
 import 'package:gateway/widgets/common/info_check_card.dart';
 
-late List<CameraDescription> cameras;
-
 class GatewayCheckScreen extends StatefulWidget {
-  GatewayCheckScreen({
+  const GatewayCheckScreen({
     Key? key,
   }) : super(key: key);
   @override
@@ -19,22 +19,22 @@ class GatewayCheckScreen extends StatefulWidget {
 }
 
 class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
-  late CameraController _controller;
+  CameraService cameraService = CameraService();
   late Future<void> _initializeControllerFuture;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    _controller = CameraController(cameras.last, ResolutionPreset.high);
-    _initializeControllerFuture = _controller.initialize();
+    _initializeControllerFuture =
+        cameraService.initialize(cameraDescription: cameras.last);
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    _controller.dispose();
+    cameraService.dispose();
   }
 
   @override
@@ -60,7 +60,7 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
                       child: Padding(
                         padding: EdgeInsets.all(0.h),
                         child: CameraPreview(
-                          _controller,
+                          cameraService.controller,
                         ),
                       ),
                     );
@@ -111,8 +111,14 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
                       bottomLeft: Radius.circular(20.r),
                     ),
                   ),
-                  child:
-                      Center(child: IconButton(onPressed: () {}, icon: Icon(Icons.refresh, color: Colors.white,size: 25.sp,))),
+                  child: Center(
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.refresh,
+                            color: Colors.white,
+                            size: 25.sp,
+                          ))),
                 ),
               ),
               Positioned(

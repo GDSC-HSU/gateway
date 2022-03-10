@@ -37,6 +37,14 @@ dependencies:
   # url_launcher: ^6.0.20
   connectivity: ^3.0.6
   camera: ^0.9.4+14
+  reactive_forms: 10.7.0
+  google_ml_kit: ^0.7.3
+  tflite:
+    git:
+      url: https://github.com/GDSC-HSU/flutter_tflite.git
+      ref: master
+  mqtt_client: ^9.6.5
+  firebase_core:
 
 dev_dependencies:
   flutter_test:

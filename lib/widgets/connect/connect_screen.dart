@@ -94,12 +94,12 @@ class _ConnectScreenState extends State<ConnectScreen> {
               ),
               SizedBox(height: 25.h),
               isConnectingToDevice
-                  ? loading(
-                      bgColor: GatewayColors.disablebuttonBgLight,
+                  ? AppBottomButton(
+                      bgColor: GatewayColors.disableButtonBgLight,
                       title: "",
                       isLoading: true,
                       onFunction: () => {})
-                  : loading(
+                  : AppBottomButton(
                       bgColor: GatewayColors.buttonBgLight,
                       title: isWantToConnect ? "Connect" : "Next",
                       leftIconButton: isWantToConnect

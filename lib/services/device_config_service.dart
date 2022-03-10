@@ -56,7 +56,8 @@ class DeviceIdentityService {
     bool doNotNull = [
       AppConstantsService.ORG_ENDPOINT,
       AppConstantsService.DEVICE_ACCESS_TOKEN,
-      AppConstantsService.API_KEY
+      AppConstantsService.API_KEY,
+      AppConstantsService.DEVICE_ID,
     ].every((element) => element.isNotEmpty);
     return _isLocalBeenCached && doNotNull;
   }

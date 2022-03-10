@@ -38,7 +38,7 @@ class _ScanScreenState extends State<ScanScreen> {
                 contentCard: Center(child: _buildCenterState(state)),
               ),
               SizedBox(height: 25.h),
-              loading(
+              AppBottomButton(
                 bgColor: GatewayColors.buttonBgLight,
                 leftIconButton: const Icon(
                   Icons.flip,

@@ -26,8 +26,9 @@ class BleScanBloc extends Bloc<BleScanEvent, BleScanState> {
       BLEScanRequestEvent event, Emitter<BleScanState> emitter) async {
     try {
       emitter(BleScanState.load());
-      scanSubscription =
-          repository.ble.scanForDevices(withServices: []).listen((data) {
+      scanSubscription = repository.ble
+          .scanForDevices(withServices: ble_constants.deviceServices)
+          .listen((data) {
         if (data.name == ble_constants.DEVICE_NAME) {
           device = data;
         }

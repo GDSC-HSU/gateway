@@ -274,6 +274,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.3"
+  event_bus:
+    dependency: transitive
+    description:
+      name: event_bus
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -295,6 +302,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.2"
+  firebase_core:
+    dependency: "direct main"
+    description:
+      name: firebase_core
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.12.0"
+  firebase_core_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_core_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.2.4"
+  firebase_core_web:
+    dependency: transitive
+    description:
+      name: firebase_core_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.6.0"
   fixnum:
     dependency: transitive
     description:
@@ -378,6 +406,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
+  google_ml_kit:
+    dependency: "direct main"
+    description:
+      name: google_ml_kit
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.7.3"
   graphs:
     dependency: transitive
     description:
@@ -483,6 +518,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0"
+  mqtt_client:
+    dependency: "direct main"
+    description:
+      name: mqtt_client
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "9.6.5"
   nested:
     dependency: transitive
     description:
@@ -630,6 +672,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.0.2"
+  reactive_forms:
+    dependency: "direct main"
+    description:
+      name: reactive_forms
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "10.7.0"
   rxdart:
     dependency: "direct main"
     description:
@@ -810,6 +859,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.0"
+  tflite:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: cc777a280692e44f596c67b26628d3bcf22f69c6
+      url: "https://github.com/GDSC-HSU/flutter_tflite.git"
+    source: git
+    version: "1.1.2"
   timing:
     dependency: transitive
     description:
