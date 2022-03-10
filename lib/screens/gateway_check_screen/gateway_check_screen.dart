@@ -1,7 +1,11 @@
 import 'package:camera/camera.dart';
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
+import 'package:gateway/model/language.dart';
+import 'package:gateway/utils/check_language.dart';
+import 'package:gateway/widgets/common/build_appbar.dart';
 import 'package:gateway/widgets/common/info_check_card.dart';
 
 late List<CameraDescription> cameras;
@@ -35,19 +39,10 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
 
   @override
   Widget build(BuildContext context) {
+    LanguageModel languageModel = CheckLanguage.checkLanguage(context.locale.languageCode);
     return Scaffold(
       backgroundColor: GatewayColors.scaffoldBgLight,
-      appBar: AppBar(
-        shadowColor: Colors.transparent,
-        elevation: 0.0,
-        title: Center(
-          child: Text(
-            "Gateway Check",
-            style: const TextStyle(color: Colors.black),
-          ),
-        ),
-        backgroundColor: GatewayColors.scaffoldBgLight,
-      ),
+      appBar: BuildAppBar(languageModel: languageModel, title: 'Gateway Check',),
       body: Column(
         children: [
           Stack(
