@@ -275,7 +275,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                     ? BoxDecoration(
                         color: valueBle == true && valueCamera == true
                             ? GatewayColors.buttonBgLight
-                            : GatewayColors.disablebuttonBgLight,
+                            : GatewayColors.disableButtonBgLight,
                         shape: BoxShape.circle,
                       )
                     : BoxDecoration(

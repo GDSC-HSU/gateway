@@ -41,7 +41,7 @@ class DeviceIdentity {
     deviceId = json['id'];
     deviceApiKey = json['apiKey'];
     deviceAccessKey = json['accessKey'];
-    deviceJwt = json['device_jwt'];
+    deviceJwt = json['device_jwt'] ?? "";
     deviceOrgEndPoint = json['endpoint'];
     mqttUserName = json['mqttUserName'];
     mqttPassword = json['mqttPassword'];

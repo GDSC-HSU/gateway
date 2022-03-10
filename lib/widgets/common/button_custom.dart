@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
 
-class loading extends StatefulWidget {
-  loading({
+class AppBottomButton extends StatefulWidget {
+  AppBottomButton({
     Key? key,
     required this.bgColor,
     required this.title,
@@ -21,10 +21,10 @@ class loading extends StatefulWidget {
   // showing loadding mode
   final bool? isLoading;
   @override
-  _loadingState createState() => _loadingState();
+  _AppBottomButtonState createState() => _AppBottomButtonState();
 }
 
-class _loadingState extends State<loading> {
+class _AppBottomButtonState extends State<AppBottomButton> {
   @override
   Widget build(BuildContext context) {
     return Align(

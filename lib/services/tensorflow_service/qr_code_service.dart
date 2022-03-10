@@ -1,13 +1,8 @@
-import 'dart:ui';
-
-import 'package:camera/camera.dart';
-import 'package:flutter/foundation.dart';
-import 'package:gateway/main.dart';
 import 'package:gateway/services/tensorflow_service/common_interface.dart';
 import 'package:gateway/services/tensorflow_service/extension.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 
-class GoogleMLKitService extends ITensorFlowCommon<InputImage, String> {
+class GoogleMLKitQRService extends ITensorFlowCommon<InputImage, String> {
   late BarcodeScanner _barcodeScanner;
 
   @override
@@ -20,10 +15,10 @@ class GoogleMLKitService extends ITensorFlowCommon<InputImage, String> {
   ///
   @override
   Future<void> inference(InputImage data) async {
+    if (isBusy) return;
     isBusy = true;
     var qrRecognitions = await _barcodeScanner.processImage(data);
     for (var element in qrRecognitions) {
-      if (element.value.isNull) continue;
       sink.add(element.value.rawValue!);
     }
     isBusy = false;
