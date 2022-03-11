@@ -31,10 +31,11 @@
     "second_thing_note_confirm": "Sau khi thêm thiết bị, thiết bị sẽ nằm trong bản điều khiển tổ chức của bạn",
     "third_thing_note_confirm": "Nếu lỗi bạn có thể xem lại video hướng dẫn của chúng tôi",
     "this_is_my_organization": "Đây là tổ chức của tôi",
-    "gateway_home": "Gateway Trang chủ",
+    "gateway_home": "Gateway Trang Chủ",
     "body_temperature": "Nhiệt độ cơ thể",
     "face_mask": "Khẩu trang",
     "health_declaration": "Khai báo sức khỏe",
     "hand_sanitizer": "Rửa tay sát khuẩn",
-    "refresh": "Tải lại"
+    "refresh": "Tải lại",
+    "check_info": "KIỂM TRA THÔNG TIN"
 }

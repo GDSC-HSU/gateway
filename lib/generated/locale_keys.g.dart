@@ -37,5 +37,5 @@ abstract class  LocaleKeys {
   static const health_declaration = 'health_declaration';
   static const hand_sanitizer = 'hand_sanitizer';
   static const refresh = 'refresh';
-
+  static const check_info = 'check_info';
 }

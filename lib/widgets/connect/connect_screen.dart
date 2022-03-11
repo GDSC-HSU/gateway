@@ -1,3 +1,4 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/blocs/ble_device_connection/bloc/ble_device_connection_bloc.dart';
 import 'package:gateway/blocs/ble_scan/bloc/ble_scan_bloc.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
+import 'package:gateway/generated/locale_keys.g.dart';
 import 'package:gateway/widgets/common/button_custom.dart';
 import 'package:gateway/widgets/common/card_setup.dart';
 import 'package:gateway/widgets/connect/device_info.dart';
@@ -37,7 +39,8 @@ class _ConnectScreenState extends State<ConnectScreen> {
               Padding(
                 padding: EdgeInsets.only(bottom: 16.h, left: 16.h, top: 8.h),
                 child: Text(
-                  'CONNECT DEVICE',
+                  LocaleKeys.connect_device.tr(),
+                  //'CONNECT DEVICE',
                   style: TextStyle(
                     color: GatewayColors.textDefaultBgLight,
                     fontSize: 15.sp,
@@ -75,18 +78,21 @@ class _ConnectScreenState extends State<ConnectScreen> {
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 30.h, vertical: 24.h),
-                                  child: const DeviceInfo(),
+                                  child: DeviceInfo(),
                                 ),
                               )
                             : Center(
-                                child: Text(
-                                  'We’re found the device in range,\npress connect to begin device pairing',
-                                  style: TextStyle(
-                                    color: GatewayColors.textDefaultBgLight,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w600,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 24.h),
+                                  child: Text(
+                                    LocaleKeys.content_connect.tr(),
+                                    style: TextStyle(
+                                      color: GatewayColors.textDefaultBgLight,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    textAlign: TextAlign.center,
                                   ),
-                                  textAlign: TextAlign.center,
                                 ),
                               )),
                   ],
@@ -101,7 +107,7 @@ class _ConnectScreenState extends State<ConnectScreen> {
                       onFunction: () => {})
                   : AppBottomButton(
                       bgColor: GatewayColors.buttonBgLight,
-                      title: isWantToConnect ? "Connect" : "Next",
+                      title: isWantToConnect ? LocaleKeys.connect.tr() : LocaleKeys.next.tr(),
                       leftIconButton: isWantToConnect
                           ? const Icon(
                               Icons.compare_arrows,
