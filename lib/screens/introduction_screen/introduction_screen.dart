@@ -44,7 +44,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   Widget build(BuildContext context) {
     LanguageModel languageModel = CheckLanguage.checkLanguage(context.locale.languageCode);
     return Scaffold(
-      appBar: BuildAppBar(languageModel: languageModel, title: '',),
+      appBar: BuildAppBar(languageModel: languageModel, title: '', leading: Container(),),
       body: Container(
         padding: EdgeInsets.only(bottom: 200.h),
         child: PageView(
@@ -84,7 +84,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                             Row(
                               children: [
                                 Text(
-                                  'I agree with gateway ',
+                                  LocaleKeys.i_agree_with_gateway.tr() + " ",
+                                  //'I agree with gateway ',
                                   style: TextStyle(
                                     color: GatewayColors.textPermissionBgLight,
                                     fontWeight: FontWeight.w600,
@@ -104,7 +105,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                             Row(
                               children: [
                                 Text(
-                                  ' and ',
+                                  " " +LocaleKeys.and + " ",
+                                  //' and ',
                                   style: TextStyle(
                                     color: GatewayColors.textPermissionBgLight,
                                     fontWeight: FontWeight.w600,
@@ -148,7 +150,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                 ),
               ),
               image: 'assets/images/logo_gateway.png',
-              title: 'What Is Gateway',
+              title: LocaleKeys.what_is_gateway.tr(),
+              //'What Is Gateway',
             ),
             IntroductionCuntent(
               content: Padding(
@@ -156,7 +159,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                 child: Column(
                   children: [
                     Text(
-                      'In order to gateway fully run, yours device has to agree some of our permission.',
+                      LocaleKeys.content_app_permission.tr(),
+                      //'In order to gateway fully run, yours device has to agree some of our permission.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: GatewayColors.textDefaultBgLight,
@@ -183,7 +187,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                                   controlAffinity:
                                       ListTileControlAffinity.leading,
                                   title: Text(
-                                    'I agree with bluetooth permission',
+                                    LocaleKeys.i_agree_with_bluetooth_permission.tr(),
+                                    //'I agree with bluetooth permission',
                                     style: TextStyle(
                                       color:
                                           GatewayColors.textPermissionBgLight,
@@ -214,7 +219,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                                   controlAffinity:
                                       ListTileControlAffinity.leading,
                                   title: Text(
-                                    'I agree with camera permission',
+                                    LocaleKeys.i_agree_with_camera_permission.tr(),
+                                    //'I agree with camera permission',
                                     style: TextStyle(
                                       color:
                                           GatewayColors.textPermissionBgLight,
@@ -241,7 +247,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                 ),
               ),
               image: 'assets/images/key_permission.png',
-              title: 'App Permission',
+              title: LocaleKeys.app_permission.tr(),
+              //'App Permission',
             ),
           ],
         ),

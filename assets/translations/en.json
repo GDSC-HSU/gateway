@@ -31,10 +31,11 @@
     "second_thing_note_confirm": "After adding device the device will be apper in your ogaziation dashboard",
     "third_thing_note_confirm": "If you have an error, you can watch our video tutorial again",
     "this_is_my_organization": "This is my organization",
-    "gateway_home": "Gateway Home",
+    "gateway_home": "Gateway",
     "body_temperature": "Body Temperature",
     "face_mask": "Face Mask",
     "health_declaration": "Health Declaration",
     "hand_sanitizer": "Hand Sanitizer",
-    "refresh": "Refresh"
+    "refresh": "Refresh",
+    "check_info": "CHECK INFORMATION"
 }

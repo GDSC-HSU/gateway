@@ -1,9 +1,11 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
+import 'package:gateway/generated/locale_keys.g.dart';
 
 class DeviceInfo extends StatelessWidget {
-  const DeviceInfo({
+  DeviceInfo({
     Key? key,
   }) : super(key: key);
 
@@ -18,7 +20,7 @@ class DeviceInfo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Name',
+              LocaleKeys.name.tr(),
               style: TextStyle(
                 color: GatewayColors.textDefaultBgLight,
                 fontSize: 13.sp,
@@ -26,7 +28,7 @@ class DeviceInfo extends StatelessWidget {
               ),
             ),
             Text(
-              'Version',
+              LocaleKeys.version.tr(),
               style: TextStyle(
                 color: GatewayColors.textDefaultBgLight,
                 fontSize: 13.sp,
@@ -34,7 +36,7 @@ class DeviceInfo extends StatelessWidget {
               ),
             ),
             Text(
-              'Manufacture',
+              LocaleKeys.manufactor.tr(),
               style: TextStyle(
                 color: GatewayColors.textDefaultBgLight,
                 fontSize: 13.sp,

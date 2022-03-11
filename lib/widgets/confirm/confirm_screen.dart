@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/routes/routing.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/mock/mock_model.dart';
+import 'package:gateway/generated/locale_keys.g.dart';
 import 'package:gateway/model/device_identity.dart';
 import 'package:gateway/services/device_config_service.dart';
 import 'package:gateway/services/device_service.dart';
@@ -34,48 +35,41 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
   late bool confirmOrganization = false;
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(
-              bottom: 16.h,
-              left: 16.h,
-              top: 8.h,
-            ),
-            child: Text(
-              'ADD ORGANIZATION',
-              style: TextStyle(
-                color: GatewayColors.textDefaultBgLight,
-                fontSize: 15.sp,
-                fontWeight: FontWeight.w700,
+    return GestureDetector(
+      onTap: () {
+        // FocusScopeNode currentFocus = FocusScope.of(context);
+        // if (!currentFocus.hasPrimaryFocus) {
+        //   currentFocus.unfocus();
+        // }
+        FocusScope.of(context).unfocus();
+      },
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                bottom: 16.h,
+                left: 16.h,
+                top: 8.h,
+              ),
+              child: Text(
+                LocaleKeys.add_organization.tr(),
+                style: TextStyle(
+                  color: GatewayColors.textDefaultBgLight,
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
-          ),
-          CardSetup(
-            contentCard: Column(
-              children: [
-                GestureDetector(
-                  onTap: () async {
-                    final String? qrConfigCode =
-                        await Navigator.of(context).push<String>(
-                      MaterialPageRoute<String>(
-                          builder: (BuildContext context) =>
-                              const QRScanDialog()),
-                    );
-                    if (qrConfigCode != null) {
-                      await _handleQRConfig(qrConfigCode);
-                      setState(() {
-                        confirmOrganization = true;
-                      });
-                    }
-                  },
-                  child: Padding(
+            CardSetup(
+              contentCard: Column(
+                children: [
+                  Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: 16.h, vertical: 16.h),
                     child: TextFormField(
-                      enabled: false,
+                      //enabled: false,
                       style: TextStyle(
                         color: GatewayColors.textDefaultBgLight,
                         fontSize: 14.sp,
@@ -87,10 +81,26 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w700,
                         ),
-                        suffixIcon: Icon(
-                          Icons.filter_center_focus,
-                          color: GatewayColors.buttonBgLight,
-                          size: 21.h,
+                        suffixIcon: GestureDetector(
+                          onTap: () async {
+                            final String? qrConfigCode =
+                                await Navigator.of(context).push<String>(
+                              MaterialPageRoute<String>(
+                                  builder: (BuildContext context) =>
+                                      const QRScanDialog()),
+                            );
+                            if (qrConfigCode != null) {
+                              await _handleQRConfig(qrConfigCode);
+                              setState(() {
+                                confirmOrganization = true;
+                              });
+                            }
+                          },
+                          child: Icon(
+                            Icons.filter_center_focus,
+                            color: GatewayColors.buttonBgLight,
+                            size: 21.h,
+                          ),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -106,40 +116,38 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                           ),
                           borderRadius: BorderRadius.circular(10.r),
                         ),
-                        hintText: 'QR Code',
+                        hintText: LocaleKeys.qr_code.tr(),
                       ),
                     ),
                   ),
-                ),
-                confirmOrganization
-                    ? const OrganizationConfirm()
-                    : const GuideConfirm(),
-              ],
+                  confirmOrganization ? OrganizationConfirm() : GuideConfirm(),
+                ],
+              ),
             ),
-          ),
-          SizedBox(height: 25.h),
-          FutureBuilder<bool>(
-              initialData: false,
-              future:
-                  Future.value(DeviceIdentityService.isDeviceBeenConfigured),
-              builder: (context, snap) {
-                return AppBottomButton(
-                  bgColor: GatewayColors.buttonBgLight,
-                  leftIconButton: const Icon(
-                    Icons.confirmation_number_outlined,
-                    color: Colors.white,
-                  ),
-                  title: 'Confirm',
-                  onFunction: () async {
-                    await _deviceClaim();
-                    await Navigator.pushReplacementNamed(
-                      context,
-                      AppRouting.gatewayCheck,
-                    );
-                  },
-                );
-              }),
-        ],
+            SizedBox(height: 25.h),
+            FutureBuilder<bool>(
+                initialData: false,
+                future:
+                    Future.value(DeviceIdentityService.isDeviceBeenConfigured),
+                builder: (context, snap) {
+                  return AppBottomButton(
+                    bgColor: GatewayColors.buttonBgLight,
+                    leftIconButton: const Icon(
+                      Icons.confirmation_number_outlined,
+                      color: Colors.white,
+                    ),
+                    title: LocaleKeys.confirm.tr(),
+                    onFunction: () async {
+                      await _deviceClaim();
+                      Navigator.pushReplacementNamed(
+                        context,
+                        AppRouting.gatewayCheck,
+                      );
+                    },
+                  );
+                }),
+          ],
+        ),
       ),
     );
   }
