@@ -2,31 +2,34 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
+import 'package:gateway/generated/locale_keys.g.dart';
 import 'package:gateway/model/language.dart';
 
 class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
   const BuildAppBar({
     Key? key,
     required this.languageModel,
-    required this.title,
+    required this.title, required this.leading,
   }) : super(key: key);
 
   final LanguageModel languageModel;
   final String title;
+  final Widget leading;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leading: leading,
       shadowColor: Colors.transparent,
       elevation: 0.0,
       backgroundColor: GatewayColors.scaffoldBgLight,
-      title: Padding(
-        padding: EdgeInsets.only(left: 103.w),
-        child: Text(
-          title,
-          style: const TextStyle(
-            color: Colors.black,
-          ),
+      centerTitle: true,
+      title: 
+      //languageModel.shortName == 'EN' ?
+      Text(
+        title,
+        style: const TextStyle(
+          color: Colors.black,
         ),
       ),
       actions: [

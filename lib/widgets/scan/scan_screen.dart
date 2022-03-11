@@ -1,8 +1,10 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/blocs/ble_scan/bloc/ble_scan_bloc.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
+import 'package:gateway/generated/locale_keys.g.dart';
 import 'package:gateway/widgets/common/button_custom.dart';
 import 'package:gateway/widgets/common/card_setup.dart';
 
@@ -26,7 +28,8 @@ class _ScanScreenState extends State<ScanScreen> {
               Padding(
                 padding: EdgeInsets.only(bottom: 16.h, left: 16.h, top: 8.h),
                 child: Text(
-                  'SCANNING',
+                  LocaleKeys.scanning.tr(),
+                  //'SCANNING',
                   style: TextStyle(
                     color: GatewayColors.textDefaultBgLight,
                     fontSize: 15.sp,
@@ -44,7 +47,7 @@ class _ScanScreenState extends State<ScanScreen> {
                   Icons.flip,
                   color: Colors.white,
                 ),
-                title: 'Scan',
+                title: LocaleKeys.scan.tr(),
                 onFunction: () {
                   bloc.add(BLEScanRequestEvent());
                 },
@@ -60,7 +63,7 @@ class _ScanScreenState extends State<ScanScreen> {
     switch (state.scanState) {
       case ScanSate.init:
         return Text(
-          'Now press the scan button to \nfind the device',
+          LocaleKeys.scan_begin_text.tr(),
           style: TextStyle(
             color: GatewayColors.textDefaultBgLight,
             fontSize: 15.sp,
