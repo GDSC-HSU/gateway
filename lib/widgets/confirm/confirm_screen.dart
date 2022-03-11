@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/routes/routing.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
+import 'package:gateway/mock/mock_model.dart';
 import 'package:gateway/model/device_identity.dart';
 import 'package:gateway/services/device_config_service.dart';
+import 'package:gateway/services/device_service.dart';
 import 'package:gateway/widgets/common/button_custom.dart';
 import 'package:gateway/widgets/common/card_setup.dart';
 import 'package:gateway/widgets/confirm/guide_confirm.dart';
@@ -128,8 +130,9 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                     color: Colors.white,
                   ),
                   title: 'Confirm',
-                  onFunction: () {
-                    Navigator.pushReplacementNamed(
+                  onFunction: () async {
+                    await _deviceClaim();
+                    await Navigator.pushReplacementNamed(
                       context,
                       AppRouting.gatewayCheck,
                     );
@@ -150,5 +153,10 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
     } catch (e) {
       print(e);
     }
+  }
+
+  _deviceClaim() async {
+    final deviceInfo = await DeviceService.getDeviceInfo();
+    await DeviceService().postDeviceDetail(deviceInfo);
   }
 }
