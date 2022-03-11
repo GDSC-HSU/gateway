@@ -87,7 +87,7 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
       backgroundColor: GatewayColors.scaffoldBgLight,
       appBar: BuildAppBar(
         languageModel: languageModel,
-        title: '',
+        title: LocaleKeys.gateway_home.tr(),
         leading: Image.asset('assets/images/logo_gateway.png'),
       ),
       body: Stack(

@@ -23,22 +23,13 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
       shadowColor: Colors.transparent,
       elevation: 0.0,
       backgroundColor: GatewayColors.scaffoldBgLight,
-      title: languageModel.shortName == 'EN' ?
-      Padding(
-        padding: EdgeInsets.only(left: 53.w),
-        child: Text(
-          title,
-          style: const TextStyle(
-            color: Colors.black,
-          ),
-        ),
-      ): Padding(
-        padding: EdgeInsets.only(left: 43.w),
-        child: Text(
-          title,
-          style: const TextStyle(
-            color: Colors.black,
-          ),
+      centerTitle: true,
+      title: 
+      //languageModel.shortName == 'EN' ?
+      Text(
+        title,
+        style: const TextStyle(
+          color: Colors.black,
         ),
       ),
       actions: [
