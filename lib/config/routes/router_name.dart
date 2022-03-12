@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:gateway/config/routes/routing.dart';
+import 'package:gateway/screens/congratulation_screen/congratulation_screen.dart';
 import 'package:gateway/screens/gateway_check_screen/gateway_check_screen.dart';
 import 'package:gateway/screens/introduction_screen/introduction_screen.dart';
 import 'package:gateway/screens/setup_screen/setup_screen.dart';
@@ -26,6 +27,8 @@ class RouterName {
         return MaterialPageRoute(builder: (context) => SetupScreen());
       case AppRouting.gatewayCheck:
         return MaterialPageRoute(builder: (context) => GatewayCheckScreen());
+      case AppRouting.congratulation:
+        return MaterialPageRoute(builder: (context) => CongratulationScreen());
       default:
         return MaterialPageRoute(
           builder: (_) {

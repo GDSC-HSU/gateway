@@ -138,7 +138,8 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                       await _deviceClaim();
                       Navigator.pushReplacementNamed(
                         context,
-                        AppRouting.gatewayCheck,
+                        AppRouting.congratulation,
+                        //AppRouting.gatewayCheck,
                       );
                     },
                   );
