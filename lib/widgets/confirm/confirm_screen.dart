@@ -140,7 +140,8 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                     onFunction: () {
                       Navigator.pushReplacementNamed(
                         context,
-                        AppRouting.gatewayCheck,
+                        AppRouting.congratulation,
+                        //AppRouting.gatewayCheck,
                       );
                     },
                   );
