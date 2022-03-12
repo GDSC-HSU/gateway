@@ -39,5 +39,8 @@
     "refresh": "Refresh",
     "check_info": "CHECK INFORMATION",
     "congratulation": "Congratulation",
-    "online": "online"
+    "online": "online",
+    "device_name": "Device Name",
+    "device_id": "Device ID",
+    "content_congratulation": "Device has been added to your oganization"
 }
