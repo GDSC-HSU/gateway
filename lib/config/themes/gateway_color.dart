@@ -15,4 +15,5 @@ class GatewayColors {
   static const Color borderCheck = Color(0xFFE2E2E2);
   static const Color successColor = Color(0xFF41E198);
   static const Color failColor = Color(0xFFFF4234);
+  static const Color onlineColor = Color(0xFF00FF19);
 }

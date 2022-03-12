@@ -38,4 +38,6 @@ abstract class  LocaleKeys {
   static const hand_sanitizer = 'hand_sanitizer';
   static const refresh = 'refresh';
   static const check_info = 'check_info';
+  static const congratulation = 'congratulation';
+  static const online = 'online';
 }
