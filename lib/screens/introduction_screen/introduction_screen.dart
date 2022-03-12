@@ -42,9 +42,15 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    LanguageModel languageModel = CheckLanguage.checkLanguage(context.locale.languageCode);
+    LanguageModel languageModel =
+        CheckLanguage.checkLanguage(context.locale.languageCode);
+
     return Scaffold(
-      appBar: BuildAppBar(languageModel: languageModel, title: '', leading: Container(),),
+      appBar: BuildAppBar(
+        languageModel: languageModel,
+        title: '',
+        leading: Container(),
+      ),
       body: Container(
         padding: EdgeInsets.only(bottom: 200.h),
         child: PageView(
@@ -71,7 +77,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    SizedBox(height: 40.h),
+                    SizedBox(height: 30.h),
                     Theme(
                       data: Theme.of(context).copyWith(
                         unselectedWidgetColor: GatewayColors.outLineCheckBox,
@@ -79,52 +85,35 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                       child: CheckboxListTile(
                         activeColor: GatewayColors.buttonBgLight,
                         controlAffinity: ListTileControlAffinity.leading,
-                        title: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  LocaleKeys.i_agree_with_gateway.tr() + " ",
-                                  //'I agree with gateway ',
-                                  style: TextStyle(
-                                    color: GatewayColors.textPermissionBgLight,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12.sp,
-                                  ),
-                                ),
-                                Text(
-                                  '“Term of services”',
+                        title: RichText(
+                          text: TextSpan(
+                            text: LocaleKeys.i_agree_with_gateway.tr() + " ",
+                            style: TextStyle(
+                              color: GatewayColors.textPermissionBgLight,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 13.sp,
+                            ),
+                            children: [
+                              TextSpan(
+                                  text: LocaleKeys.term_of_services.tr() + " ",
                                   style: TextStyle(
                                     color: GatewayColors.buttonBgLight,
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 12.sp,
-                                  ),
+                                    fontSize: 13.sp,
+                                  )),
+                              TextSpan(text: LocaleKeys.and.tr() + " "),
+                              TextSpan(
+                                text: LocaleKeys.privacy_policy.tr(),
+                                style: TextStyle(
+                                  color: GatewayColors.buttonBgLight,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 13.sp,
                                 ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  " " +LocaleKeys.and + " ",
-                                  //' and ',
-                                  style: TextStyle(
-                                    color: GatewayColors.textPermissionBgLight,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12.sp,
-                                  ),
-                                ),
-                                Text(
-                                  '“Privacy policy”',
-                                  style: TextStyle(
-                                    color: GatewayColors.buttonBgLight,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12.sp,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                              ),
+                            ],
+                          ),
                         ),
+                        
                         value: valuePolicy,
                         onChanged: (bool? value) {
                           setState(() {
@@ -136,7 +125,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                   ],
                 ),
               ),
-              image: 'assets/images/logo_gateway.png',
+              image: 'assets/images/gateway_logo.png',
               title: LocaleKeys.welcome_to_gateway.tr(),
               //'Welcome To Gateway',
             ),
@@ -149,7 +138,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                   fit: BoxFit.cover,
                 ),
               ),
-              image: 'assets/images/logo_gateway.png',
+              image: 'assets/images/gateway_logo.png',
               title: LocaleKeys.what_is_gateway.tr(),
               //'What Is Gateway',
             ),
@@ -187,7 +176,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                                   controlAffinity:
                                       ListTileControlAffinity.leading,
                                   title: Text(
-                                    LocaleKeys.i_agree_with_bluetooth_permission.tr(),
+                                    LocaleKeys.i_agree_with_bluetooth_permission
+                                        .tr(),
                                     //'I agree with bluetooth permission',
                                     style: TextStyle(
                                       color:
@@ -219,7 +209,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                                   controlAffinity:
                                       ListTileControlAffinity.leading,
                                   title: Text(
-                                    LocaleKeys.i_agree_with_camera_permission.tr(),
+                                    LocaleKeys.i_agree_with_camera_permission
+                                        .tr(),
                                     //'I agree with camera permission',
                                     style: TextStyle(
                                       color:
@@ -326,4 +317,3 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
     );
   }
 }
-
