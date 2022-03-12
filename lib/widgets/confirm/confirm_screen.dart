@@ -1,12 +1,9 @@
 import 'dart:convert';
-
-import 'package:camera/camera.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/routes/routing.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
-import 'package:gateway/mock/mock_model.dart';
 import 'package:gateway/generated/locale_keys.g.dart';
 import 'package:gateway/model/device_identity.dart';
 import 'package:gateway/services/device_config_service.dart';
@@ -155,11 +152,10 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
   _handleQRConfig(String qrAsString) async {
     try {
       final json = jsonDecode(qrAsString);
-      print(json);
       final deviceIdentity = DeviceIdentity.fromJson(json);
       await DeviceIdentityService.saveDeviceIdentityConfig(deviceIdentity);
     } catch (e) {
-      print(e);
+      throw "[DEV] error JSON Decode";
     }
   }
 
