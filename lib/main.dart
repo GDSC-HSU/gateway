@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:gateway/app.dart';
 import 'package:gateway/firebase_options.dart';
@@ -19,7 +20,7 @@ Future<void> main() async {
   await FlutterReactiveBle().initialize();
   await DeviceIdentityService.ensureInitialized();
   cameras = await availableCameras();
-
+   _portraitModeOnly();
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('vi')],
@@ -28,4 +29,11 @@ Future<void> main() async {
       child: const MyApp(),
     ),
   );
+  
+}
+void _portraitModeOnly() {
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 }

@@ -39,5 +39,10 @@
     "refresh": "Tải lại",
     "check_info": "KIỂM TRA THÔNG TIN",
     "congratulation": "Chúc mừng",
-    "online": "Trực tuyến"
+    "online": "Trực tuyến",
+    "device_name": "Tên thiết bị",
+    "device_id": "ID thiết bị",
+    "content_congratulation": "Thiết bị đã được thêm vào tổ chức của bạn",
+    "privacy_policy": "“Chính sách bảo mật”",
+    "term_of_services": "“Thời hạn của dịch vụ”"
 }
