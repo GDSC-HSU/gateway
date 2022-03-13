@@ -88,7 +88,7 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
       appBar: BuildAppBar(
         languageModel: languageModel,
         title: LocaleKeys.gateway_home.tr(),
-        leading: Image.asset('assets/images/logo_gateway.png'),
+        leading: Image.asset('assets/images/gateway_logo.png'),
       ),
       body: Stack(
         children: [

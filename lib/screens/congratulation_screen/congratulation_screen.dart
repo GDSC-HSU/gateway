@@ -23,158 +23,163 @@ class CongratulationScreen extends StatelessWidget {
         title: '',
         leading: Container(),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(left: 26.h),
-            child: Text(
-              LocaleKeys.congratulation.tr(),
-              style: TextStyle(
-                color: GatewayColors.buttonBgLight,
-                fontSize: 30.sp,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 26.h),
-            child: SizedBox(
-              height: 20.h,
-              child: Divider(
-                color: GatewayColors.borderCheck,
-                thickness: 4.h,
-              ),
-            ),
-          ),
-          Stack(
-            children: [
-              Center(
-                child: Image.asset(
-                  'assets/images/device.png',
-                  scale: 0.5.h,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: 26.h),
+              child: Text(
+                LocaleKeys.congratulation.tr(),
+                style: TextStyle(
+                  color: GatewayColors.buttonBgLight,
+                  fontSize: 30.sp,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
-              Positioned(
-                bottom: 20.h,
-                right: 35.h,
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.circle,
-                      color: GatewayColors.onlineColor,
-                      size: 20.sp,
-                    ),
-                    SizedBox(width: 10.h),
-                    Text(
-                      LocaleKeys.online.tr(),
-                      style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 15.sp,
-                          color: GatewayColors.textDefaultBgLight),
-                    )
-                  ],
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 26.h),
+              child: SizedBox(
+                height: 20.h,
+                child: Divider(
+                  color: GatewayColors.borderCheck,
+                  thickness: 4.h,
                 ),
               ),
-            ],
-          ),
-          SizedBox(height: 20.h),
-          Padding(
-            padding: EdgeInsets.only(left: 26.h),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+            ),
+            Stack(
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Device Name',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14.sp,
-                        color: GatewayColors.textDefaultBgLight,
-                      ),
-                    ),
-                    SizedBox(height: 20.h),
-                    Text(
-                      'Device ID',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14.sp,
-                        color: GatewayColors.textDefaultBgLight,
-                      ),
-                    ),
-                  ],
+                Center(
+                  child: Image.asset(
+                    'assets/images/device.png',
+                    fit: BoxFit.cover,
+                    width: 210.h,
+                    height: 210.h,
+                    //scale: 0.5,
+                  ),
                 ),
-                SizedBox(width: 30.h),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                Positioned(
+                  bottom: 20.h,
+                  right: 35.h,
+                  child: Row(
                     children: [
-                      Text(
-                        'Location HSU Frontdoor',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 15.sp,
-                          color: Colors.black,
-                        ),
+                      Icon(
+                        Icons.circle,
+                        color: GatewayColors.onlineColor,
+                        size: 20.sp,
                       ),
-                      SizedBox(height: 20.h),
+                      SizedBox(width: 10.h),
                       Text(
-                        'hsu-xxx',
+                        LocaleKeys.online.tr(),
                         style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 15.sp,
-                          color: Colors.black,
-                        ),
-                      ),
+                            fontWeight: FontWeight.w700,
+                            fontSize: 15.sp,
+                            color: GatewayColors.textDefaultBgLight),
+                      )
                     ],
                   ),
                 ),
               ],
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 40.h, vertical: 20.h),
-            child: Text(
-              'Device has been added to your oganization',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 18.sp,
-                  color: GatewayColors.textDefaultBgLight),
-            ),
-          ),
-          Center(
-            child: Icon(
-              Icons.check_circle,
-              color: Colors.greenAccent[700],
-              size: 70.sp,
-            ),
-          ),
-          SizedBox(height: 30.h),
-          FutureBuilder<bool>(
-              initialData: false,
-              future:
-                  Future.value(DeviceIdentityService.isDeviceBeenConfigured),
-              builder: (context, snap) {
-                return AppBottomButton(
-                  bgColor: GatewayColors.buttonBgLight,
-                  rightIconButton: Icon(
-                    Icons.arrow_forward,
-                    color: Colors.white,
+            SizedBox(height: 20.h),
+            Padding(
+              padding: EdgeInsets.only(left: 26.h),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        LocaleKeys.device_name.tr(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 14.sp,
+                          color: GatewayColors.textDefaultBgLight,
+                        ),
+                      ),
+                      SizedBox(height: 20.h),
+                      Text(
+                        LocaleKeys.device_id.tr(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 14.sp,
+                          color: GatewayColors.textDefaultBgLight,
+                        ),
+                      ),
+                    ],
                   ),
-                  title: LocaleKeys.next.tr(),
-                  onFunction: () {
-                    Navigator.pushReplacementNamed(
-                      context,
-                      //AppRouting.congratulation,
-                      AppRouting.gatewayCheck,
-                    );
-                  },
-                );
-              }),
-        ],
+                  SizedBox(width: 30.h),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Location HSU Frontdoor',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 15.sp,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 20.h),
+                        Text(
+                          'hsu-xxx',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 15.sp,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 40.h, vertical: 20.h),
+              child: Text(
+                LocaleKeys.content_congratulation.tr(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18.sp,
+                    color: GatewayColors.textDefaultBgLight),
+              ),
+            ),
+            Center(
+              child: Icon(
+                Icons.check_circle,
+                color: Colors.greenAccent[700],
+                size: 70.sp,
+              ),
+            ),
+            SizedBox(height: 30.h),
+            FutureBuilder<bool>(
+                initialData: false,
+                future:
+                    Future.value(DeviceIdentityService.isDeviceBeenConfigured),
+                builder: (context, snap) {
+                  return AppBottomButton(
+                    bgColor: GatewayColors.buttonBgLight,
+                    rightIconButton: Icon(
+                      Icons.arrow_forward,
+                      color: Colors.white,
+                    ),
+                    title: LocaleKeys.next.tr(),
+                    onFunction: () {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        //AppRouting.congratulation,
+                        AppRouting.gatewayCheck,
+                      );
+                    },
+                  );
+                }),
+          ],
+        ),
       ),
     );
   }

@@ -40,4 +40,10 @@ abstract class  LocaleKeys {
   static const check_info = 'check_info';
   static const congratulation = 'congratulation';
   static const online = 'online';
+  static const device_name = 'device_name';
+  static const device_id = 'device_id';
+  static const content_congratulation = 'content_congratulation';
+  static const privacy_policy = 'privacy_policy';
+  static const term_of_services = 'term_of_services';
+
 }
