@@ -47,6 +47,7 @@ class DeviceIdentityService {
     AppConstantsService.API_KEY = deviceIdentity.deviceApiKey;
     AppConstantsService.MQTT_USERNAME = deviceIdentity.mqttUserName;
     AppConstantsService.MQTT_PASSWORD = deviceIdentity.mqttPassword;
+    AppConstantsService.ORG_ID = deviceIdentity.oid;
     if (deviceIdentity.deviceJwt != null) {
       AppConstantsService.DEVICE_JWT = deviceIdentity.deviceJwt!;
     }
@@ -58,6 +59,7 @@ class DeviceIdentityService {
       AppConstantsService.DEVICE_ACCESS_TOKEN,
       AppConstantsService.API_KEY,
       AppConstantsService.DEVICE_ID,
+      AppConstantsService.ORG_ID
     ].every((element) => element.isNotEmpty);
     return _isLocalBeenCached && doNotNull;
   }

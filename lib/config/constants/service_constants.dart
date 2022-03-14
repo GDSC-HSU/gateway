@@ -18,10 +18,12 @@ class AppConstantsService {
   static String ORG_ENDPOINT = '';
   static String MQTT_USERNAME = '';
   static String MQTT_PASSWORD = '';
+  static String ORG_ID = '';
   //
 
   // HTTP
   static const String DATA_PATH = "/data";
+  static const String ORG_PATH = "/organization";
   static const String DEVICE_PATH = "/device";
   static const String DEVICE_ID_KEY = 'id';
   static const String DEVICE_HARDWARE_INFO_KEY = 'hardwareInfo';

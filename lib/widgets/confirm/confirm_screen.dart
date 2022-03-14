@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:camera/camera.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +6,10 @@ import 'package:gateway/config/routes/routing.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/generated/locale_keys.g.dart';
 import 'package:gateway/model/device_identity.dart';
+import 'package:gateway/screens/test/mqtt_connection.dart';
 import 'package:gateway/services/device_config_service.dart';
+import 'package:gateway/services/device_service.dart';
+import 'package:gateway/services/organization_service.dart';
 import 'package:gateway/widgets/common/button_custom.dart';
 import 'package:gateway/widgets/common/card_setup.dart';
 import 'package:gateway/widgets/confirm/guide_confirm.dart';
@@ -41,7 +42,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
         // }
         FocusScope.of(context).unfocus();
       },
-          child: SingleChildScrollView(
+      child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -118,9 +119,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                       ),
                     ),
                   ),
-                  confirmOrganization
-                      ? OrganizationConfirm()
-                      : GuideConfirm(),
+                  confirmOrganization ? OrganizationConfirm() : GuideConfirm(),
                 ],
               ),
             ),
@@ -137,7 +136,10 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                       color: Colors.white,
                     ),
                     title: LocaleKeys.confirm.tr(),
-                    onFunction: () {
+                    onFunction: () async {
+                      // await _deviceClaim();
+
+                      await _getOrg();
                       Navigator.pushReplacementNamed(
                         context,
                         AppRouting.congratulation,
@@ -155,11 +157,20 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
   _handleQRConfig(String qrAsString) async {
     try {
       final json = jsonDecode(qrAsString);
-      print(json);
       final deviceIdentity = DeviceIdentity.fromJson(json);
       await DeviceIdentityService.saveDeviceIdentityConfig(deviceIdentity);
     } catch (e) {
-      print(e);
+      throw "[DEV] error JSON Decode";
     }
+  }
+
+  _deviceClaim() async {
+    final deviceInfo = await DeviceService.getDeviceInfo();
+    await DeviceService().postDeviceDetail(deviceInfo);
+  }
+
+  _getOrg() async {
+    final orgInfo = await OrganizationService().getOrgPreview();
+    print(orgInfo);
   }
 }
