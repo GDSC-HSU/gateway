@@ -10,6 +10,7 @@ class DeviceIdentity {
   late String deviceOrgEndPoint;
   late String mqttUserName;
   late String mqttPassword;
+  late String oid;
 
   DeviceIdentity(
       {required this.deviceId,
@@ -18,7 +19,8 @@ class DeviceIdentity {
       this.deviceJwt,
       required this.deviceOrgEndPoint,
       required this.mqttUserName,
-      required this.mqttPassword});
+      required this.mqttPassword,
+      required this.oid});
 
   DeviceIdentity addDeviceInfo(DeviceInfo deviceInfo) {
     deviceId = deviceInfo.id;
@@ -26,11 +28,11 @@ class DeviceIdentity {
     return this;
   }
 
-  DeviceIdentity addOrganizationInfo(OrganizationInfo organizationInfo) {
-    deviceOrgEndPoint = organizationInfo.endpoint;
-    deviceApiKey = organizationInfo.apiKey;
-    return this;
-  }
+  // DeviceIdentity addOrganizationInfo(OrganizationInfo organizationInfo) {
+  //   deviceOrgEndPoint = organizationInfo.endpoint;
+  //   deviceApiKey = organizationInfo.apiKey;
+  //   return this;
+  // }
 
   DeviceIdentity addJWT(String jwtToken) {
     deviceJwt = jwtToken;
@@ -45,6 +47,7 @@ class DeviceIdentity {
     deviceOrgEndPoint = json['endpoint'];
     mqttUserName = json['mqttUserName'];
     mqttPassword = json['mqttPassword'];
+    oid = json["oid"];
   }
 
   Map<String, dynamic> toJson() {
@@ -56,6 +59,7 @@ class DeviceIdentity {
     data['endpoint'] = deviceOrgEndPoint;
     data['mqttUserName'] = mqttUserName;
     data['mqttPassword'] = mqttPassword;
+    data['oid'] = oid;
     return data;
   }
 }

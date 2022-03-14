@@ -6,8 +6,10 @@ import 'package:gateway/config/routes/routing.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/generated/locale_keys.g.dart';
 import 'package:gateway/model/device_identity.dart';
+import 'package:gateway/screens/test/mqtt_connection.dart';
 import 'package:gateway/services/device_config_service.dart';
 import 'package:gateway/services/device_service.dart';
+import 'package:gateway/services/organization_service.dart';
 import 'package:gateway/widgets/common/button_custom.dart';
 import 'package:gateway/widgets/common/card_setup.dart';
 import 'package:gateway/widgets/confirm/guide_confirm.dart';
@@ -135,7 +137,9 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                     ),
                     title: LocaleKeys.confirm.tr(),
                     onFunction: () async {
-                      await _deviceClaim();
+                      // await _deviceClaim();
+
+                      await _getOrg();
                       Navigator.pushReplacementNamed(
                         context,
                         AppRouting.congratulation,
@@ -163,5 +167,10 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
   _deviceClaim() async {
     final deviceInfo = await DeviceService.getDeviceInfo();
     await DeviceService().postDeviceDetail(deviceInfo);
+  }
+
+  _getOrg() async {
+    final orgInfo = await OrganizationService().getOrgPreview();
+    print(orgInfo);
   }
 }

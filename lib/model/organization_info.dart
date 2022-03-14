@@ -1,28 +1,21 @@
 class OrganizationInfo {
-  late String id;
-  late String name;
-  late String endpoint;
-  late String apiKey;
+  String? name;
+  String? imageUrl;
+  String? oid;
 
-  OrganizationInfo(
-      {required this.id,
-      required this.name,
-      required this.endpoint,
-      required this.apiKey});
+  OrganizationInfo({this.name, this.imageUrl, this.oid});
 
   OrganizationInfo.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
     name = json['name'];
-    endpoint = json['endpoint'];
-    apiKey = json['apiKey'];
+    imageUrl = json['imageUrl'];
+    oid = json['oid'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['endpoint'] = this.endpoint;
-    data['apiKey'] = this.apiKey;
+    data['name'] = name;
+    data['imageUrl'] = imageUrl;
+    data['oid'] = oid;
     return data;
   }
 }
