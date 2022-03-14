@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:gateway/config/constants/service_constants.dart';
 import 'package:gateway/model/device_hardware_info.dart';
 import 'package:gateway/model/device_sensor.dart';
@@ -27,14 +28,14 @@ class DeviceService {
         // 404: missing field
         // 403: API-KEY invalid
         //         ACCESS-KEY invalid
-        throw "";
+        throw "[Dev] Error";
       }
     } catch (e) {
-      print(e);
+      throw "[Dev] Error";
     }
   }
 
-  Future<void> postDeviceDetail(DeviceHardwareInfo info) async {
+  Future<void> postDeviceDetail(Map info) async {
     // device header
     final headers = <String, String>{
       AppConstantsService.API_KEY_HEADER: AppConstantsService.API_KEY,
@@ -49,7 +50,7 @@ class DeviceService {
     //
     final body = {
       AppConstantsService.DEVICE_ID_KEY: AppConstantsService.DEVICE_ID,
-      AppConstantsService.DEVICE_HARDWARE_INFO_KEY: info.toJson()
+      AppConstantsService.DEVICE_HARDWARE_INFO_KEY: info
     };
 
     try {
@@ -58,13 +59,17 @@ class DeviceService {
       if (response.statusCode == 200) {
         return;
       } else {
-        // 404: missing field
-        // 403: API-KEY invalid
-        //         ACCESS-KEY invalid
-        throw "";
+        throw "[Dev] Error";
       }
     } catch (e) {
-      throw "aaa";
+      throw "[Dev] Error";
     }
+  }
+
+  static Future<Map<String, dynamic>> getDeviceInfo() async {
+    final deviceInfoPlugin = DeviceInfoPlugin();
+    final deviceInfo = await deviceInfoPlugin.deviceInfo;
+    return deviceInfo.toMap();
+// Push [map] to your service.
   }
 }

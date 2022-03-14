@@ -1,8 +1,16 @@
 import 'package:gateway/config/constants/service_constants.dart';
+import 'package:gateway/services/device_config_service.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 
-enum MQTTConnectionStatus { connected, disconnected, reconnecting }
+enum MQTTConnectionStatus {
+  init,
+  connected,
+  connecting,
+  disconnected,
+  reconnecting,
+  error
+}
 
 // - [ ] TODO JWT for IOT Core
 class MQTTService {
@@ -14,7 +22,7 @@ class MQTTService {
   _initMQTTConfig() {
     /// setup mqtt client
     _client.setProtocolV311();
-    _client.logging(on: false);
+    _client.logging(on: true);
     _client.autoReconnect = true;
     _client.resubscribeOnAutoReconnect = true;
     // configuration will be configured in boot up
@@ -29,13 +37,18 @@ class MQTTService {
   }
 
   init(Function(MQTTConnectionStatus) connectionUpdate) async {
+    final isConfigured = DeviceIdentityService.isDeviceBeenConfigured;
+    if (!isConfigured) throw "[DEV] error device no been configured";
     try {
       // configuration will be configured in boot up
-      _client = MqttServerClient(AppConstantsService.ORG_ENDPOINT, '');
+      final serverAddress = Uri.parse(AppConstantsService.ORG_ENDPOINT);
+      _client = MqttServerClient(serverAddress.authority, '');
       _initMQTTConfig();
-      await _client.connect();
       _listenMQTTStatus(connectionUpdate);
+      connectionUpdate(MQTTConnectionStatus.connecting);
+      await _client.connect();
     } catch (e) {
+      connectionUpdate(MQTTConnectionStatus.error);
       rethrow;
     }
   }
