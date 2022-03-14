@@ -55,9 +55,13 @@ extension LargestQRInFrontOfCamera on List<Barcode> {
   // hmm not sure it gonna work
   Barcode largestQR() {
     final largestQR = reduce((firstBox, secondBox) {
-      final isFirstBoxOverlap =
-          firstBox.value.boundingBox!.overlaps(secondBox.value.boundingBox!);
-      return isFirstBoxOverlap ? firstBox : secondBox;
+      final acreageFirstBox =
+          firstBox.value.boundingBox!.left * firstBox.value.boundingBox!.right;
+      final acreageSecondBox = secondBox.value.boundingBox!.left *
+          secondBox.value.boundingBox!.right;
+
+      final isFirstBoxLarger = acreageFirstBox > acreageSecondBox;
+      return isFirstBoxLarger ? firstBox : secondBox;
     });
     return largestQR;
   }

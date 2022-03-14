@@ -73,6 +73,12 @@ class BleSensorControllerBloc
   }
 
   @override
+  void onChange(Change<BleSensorControllerState> change) {
+    super.onChange(change);
+    print(change);
+  }
+
+  @override
   Future<void> close() {
     streamHexoStateSub.cancel();
     streamBleSensorDataConsumer.close();
