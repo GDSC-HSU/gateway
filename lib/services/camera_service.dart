@@ -22,8 +22,9 @@ class CameraService {
 
   /// camera locations
   Future<void> initialize(
-      {required CameraDescription cameraDescription}) async {
-    controller = CameraController(cameraDescription, ResolutionPreset.medium,
+      {required CameraDescription cameraDescription,
+      ResolutionPreset cameraResolution = ResolutionPreset.medium}) async {
+    controller = CameraController(cameraDescription, cameraResolution,
         enableAudio: false);
     await controller.initialize();
   }
