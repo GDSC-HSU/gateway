@@ -45,6 +45,7 @@ dependencies:
       ref: master
   mqtt_client: ^9.6.5
   firebase_core:
+  device_info_plus: ^3.2.2
 
 dev_dependencies:
   flutter_test:
