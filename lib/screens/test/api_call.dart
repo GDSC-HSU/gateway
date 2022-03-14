@@ -25,8 +25,10 @@ class _APICallTestState extends State<APICallTest> {
               onPressed: () => {service.postDeviceData(mockDeviceSensorData)},
               child: Text("postDeviceData")),
           TextButton(
-              onPressed: () =>
-                  {service.postDeviceDetail(mockDeviceHardWareInfo)},
+              onPressed: () async => {
+                    service
+                        .postDeviceDetail(await DeviceService.getDeviceInfo())
+                  },
               child: Text("device Claim"))
         ],
       ),

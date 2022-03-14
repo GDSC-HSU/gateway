@@ -8,6 +8,7 @@ import 'package:gateway/blocs/ble_sensor/ble_sensor.dart';
 import 'package:gateway/blocs/ble_sensor/bloc/ble_sensor_bloc.dart';
 import 'package:gateway/screens/test/device_config.dart';
 import 'package:gateway/screens/test/hexo_state.dart';
+import 'package:gateway/screens/test/mqtt_connection.dart';
 
 import '../../generated/locale_keys.g.dart';
 import 'ble_sensor_grid.dart';
@@ -28,19 +29,20 @@ class _TestPageState extends State<TestPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            DeviceIdentityTest(),
-            ScanPage(),
-            StreamBuilder<BleDeviceConnectionState>(
-                stream: context.read<BleDeviceConnectionBloc>().stream,
-                builder: (context, snapshot) {
-                  if (snapshot.data?.connectionSate ==
-                      DeviceConnectionState.connected) {
-                    return Column(
-                      children: [BleSensorGridMonitor(), HexoStateTest()],
-                    );
-                  }
-                  return Container();
-                }),
+            MQTTConnectionScreen()
+            // DeviceIdentityTest(),
+            // ScanPage(),
+            // StreamBuilder<BleDeviceConnectionState>(
+            //     stream: context.read<BleDeviceConnectionBloc>().stream,
+            //     builder: (context, snapshot) {
+            //       if (snapshot.data?.connectionSate ==
+            //           DeviceConnectionState.connected) {
+            //         return Column(
+            //           children: [BleSensorGridMonitor(), HexoStateTest()],
+            //         );
+            //       }
+            //       return Container();
+            //     }),
           ],
         ),
       ),
