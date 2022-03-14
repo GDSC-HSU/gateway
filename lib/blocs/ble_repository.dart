@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
-import 'package:gateway/config/constants/ble_timmer.dart';
+import 'package:gateway/config/constants/app_delay_timmer_constants.dart';
 import 'package:rxdart/rxdart.dart';
 
 class BLERepository {

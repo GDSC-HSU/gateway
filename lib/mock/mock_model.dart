@@ -17,10 +17,7 @@ final DeviceHardwareInfo mockDeviceHardWareInfo = DeviceHardwareInfo(
     macAddress: "", nameHardware: "IphoneXXX", os: "AppleVSSony");
 
 final OrganizationInfo mockOrgInfo = OrganizationInfo(
-    id: "xxx-hsu-xxx",
-    apiKey: "xxx-org-api-key",
-    name: "hsu",
-    endpoint: "http://192.168.1.6:3000");
+    name: "xxx-hsu-xxx", imageUrl: "xxx-org-api-key", oid: "xxxx");
 
 final DeviceSensorData mockDeviceSensorData = DeviceSensorData(
     bodyTemperature: 30.5,
@@ -31,6 +28,7 @@ final DeviceSensorData mockDeviceSensorData = DeviceSensorData(
     isComplete: true);
 
 final DeviceIdentity mockDeviceIdentity = DeviceIdentity(
+    oid: "xxxx",
     deviceAccessKey: 'ce9go8K34sCipHy_AsotD',
     deviceApiKey: '123',
     deviceId: 'z2OnUdMhstbJRpf1Wqp2',
