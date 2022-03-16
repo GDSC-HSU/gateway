@@ -7,7 +7,7 @@ import 'package:gateway/services/device_config_service.dart';
 import 'package:gateway/services/mqtt_service.dart';
 
 class AppRepositoryProvider extends StatelessWidget {
-  final FlutterReactiveBle rxBle = MockFlutterReactiveBle();
+  final FlutterReactiveBle rxBle = FlutterReactiveBle();
   final Widget child;
   AppRepositoryProvider({Key? key, required this.child}) : super(key: key);
 
