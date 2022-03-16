@@ -61,3 +61,5 @@ flutter:
     - assets/translations/
     - assets/images/
     - assets/gif/
+    - assets/model/
+    - assets/
