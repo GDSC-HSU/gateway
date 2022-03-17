@@ -7,6 +7,10 @@ abstract class GatewayControllerState extends Equatable {
   List<Object> get props => [];
 }
 
+class GatewayCheckUploading extends GatewayControllerState {}
+
+class GatewayCheckUploadedSuccessful extends GatewayControllerState {}
+
 class BleSensorControllerInitial extends GatewayControllerState {}
 
 // class BleSensorControllerValidState extends GatewayControllerState {

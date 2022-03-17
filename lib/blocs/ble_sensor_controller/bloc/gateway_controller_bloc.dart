@@ -6,6 +6,8 @@ import 'package:gateway/blocs/ble_sensor/ble_sensor.dart';
 import 'package:gateway/blocs/ble_sensor/bloc/ble_sensor_bloc.dart';
 import 'package:gateway/blocs/ble_sensor_controller/controller_state.dart';
 import 'package:gateway/blocs/ble_sensor_controller/controller_state_from.dart';
+import 'package:gateway/services/device_service.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 part 'gateway_controller_bloc_event.dart';
 part 'gateway_controller_bloc_state.dart';
@@ -15,13 +17,15 @@ class GatewayControllerBloc
     extends Bloc<GatewayControllerEvent, GatewayControllerState> {
   final List<BleSensorBloc> listOfSensor;
   late StreamController<BleSensorOnData> streamBleSensorDataConsumer;
-
+  final DeviceService deviceService = DeviceService();
+  late StreamSubscription streamHexoStateSub;
   final HexoStateForm hexoState = HexoStateForm();
 
   GatewayControllerBloc(this.listOfSensor)
       : super(BleSensorControllerInitial()) {
     streamBleSensorDataConsumer = StreamController();
     _initListenSenorData();
+    _listFormEvent();
 
     // Send command to BLE sensor
     // inner bloc communication
@@ -53,15 +57,26 @@ class GatewayControllerBloc
     }
   }
 
+  _listFormEvent() {
+    streamHexoStateSub = hexoState.form.statusChanged.listen((event) async {
+      if (hexoState.customControllerStatusValid()) {
+        final data = hexoState.toSensorData();
+        hexoState.resetFrom();
+        emit(GatewayCheckUploading());
+        await deviceService.postDeviceData(data);
+        emit(GatewayCheckUploadedSuccessful());
+      }
+    });
+  }
+
   @override
   void onChange(Change<GatewayControllerState> change) {
     super.onChange(change);
-    print(change);
   }
 
   @override
   Future<void> close() {
-    // streamHexoStateSub.cancel();
+    streamHexoStateSub.cancel();
     streamBleSensorDataConsumer.close();
     // TODO: implement close
     return super.close();

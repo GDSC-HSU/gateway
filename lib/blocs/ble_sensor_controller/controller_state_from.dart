@@ -1,18 +1,24 @@
 import 'package:gateway/blocs/ble_sensor/ble_sensor.dart';
 import 'package:gateway/blocs/ble_sensor_controller/bloc/gateway_controller_bloc.dart';
 import 'package:gateway/extension.dart';
+import 'package:gateway/model/device_sensor.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 enum FromType { temperature, identification, maskCamera, qrCamera }
 
 class HexoStateForm {
-  late FormGroup form = FormGroup(_createFormControlForBLEData());
+  late FormGroup form;
 
-  FormControl getBLEFormControl(FromType type) {
-    return form.controls[type.name] as FormControl;
+  HexoStateForm() {
+    form = FormGroup(_createFormControlForBLEData());
   }
 
-  static Map<String, FormControl> _createFormControlForBLEData() {
+  bool get isProvideCovidIdentificationMethod {
+    return form.controls[FromType.identification.name]!.valid ||
+        form.controls[FromType.qrCamera.name]!.valid;
+  }
+
+  Map<String, FormControl> _createFormControlForBLEData() {
     // TODO custome required and not required
     final from = FromType.values.asNameMap().map((key, value) {
       switch (value) {
@@ -44,6 +50,7 @@ class HexoStateForm {
     final fromType = _bleToFromType(event.sensorType);
     data = fromValue(fromType, data);
     form.controls[fromType.name]?.updateValue(data);
+    print([event.sensorType.name, form.controls[fromType.name]!.value]);
   }
 
   Object fromValue(FromType type, dynamic data) {
@@ -83,34 +90,23 @@ class HexoStateForm {
     }
   }
 
+  DeviceSensorData toSensorData() {
+    return DeviceSensorData.fromFromData(form.rawValue);
+  }
+
   resetFrom() {
     form.reset();
+    form.markAsPristine();
+  }
+
+  bool customControllerStatusValid() {
+    final isBool = isProvideCovidIdentificationMethod &&
+        form.controls[FromType.maskCamera.name]!.valid &&
+        form.controls[FromType.temperature.name]!.valid;
+    return isBool;
   }
 
   get formValue => form.value;
 
   Stream<ControlStatus> get controlStatusStream => form.statusChanged;
-}
-
-var mockData = SensorType.values
-    .map((e) => GatewayControllerBLESensorDataEvent(const [49, 50], e))
-    .toList();
-
-void main(List<String> args) async {
-  final hexoForm = HexoStateForm();
-  late List<Future<GatewayControllerBLESensorDataEvent>> ble_sensor = [];
-  late Stream<GatewayControllerBLESensorDataEvent> streamEmitor;
-  for (var i = 0; i < mockData.length; i++) {
-    ble_sensor.add(Future<GatewayControllerBLESensorDataEvent>.delayed(
-        Duration(microseconds: i * 100), () => mockData[i]));
-  }
-  streamEmitor = Stream.fromFutures(ble_sensor);
-  hexoForm.form.valueChanges.listen((event) {
-    print(hexoForm.form.valid);
-    print(event);
-  });
-  await for (var item in streamEmitor) {
-    hexoForm.addBLEDataToForm(item);
-  }
-  print("Helloo");
 }
