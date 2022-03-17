@@ -20,6 +20,7 @@ import 'package:gateway/main.dart';
 import 'package:gateway/services/camera_service.dart';
 import 'package:gateway/widgets/common/info_check_card.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:rxdart/transformers.dart';
 
 class GatewayCheckScreen extends StatefulWidget {
   const GatewayCheckScreen({
@@ -74,7 +75,9 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
     googleMLKitQRServiceSub = googleMLKitQRService.stream.listen((event) {
       hexoState.addHardWareSensorToForm(event, FromType.qrCamera);
     });
-    faceMaskDetectorServiceSub = faceMaskDetectorService.stream.listen((event) {
+    faceMaskDetectorServiceSub = faceMaskDetectorService.stream
+        // .debounceTime(Duration(milliseconds: 200))
+        .listen((event) {
       hexoState.addHardWareSensorToForm(event, FromType.maskCamera);
     });
   }
@@ -144,7 +147,8 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
                             formControlName: FromType.identification.name,
                             builder: (context, from, child) {
                               return InfoCheckCard(
-                                iconStatus: from.valid,
+                                iconStatus: hexoState
+                                    .isProvideCovidIdentificationMethod,
                                 imageIcon: 'assets/images/petition.png',
                                 title: LocaleKeys.health_declaration.tr(),
                               );
@@ -240,7 +244,9 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
                           ),
                           child: Center(
                               child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    hexoState.resetFrom();
+                                  },
                                   icon: Icon(
                                     Icons.refresh,
                                     color: Colors.white,
