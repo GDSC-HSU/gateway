@@ -51,7 +51,6 @@ class BleDeviceConnectionBloc
   @override
   Future<void> close() async {
     await connectionStateSub.cancel();
-    // TODO: implement close
     return super.close();
   }
 }

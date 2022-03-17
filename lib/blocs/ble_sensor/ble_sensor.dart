@@ -4,12 +4,9 @@ import 'package:gateway/blocs/ble_sensor/sensor/ble_sensor.dart';
 import 'package:gateway/blocs/ble_sensor/sensor/interface.dart';
 import 'package:gateway/config/constants/ble_desgin_constants.g.dart';
 
-enum SensorType {
-  proximity,
-  temperature,
-  rfid,
-  radar,
-}
+enum SensorType { proximity, temperature, rfid, radar }
+
+// SensorType.get
 
 class BLESensorProvider {
   final BleDeviceConnectionBloc bloc;

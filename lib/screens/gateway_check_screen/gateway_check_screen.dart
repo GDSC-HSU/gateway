@@ -107,7 +107,9 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
                   ),
                 );
               } else {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator(
+                  color: GatewayColors.buttonBgLight,
+                ));
               }
             },
           ),

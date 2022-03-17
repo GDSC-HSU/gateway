@@ -7,6 +7,8 @@ import 'package:gateway/blocs/ble_repository.dart';
 import 'package:gateway/config/constants/app_delay_timmer_constants.dart';
 import 'package:gateway/config/constants/ble_desgin_constants.g.dart'
     as ble_constants;
+import 'package:gateway/config/constants/app_delay_timmer_constants.dart';
+import 'package:gateway/generated/locale_keys.g.dart';
 part 'ble_scan_event.dart';
 part 'ble_scan_state.dart';
 

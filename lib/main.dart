@@ -8,6 +8,7 @@ import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:gateway/app.dart';
 import 'package:gateway/firebase_options.dart';
 import 'package:gateway/services/device_config_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 late List<CameraDescription> cameras;
 
@@ -18,9 +19,11 @@ Future<void> main() async {
   );
   await EasyLocalization.ensureInitialized();
   await FlutterReactiveBle().initialize();
+  // final share = await SharedPreferences.getInstance();
+  // share.clear();
   await DeviceIdentityService.ensureInitialized();
   cameras = await availableCameras();
-   _portraitModeOnly();
+  _portraitModeOnly();
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('vi')],
@@ -29,8 +32,8 @@ Future<void> main() async {
       child: const MyApp(),
     ),
   );
-  
 }
+
 void _portraitModeOnly() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
