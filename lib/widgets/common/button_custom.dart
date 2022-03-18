@@ -15,8 +15,8 @@ class AppBottomButton extends StatefulWidget {
   final Color bgColor;
   final String title;
   // only one icon per side
-  final Icon? leftIconButton;
-  final Icon? rightIconButton;
+  final Widget? leftIconButton;
+  final Widget? rightIconButton;
   final Function onFunction;
   // showing loadding mode
   final bool? isLoading;

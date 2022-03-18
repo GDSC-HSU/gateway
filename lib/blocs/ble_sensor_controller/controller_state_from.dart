@@ -8,13 +8,13 @@ class HexoStateForm {
   late FormGroup form = FormGroup(_createFormControlForBLEData());
 
   FormControl getBLEFormControl(SensorType type) {
-    return form.controls[type.name] as FormControl;
+    return form.controls[type.toString()] as FormControl;
   }
 
   static Map<String, FormControl> _createFormControlForBLEData() {
-    final bleSensorForm = SensorType.values.asNameMap().map((key, value) =>
-        MapEntry(value.name, FormControl(validators: [Validators.required])));
-    return {SensorType.proximity.name: FormControl()};
+    // final bleSensorForm = SensorType.values.asNameMap().map((key, value) =>
+    //     MapEntry(value.name, FormControl(validators: [Validators.required])));
+    return {SensorType.proximity.toString(): FormControl()};
   }
 
   addBLEDataToForm(BleSensorControllerSensorDataEvent event) {

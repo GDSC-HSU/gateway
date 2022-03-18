@@ -78,7 +78,7 @@ class _ConnectScreenState extends State<ConnectScreen> {
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 30.h, vertical: 24.h),
-                                  child: DeviceInfo(),
+                                  child: DeviceInfoScreen(),
                                 ),
                               )
                             : Center(

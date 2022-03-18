@@ -25,7 +25,7 @@
     "next": "Tiếp theo",
     "add_organization": "THÊM VÀO TỔ CHỨC",
     "qr_code": "Mã QR",
-    "organization_id": "Id Tổ chức",
+    "organization_id": "ID Tổ chức",
     "title_note_confirm": "Nhập mã cung cấp cho tổ chức của bạn để đăng ký thiết bị",
     "first_thing_note_confirm": "Đảm bảo rằng bạn đã đăng ký thiết bị trong bảng điều khiển web",
     "second_thing_note_confirm": "Sau khi thêm thiết bị, thiết bị sẽ nằm trong bản điều khiển tổ chức của bạn",
@@ -44,5 +44,6 @@
     "device_id": "ID thiết bị",
     "content_congratulation": "Thiết bị đã được thêm vào tổ chức của bạn",
     "privacy_policy": "“Chính sách bảo mật”",
-    "term_of_services": "“Thời hạn của dịch vụ”"
+    "term_of_services": "“Thời hạn của dịch vụ”",
+    "please_rescan": "Vui lòng hãy quét lại"
 }
