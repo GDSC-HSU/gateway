@@ -39,3 +39,5 @@ Don't looking for any beauty in architecture design principle, **attempted proje
 4. Android -BLE SUPPORT HDMI (Samsung Dex like) - un-tested
 5. ESP32 - (BLE 4.2)
 
+
+
