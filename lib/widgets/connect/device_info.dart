@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/generated/locale_keys.g.dart';
 
-class DeviceInfo extends StatelessWidget {
-  DeviceInfo({
+class DeviceInfoScreen extends StatelessWidget {
+  DeviceInfoScreen({
     Key? key,
   }) : super(key: key);
 

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/blocs/ble_sensor_controller/bloc/gateway_controller_bloc.dart';
 import 'package:gateway/blocs/ble_sensor_controller/controller_state_from.dart';
+import 'package:gateway/config/routes/routing.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/di/di_ble_sensor.dart';
 import 'package:gateway/generated/locale_keys.g.dart';
@@ -18,6 +19,7 @@ import 'package:gateway/utils/check_language.dart';
 import 'package:gateway/widgets/common/build_appbar.dart';
 import 'package:gateway/main.dart';
 import 'package:gateway/services/camera_service.dart';
+import 'package:gateway/widgets/common/dialog/loading_dialog.dart';
 import 'package:gateway/widgets/common/info_check_card.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:rxdart/transformers.dart';
@@ -106,7 +108,19 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
             );
           }
           return BlocListener<GatewayControllerBloc, GatewayControllerState>(
-            listener: (context, state) {},
+            listener: (context, state) async {
+              if (state is GatewayNoMotionDetected) {
+                // cameraService.stopImgStream();
+              }
+              if (state is GatewayCheckUploading) {
+                await showLoadingDialog(context);
+              }
+              if (state is GatewayCheckUploadedSuccessful) {
+                Navigator.of(context).pop();
+                // Navigator.of(context)
+                //     .popUntil(ModalRoute.withName(AppRouting.gatewayCheck));
+              }
+            },
             child: ReactiveFormBuilder(
               form: () => hexoState.form,
               builder: (context, from, child) {
@@ -143,16 +157,15 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
                         SizedBox(
                           height: 10.h,
                         ),
-                        ReactiveValueListenableBuilder(
-                            formControlName: FromType.identification.name,
-                            builder: (context, from, child) {
-                              return InfoCheckCard(
-                                iconStatus: hexoState
-                                    .isProvideCovidIdentificationMethod,
-                                imageIcon: 'assets/images/petition.png',
-                                title: LocaleKeys.health_declaration.tr(),
-                              );
-                            }),
+                        ReactiveFormConsumer(builder: (context, from, child) {
+                          final isDone =
+                              hexoState.isProvideCovidIdentificationMethod();
+                          return InfoCheckCard(
+                            iconStatus: isDone,
+                            imageIcon: 'assets/images/petition.png',
+                            title: LocaleKeys.health_declaration.tr(),
+                          );
+                        }),
                         SizedBox(
                           height: 10.h,
                         ),

@@ -37,8 +37,12 @@ class GatewayControllerBloc
 
     // listen and add data to hexo State
 
-    on<GatewayControllerBLESensorDataEvent>(
-        (event, emit) => {hexoState.addBLEDataToForm(event)});
+    on<GatewayControllerBLESensorDataEvent>((event, emit) => {
+          if (event.sensorType != SensorType.radar)
+            {hexoState.addBLEDataToForm(event)}
+          else
+            {_ifNoMovementRestartFrom()}
+        });
 
     on<BleSensorControllerResetEvent>((event, emit) => {hexoState.resetFrom()});
   }
@@ -67,6 +71,10 @@ class GatewayControllerBloc
         emit(GatewayCheckUploadedSuccessful());
       }
     });
+  }
+
+  _ifNoMovementRestartFrom() {
+    hexoState.resetFrom();
   }
 
   @override

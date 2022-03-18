@@ -1,12 +1,14 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gateway/config/routes/routing.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/main.dart';
 import 'package:gateway/services/camera_service.dart';
 import 'package:gateway/services/tensorflow_service/extension.dart';
 import 'package:gateway/services/tensorflow_service/qr_code_service.dart';
 import 'package:gateway/widgets/common/button_custom.dart';
+import 'package:gateway/widgets/confirm/organization_confirm.dart';
 
 import '../../model/device_identity.dart';
 
@@ -51,7 +53,9 @@ class _QRScanDialogState extends State<QRScanDialog> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    color: GatewayColors.buttonBgLight,
+                  ),
                 );
               }
               return Stack(
@@ -72,13 +76,20 @@ class _QRScanDialogState extends State<QRScanDialog> {
                             }
                             final qrString = snapshot.data;
                             return AppBottomButton(
-                                isLoading: isLoading,
-                                bgColor: isLoading
-                                    ? GatewayColors.disableButtonBgLight
-                                    : GatewayColors.buttonBgLight,
-                                title: "OK",
-                                onFunction: () =>
-                                    {Navigator.of(context).pop(qrString)});
+                              isLoading: isLoading,
+                              bgColor: isLoading
+                                  ? GatewayColors.disableButtonBgLight
+                                  : GatewayColors.buttonBgLight,
+                              title: "OK",
+                              onFunction: () {
+                                Navigator.of(context).pop(qrString);
+                                // Navigator.of(context).push<String>(
+                                //   MaterialPageRoute<String>(
+                                //       builder: (BuildContext context) =>
+                                //           const OrganizationConfirm()),
+                                // );
+                              },
+                            );
                           }),
                     ),
                   )

@@ -22,6 +22,8 @@ class BleSensorControllerInitial extends GatewayControllerState {}
 //   List<Object> get props => [hexoState];
 // }
 
+class GatewayNoMotionDetected extends GatewayControllerState {}
+
 class BleSensorControllerInValidState extends GatewayControllerState {
   final SensorType sensorTypeLocation;
   final String mess;

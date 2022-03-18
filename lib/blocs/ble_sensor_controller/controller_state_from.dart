@@ -13,7 +13,7 @@ class HexoStateForm {
     form = FormGroup(_createFormControlForBLEData());
   }
 
-  bool get isProvideCovidIdentificationMethod {
+  bool isProvideCovidIdentificationMethod() {
     return form.controls[FromType.identification.name]!.valid ||
         form.controls[FromType.qrCamera.name]!.valid;
   }
@@ -77,6 +77,7 @@ class HexoStateForm {
   addHardWareSensorToForm(dynamic data, FromType type) {
     data = fromValue(type, data);
     form.controls[type.name]?.updateValue(data);
+    print([type, form.controls[type.name]!.value]);
   }
 
   FromType _bleToFromType(SensorType sensorType) {
@@ -100,7 +101,7 @@ class HexoStateForm {
   }
 
   bool customControllerStatusValid() {
-    final isBool = isProvideCovidIdentificationMethod &&
+    final isBool = isProvideCovidIdentificationMethod() &&
         form.controls[FromType.maskCamera.name]!.valid &&
         form.controls[FromType.temperature.name]!.valid;
     return isBool;

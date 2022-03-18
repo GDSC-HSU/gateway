@@ -44,5 +44,6 @@
     "device_id": "Device ID",
     "content_congratulation": "Device has been added to your oganization",
     "privacy_policy": "“Privacy policy”",
-    "term_of_services": "“Term of services”"
+    "term_of_services": "“Term of services”",
+    "please_rescan": "Please rescan"
 }
