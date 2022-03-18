@@ -1,3 +1,9 @@
 [submodule "ble_devices"]
 	path = ble_devices
 	url = https://github.com/truonghoangduy/esp32-gateway-devices.git
+[submodule "gateway-core"]
+	path = gateway-core
+	url = https://github.com/GDSC-HSU/gateway-core
+[submodule "gateway-dashboard"]
+	path = gateway-dashboard
+	url = https://github.com/GDSC-HSU/gateway-dashboard
