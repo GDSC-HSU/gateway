@@ -6,7 +6,10 @@ import 'package:gateway/blocs/ble_device_connection/bloc/ble_device_connection_b
 import 'package:gateway/blocs/ble_scan/bloc/ble_scan_bloc.dart';
 import 'package:gateway/blocs/ble_sensor/ble_sensor.dart';
 import 'package:gateway/blocs/ble_sensor/bloc/ble_sensor_bloc.dart';
+import 'package:gateway/config/routes/routing.dart';
+import 'package:gateway/screens/gateway_check_screen/gateway_check_screen.dart';
 import 'package:gateway/screens/test/device_config.dart';
+import 'package:gateway/screens/test/face_mask.dart';
 import 'package:gateway/screens/test/hexo_state.dart';
 import 'package:gateway/screens/test/mqtt_connection.dart';
 
@@ -29,20 +32,29 @@ class _TestPageState extends State<TestPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            MQTTConnectionScreen()
+            // MQTTConnectionScreen()
             // DeviceIdentityTest(),
-            // ScanPage(),
-            // StreamBuilder<BleDeviceConnectionState>(
-            //     stream: context.read<BleDeviceConnectionBloc>().stream,
-            //     builder: (context, snapshot) {
-            //       if (snapshot.data?.connectionSate ==
-            //           DeviceConnectionState.connected) {
-            //         return Column(
-            //           children: [BleSensorGridMonitor(), HexoStateTest()],
-            //         );
-            //       }
-            //       return Container();
-            //     }),
+            ScanPage(),
+            StreamBuilder<BleDeviceConnectionState>(
+                stream: context.read<BleDeviceConnectionBloc>().stream,
+                builder: (context, snapshot) {
+                  if (snapshot.data?.connectionSate ==
+                      DeviceConnectionState.connected) {
+                    Future.delayed(
+                        Duration(seconds: 1),
+                        () => {
+                              Navigator.of(context)
+                                  .pushNamed(AppRouting.gatewayCheck)
+                            });
+                    return Column(
+                      children: [
+                        // GatewayCheckScreen()
+                      ],
+                    );
+                  }
+                  return Container();
+                }),
+            // FaceMaskTest()
           ],
         ),
       ),

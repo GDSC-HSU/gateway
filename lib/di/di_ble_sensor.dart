@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/ble_device_connection/bloc/ble_device_connection_bloc.dart';
 import '../blocs/ble_sensor/ble_sensor.dart';
 import '../blocs/ble_sensor/bloc/ble_sensor_bloc.dart';
-import '../blocs/ble_sensor_controller/bloc/ble_sensor_controller_bloc.dart';
+import '../blocs/ble_sensor_controller/bloc/gateway_controller_bloc.dart';
 
 class AppBLESensorDependencyProvider extends StatelessWidget {
   final Widget child;
@@ -21,7 +21,7 @@ class AppBLESensorDependencyProvider extends StatelessWidget {
           lazy: false,
           create: (context) {
             final ble_connection_bloc = context.read<BleDeviceConnectionBloc>();
-            return BleSensorControllerBloc([
+            return GatewayControllerBloc([
               ...SensorType.values
                   .map((e) => BleSensorBloc(e, ble_connection_bloc))
             ]);

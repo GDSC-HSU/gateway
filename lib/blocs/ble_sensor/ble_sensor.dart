@@ -4,7 +4,7 @@ import 'package:gateway/blocs/ble_sensor/sensor/ble_sensor.dart';
 import 'package:gateway/blocs/ble_sensor/sensor/interface.dart';
 import 'package:gateway/config/constants/ble_desgin_constants.g.dart';
 
-enum SensorType { proximity, temperature, rfid, radar }
+enum SensorType { temperature, rfid, radar }
 
 // SensorType.get
 
@@ -15,9 +15,9 @@ class BLESensorProvider {
 
   ISensorBehavior provide(SensorType sensorType) {
     switch (sensorType) {
-      case SensorType.proximity:
-        return BLESensor(bloc, BLE_CHARACTERISTIC_PROXIMITY_DISTANCE,
-            BLE_SERVICE_PROXIMITY_UUID);
+      // case SensorType.proximity:
+      //   return BLESensor(bloc, BLE_CHARACTERISTIC_PROXIMITY_DISTANCE,
+      //       BLE_SERVICE_PROXIMITY_UUID);
       case SensorType.temperature:
         return BLESensor(bloc, BLE_CHARACTERISTIC_THERMOMETER_READ,
             BLE_SERVICE_THERMOMETER_UUID);
