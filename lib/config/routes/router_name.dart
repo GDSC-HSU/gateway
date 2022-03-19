@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:gateway/config/routes/routing.dart';
 import 'package:gateway/di/di_ble_sensor.dart';
+import 'package:gateway/model/device_info.dart';
 import 'package:gateway/screens/congratulation_screen/congratulation_screen.dart';
 import 'package:gateway/screens/gateway_check_screen/gateway_check_screen.dart';
 import 'package:gateway/screens/introduction_screen/introduction_screen.dart';
@@ -29,7 +30,11 @@ class RouterName {
             builder: (context) =>
                 AppBLESensorDependencyProvider(child: GatewayCheckScreen()));
       case AppRouting.congratulation:
-        return MaterialPageRoute(builder: (context) => CongratulationScreen());
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (context) => CongratulationScreen(
+                  deviceInfo: settings.arguments as DeviceInfo,
+                ));
       default:
         return MaterialPageRoute(
           builder: (_) {

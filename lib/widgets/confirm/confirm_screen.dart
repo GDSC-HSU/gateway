@@ -34,7 +34,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
   }
 
   bool confirmOrganization = false;
-  late DeviceInfo deviceInfo; 
+  late DeviceInfo deviceInfo;
   late QrScanCubit _cubit;
   @override
   Widget build(BuildContext context) {
@@ -179,7 +179,6 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                                 onFunction: () async {
                                   BlocProvider.of<QrScanCubit>(context)
                                       .confirmOrganization();
-                                  
                                 },
                               )
                             : AppBottomButton(
@@ -203,7 +202,6 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
       ),
     );
   }
-
 
   // _handleQRConfig(String qrAsString) async {
   //   try {
@@ -234,11 +232,10 @@ extension StateHandler on _ConfirmScreenState {
 
       return CircularProgressIndicator();
     }
-    if(state is ConfirmOrganization){
-      Navigator.pushReplacementNamed(
-        context,
-        AppRouting.congratulation,
-      );
+    if (state is ConfirmOrganizationSuccessful) {
+      final data = state.deviceInfo;
+      Navigator.pushReplacementNamed(context, AppRouting.congratulation,
+          arguments: data);
     }
   }
 }
