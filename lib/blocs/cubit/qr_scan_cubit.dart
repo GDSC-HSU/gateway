@@ -34,7 +34,7 @@ class QrScanCubit extends Cubit<QrScanState> {
 
   _deviceClaim() async {
     final deviceInfo = await DeviceService.getDeviceInfo();
-    await DeviceService().postDeviceDetail(deviceInfo);
+    return await DeviceService().postDeviceDetail(deviceInfo);
   }
 
   Future<void> getOrganization(String qrAString) async {
@@ -43,20 +43,19 @@ class QrScanCubit extends Cubit<QrScanState> {
       await _handleQRConfig(qrAString);
       OrganizationInfo organizationInfo = await _getOrg();
       emit(QrScanSuccess(organizationInfo: organizationInfo));
-      
     } catch (e) {
       print(e);
       emit(QrScanError(error: LocaleKeys.please_rescan.tr()));
     }
   }
 
-  Future<void> confirmOrganization() async{
-    DeviceInfo deviceInfo = await _deviceClaim();
+  Future<void> confirmOrganization() async {
     emit(ConfirmOrganizationWaiting());
-    emit(ConfirmOrganization(deviceInfo: deviceInfo));
+    DeviceInfo deviceInfo = await _deviceClaim();
+    emit(ConfirmOrganizationSuccessful(deviceInfo: deviceInfo));
   }
 
-  Future<void> getDeviceInfo() async{
+  Future<void> getDeviceInfo() async {
     DeviceInfo deviceInfo = await _deviceClaim();
     emit(InfoDeviceSuccess(deviceInfo: deviceInfo));
   }

@@ -18,10 +18,7 @@ class QrScanSuccess extends QrScanState {
   });
   @override
   List<Object> get props => [organizationInfo];
-  
 }
-
-
 
 class QrScanError extends QrScanState {
   final String error;
@@ -31,13 +28,11 @@ class QrScanError extends QrScanState {
   List<Object> get props => [error];
 }
 
-class ConfirmOrganizationWaiting extends QrScanState {
-  
-}
+class ConfirmOrganizationWaiting extends QrScanState {}
 
-class ConfirmOrganization extends QrScanState {
+class ConfirmOrganizationSuccessful extends QrScanState {
   final DeviceInfo deviceInfo;
-  ConfirmOrganization({
+  const ConfirmOrganizationSuccessful({
     required this.deviceInfo,
   });
   @override
