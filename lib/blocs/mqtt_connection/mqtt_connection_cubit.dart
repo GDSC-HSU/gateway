@@ -12,14 +12,16 @@ class MQTTConnectionCubit extends Cubit<MQTTConnectionState> {
 
   // TODO add check when device is configured by singleton injection
   connectToMQTTBroker() {
-    mqttService.init((connectionUpdate) async {
-      if (connectionUpdate == MQTTConnectionStatus.connected) {
-        Future.delayed(MQTTtimer.mqttConnectedDelay,
-            () => emit(MQTTConnectionState(connectionUpdate)));
-      } else {
-        emit(MQTTConnectionState(connectionUpdate));
-      }
-    });
+    if (!mqttService.isMQTTConnected()) {
+      mqttService.init((connectionUpdate) async {
+        if (connectionUpdate == MQTTConnectionStatus.connected) {
+          Future.delayed(MQTTtimer.mqttConnectedDelay,
+              () => emit(MQTTConnectionState(connectionUpdate)));
+        } else {
+          emit(MQTTConnectionState(connectionUpdate));
+        }
+      });
+    }
   }
 
   dispose() {

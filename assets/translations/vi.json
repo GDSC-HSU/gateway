@@ -6,8 +6,6 @@
     "confirm": "Xác nhận",
     "scan_begin_text": "Bạn hãy ấn nút quyét để tìm kiếm thiết bị",
     "ble_device_not_found": "Không tìm thấy thiết bị của bạn, hãy kiểm tra lại thiết bị đã được mở?",
-
-
     "welcome_to_gateway": "Chào mừng đến Gateway",
     "content_welcome": "Chúng tôi là “google developer student clubs of hoa sen university” (gdsc-hsu) tạo ra giải pháp đột phá trong thời kỳ coivd-19.",
     "i_agree_with_gateway": "Tôi đồng ý với gateway",
@@ -40,6 +38,7 @@
     "check_info": "KIỂM TRA THÔNG TIN",
     "congratulation": "Chúc mừng",
     "online": "Trực tuyến",
+    "offline": "Ngoại tuyến",
     "device_name": "Tên thiết bị",
     "device_id": "ID thiết bị",
     "content_congratulation": "Thiết bị đã được thêm vào tổ chức của bạn",
