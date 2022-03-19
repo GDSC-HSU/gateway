@@ -14,26 +14,35 @@ enum MQTTConnectionStatus {
 
 // - [ ] TODO JWT for IOT Core
 class MQTTService {
-  late MqttServerClient _client;
+  MqttServerClient? _client;
 
   // most case you wont need it
-  MqttServerClient get mqttClient => _client;
+  MqttServerClient get mqttClient => _client!;
 
   _initMQTTConfig() {
     /// setup mqtt client
-    _client.setProtocolV311();
-    _client.logging(on: true);
-    _client.autoReconnect = true;
-    _client.resubscribeOnAutoReconnect = true;
+    _client!.setProtocolV311();
+    _client!.logging(on: true);
+    _client!.autoReconnect = true;
+    _client!.resubscribeOnAutoReconnect = true;
     // configuration will be configured in boot up
     final connectionMess = MqttConnectMessage()
         .withClientIdentifier(AppConstantsService.DEVICE_ID)
         .authenticateAs(AppConstantsService.MQTT_USERNAME,
             AppConstantsService.MQTT_PASSWORD)
         .startClean();
-    _client.connectionMessage = connectionMess;
+    _client!.connectionMessage = connectionMess;
 
     ///
+  }
+
+  bool isMQTTConnected() {
+    if (_client != null) {
+      bool isConnected =
+          _client!.connectionStatus?.state == MqttConnectionState.connected;
+      return isConnected;
+    }
+    return false;
   }
 
   init(Function(MQTTConnectionStatus) connectionUpdate) async {
@@ -46,7 +55,7 @@ class MQTTService {
       _initMQTTConfig();
       _listenMQTTStatus(connectionUpdate);
       connectionUpdate(MQTTConnectionStatus.connecting);
-      await _client.connect();
+      await _client!.connect();
     } catch (e) {
       connectionUpdate(MQTTConnectionStatus.error);
       rethrow;
@@ -54,15 +63,15 @@ class MQTTService {
   }
 
   _listenMQTTStatus(Function(MQTTConnectionStatus) connectionUpdate) {
-    _client.onConnected =
+    _client!.onConnected =
         () => connectionUpdate(MQTTConnectionStatus.connected);
-    _client.onDisconnected =
+    _client!.onDisconnected =
         () => connectionUpdate(MQTTConnectionStatus.disconnected);
-    _client.onAutoReconnect =
+    _client!.onAutoReconnect =
         () => connectionUpdate(MQTTConnectionStatus.reconnecting);
   }
 
   void dispose() {
-    _client.disconnect();
+    _client!.disconnect();
   }
 }
