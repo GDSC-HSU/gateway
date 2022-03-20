@@ -1,5 +1,7 @@
 // ignore_for_file: unnecessary_new
 
+import 'package:gateway/blocs/ble_sensor_controller/controller_state_from.dart';
+import 'package:gateway/config/constants/service_constants.dart';
 import 'package:gateway/model/covid_identification.dart';
 
 class DeviceSensorData {
@@ -27,6 +29,19 @@ class DeviceSensorData {
       covidIdentification = null;
     }
     isComplete = json['isComplete'];
+  }
+
+  DeviceSensorData.fromFromData(Map<String, dynamic> json) {
+    did = AppConstantsService.DEVICE_ID;
+    bodyTemperature = json[FromType.temperature.name];
+    faceMask = json[FromType.maskCamera.name];
+    final identificationMethod =
+        json[FromType.qrCamera.name] == null ? "RFID" : "QR";
+    final identificationData =
+        json[FromType.qrCamera.name] ?? json[FromType.identification.name];
+    covidIdentification = CovidIdentification.fromFormData(
+        method: identificationMethod, data: identificationData);
+    isComplete = true;
   }
 
   Map<String, dynamic> toJson() {

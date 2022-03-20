@@ -6,7 +6,7 @@ class DeviceInfo {
   late String oid;
   late String name;
   late String location;
-  late DeviceHardwareInfo? hardwareInfo;
+  late Map<String, dynamic>? hardwareInfo;
   late List<String> tags;
 
   DeviceInfo(
@@ -24,9 +24,7 @@ class DeviceInfo {
     oid = json['oid'];
     name = json['name'];
     location = json['location'];
-    hardwareInfo = json['hardwareInfo'] != null
-        ? DeviceHardwareInfo.fromJson(json['hardwareInfo'])
-        : null;
+    hardwareInfo = json['hardwareInfo'] != null ? json['hardwareInfo'] : null;
     tags = json['tags'].cast<String>();
   }
 
@@ -38,7 +36,7 @@ class DeviceInfo {
     data['name'] = name;
     data['location'] = location;
     if (hardwareInfo != null) {
-      data['hardwareInfo'] = hardwareInfo!.toJson();
+      data['hardwareInfo'] = hardwareInfo;
     }
     data['tags'] = tags;
     return data;

@@ -20,7 +20,6 @@ class BleSensorBloc extends Bloc<BleSensorEvent, BleSensorState> {
     });
 
     sensorBehavior.notify().listen((event) {
-      print(event);
       emit(BleSensorOnData(event, sensorType));
     });
   }

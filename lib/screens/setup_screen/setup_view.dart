@@ -21,8 +21,13 @@ class _SetupViewState extends State<SetupView> {
   final _curve = Curves.ease;
   int _currentPage = 0;
 
-  List<Widget> get _buildListScreen =>
-      [ScanScreen(), ConnectScreen(), ConfirmScreen()];
+  List<Widget> get _buildListScreen => [
+        ScanScreen(),
+        ConnectScreen(
+          onDone: () => _onClickSelectPage(2),
+        ),
+        ConfirmScreen()
+      ];
 
   @override
   void didChangeDependencies() {

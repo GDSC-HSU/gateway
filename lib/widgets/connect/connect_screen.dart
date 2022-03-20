@@ -12,7 +12,8 @@ import 'package:gateway/widgets/common/card_setup.dart';
 import 'package:gateway/widgets/connect/device_info.dart';
 
 class ConnectScreen extends StatefulWidget {
-  ConnectScreen({Key? key}) : super(key: key);
+  Function? onDone;
+  ConnectScreen({Key? key, this.onDone}) : super(key: key);
 
   @override
   _ConnectScreenState createState() => _ConnectScreenState();
@@ -78,12 +79,13 @@ class _ConnectScreenState extends State<ConnectScreen> {
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 30.h, vertical: 24.h),
-                                  child: DeviceInfo(),
+                                  child: DeviceInfoScreen(),
                                 ),
                               )
                             : Center(
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 24.h),
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 24.h),
                                   child: Text(
                                     LocaleKeys.content_connect.tr(),
                                     style: TextStyle(
@@ -107,7 +109,9 @@ class _ConnectScreenState extends State<ConnectScreen> {
                       onFunction: () => {})
                   : AppBottomButton(
                       bgColor: GatewayColors.buttonBgLight,
-                      title: isWantToConnect ? LocaleKeys.connect.tr() : LocaleKeys.next.tr(),
+                      title: isWantToConnect
+                          ? LocaleKeys.connect.tr()
+                          : LocaleKeys.next.tr(),
                       leftIconButton: isWantToConnect
                           ? const Icon(
                               Icons.compare_arrows,
@@ -127,6 +131,11 @@ class _ConnectScreenState extends State<ConnectScreen> {
                                 bloc.add(BLEDeviceConnectionRequestEvent(
                                     bleScanBloc.device!.id))
                                 // }
+                              }
+                            else if (state.connectionSate ==
+                                DeviceConnectionState.connected)
+                              {
+                                if (widget.onDone != null) {widget.onDone!()}
                               }
                           })
             ],

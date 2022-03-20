@@ -10,6 +10,12 @@ class CovidIdentification {
     identificationData = json['identificationData'];
   }
 
+  CovidIdentification.fromFormData(
+      {required String method, required String data}) {
+    identificationMethod = method;
+    identificationData = data;
+  }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['identificationMethod'] = identificationMethod;

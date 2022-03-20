@@ -20,7 +20,7 @@ class GoogleMLKitQRService extends ITensorFlowCommon<InputImage, String> {
     var qrRecognitions = await _barcodeScanner.processImage(data);
     for (var element in qrRecognitions) {
       sink.add(element.value.rawValue!);
-      print(element.value.rawValue);
+      // print(element.value.rawValue);
     }
     isBusy = false;
     return;

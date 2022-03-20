@@ -6,8 +6,6 @@
     "confirm": "Confirm",
     "scan_begin_text": "Now press scan button to find device",
     "ble_device_not_found": "Ops the device not found! Make sure you have turn it on",
-
-    
     "welcome_to_gateway": "Welcome To Gateway",
     "content_welcome": "We’re “google developer student clubs of hoa sen university” (gdsc-hsu) which create an solution for the coivd-19 out-break.",
     "i_agree_with_gateway": "I agree with gateway",
@@ -40,9 +38,11 @@
     "check_info": "CHECK INFORMATION",
     "congratulation": "Congratulation",
     "online": "online",
+    "offline": "offline",
     "device_name": "Device Name",
     "device_id": "Device ID",
     "content_congratulation": "Device has been added to your oganization",
     "privacy_policy": "“Privacy policy”",
-    "term_of_services": "“Term of services”"
+    "term_of_services": "“Term of services”",
+    "please_rescan": "Please rescan"
 }

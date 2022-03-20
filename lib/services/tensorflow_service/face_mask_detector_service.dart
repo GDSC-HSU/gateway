@@ -17,6 +17,7 @@ class FaceMaskDetectorService extends ITensorFlowCommon<CameraImage, bool> {
   // TODO using threading for alocate IMG translation for Dart
   @override
   Future<void> inference(CameraImage img) async {
+    if (isBusy) return;
     isBusy = true;
     //
     final unionBytes = img.planes.map((e) => e.bytes).toList();
@@ -24,8 +25,11 @@ class FaceMaskDetectorService extends ITensorFlowCommon<CameraImage, bool> {
       bytesList: unionBytes,
       imageHeight: img.height,
       imageWidth: img.width,
-      threshold: 0.3,
+      imageMean: 127.5,
+      imageStd: 127.5,
+      rotation: 90,
       numResults: 2,
+      threshold: 0.3,
       asynch: true,
     );
     //

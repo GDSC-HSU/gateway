@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:gateway/config/constants/service_constants.dart';
 import 'package:gateway/model/device_hardware_info.dart';
+import 'package:gateway/model/device_info.dart';
 import 'package:gateway/model/device_sensor.dart';
 import 'package:http/http.dart' as http;
 
@@ -35,7 +36,7 @@ class DeviceService {
     }
   }
 
-  Future<void> postDeviceDetail(Map info) async {
+  Future<DeviceInfo> postDeviceDetail(Map<String, dynamic> info) async {
     // device header
     final headers = <String, String>{
       AppConstantsService.API_KEY_HEADER: AppConstantsService.API_KEY,
@@ -57,7 +58,9 @@ class DeviceService {
       var response =
           await http.post(url, headers: headers, body: jsonEncode(body));
       if (response.statusCode == 200) {
-        return;
+        final json = jsonDecode(response.body);
+        final data = DeviceInfo.fromJson(json);
+        return data;
       } else {
         throw "[Dev] Error";
       }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gateway/blocs/mqtt_connection/mqtt_connection_cubit.dart';
-import 'package:gateway/blocs/mqtt_connection/mqtt_connection_cubit.dart';
+import 'package:gateway/config/themes/gateway_color.dart';
 
 class MQTTConnectionScreen extends StatefulWidget {
   const MQTTConnectionScreen({Key? key}) : super(key: key);
@@ -32,10 +32,12 @@ class _MQTTConnectionScreenState extends State<MQTTConnectionScreen> {
           builder: (context, state) {
             if (state == const MQTTConnectionState.connecting()) {
               return Container(
-                  width: 200, height: 200, child: CircularProgressIndicator());
+                  width: 200, height: 200, child: CircularProgressIndicator(
+                    color: GatewayColors.buttonBgLight,
+                  ));
             }
             return Text(
-              state.status.name,
+              state.status.toString(),
               style: TextStyle(color: Colors.red),
             );
           },

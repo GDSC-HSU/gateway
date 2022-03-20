@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:gateway/blocs/ble_repository.dart';
+import 'package:gateway/config/constants/app_delay_timmer_constants.dart';
 import 'package:gateway/config/constants/ble_desgin_constants.g.dart'
     as ble_constants;
 import 'package:gateway/config/constants/app_delay_timmer_constants.dart';

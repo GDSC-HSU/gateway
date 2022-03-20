@@ -1,20 +1,27 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gateway/blocs/mqtt_connection/mqtt_connection_cubit.dart';
 import 'package:gateway/config/routes/routing.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/generated/locale_keys.g.dart';
+import 'package:gateway/model/device_info.dart';
 import 'package:gateway/model/language.dart';
 import 'package:gateway/services/device_config_service.dart';
+import 'package:gateway/services/mqtt_service.dart';
 import 'package:gateway/utils/check_language.dart';
 import 'package:gateway/widgets/common/build_appbar.dart';
 import 'package:gateway/widgets/common/button_custom.dart';
 
 class CongratulationScreen extends StatelessWidget {
-  const CongratulationScreen({Key? key}) : super(key: key);
+  final DeviceInfo deviceInfo;
+  const CongratulationScreen({Key? key, required this.deviceInfo})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    context.read<MQTTConnectionCubit>().connectToMQTTBroker();
     LanguageModel languageModel =
         CheckLanguage.checkLanguage(context.locale.languageCode);
     return Scaffold(
@@ -59,26 +66,37 @@ class CongratulationScreen extends StatelessWidget {
                     //scale: 0.5,
                   ),
                 ),
-                Positioned(
-                  bottom: 20.h,
-                  right: 35.h,
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.circle,
-                        color: GatewayColors.onlineColor,
-                        size: 20.sp,
+                BlocBuilder<MQTTConnectionCubit, MQTTConnectionState>(
+                  builder: (context, state) {
+                    // TODO add shimmer effect for [MQTTConnectionStatus.connecting]
+                    final isConnected =
+                        state.status == MQTTConnectionStatus.connected;
+                    return Positioned(
+                      bottom: 20.h,
+                      right: 35.h,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.circle,
+                            color: isConnected
+                                ? GatewayColors.onlineColor
+                                : GatewayColors.disableButtonBgLight,
+                            size: 20.sp,
+                          ),
+                          SizedBox(width: 10.h),
+                          Text(
+                            isConnected
+                                ? LocaleKeys.online.tr()
+                                : LocaleKeys.offline.tr(),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 15.sp,
+                                color: GatewayColors.textDefaultBgLight),
+                          )
+                        ],
                       ),
-                      SizedBox(width: 10.h),
-                      Text(
-                        LocaleKeys.online.tr(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 15.sp,
-                            color: GatewayColors.textDefaultBgLight),
-                      )
-                    ],
-                  ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -116,7 +134,7 @@ class CongratulationScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Location HSU Frontdoor',
+                          deviceInfo.name,
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
                             fontSize: 15.sp,
@@ -125,7 +143,7 @@ class CongratulationScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 20.h),
                         Text(
-                          'hsu-xxx',
+                          deviceInfo.location,
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
                             fontSize: 15.sp,
