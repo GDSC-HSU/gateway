@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/generated/locale_keys.g.dart';
 import 'package:overlay_dialog/overlay_dialog.dart';
@@ -54,23 +55,23 @@ class CustomerProgressDialog extends StatelessWidget {
                     child: Material(
                       color: Colors.transparent,
                       child: Container(
-                        padding: EdgeInsets.all(24.0),
+                        padding: EdgeInsets.all(20.h),
                         decoration: BoxDecoration(
                             color: GatewayColors.scaffoldBgLight,
                             borderRadius:
-                                BorderRadius.all(const Radius.circular(10.0))),
+                                BorderRadius.all(Radius.circular(10.r),),),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            CircularProgressIndicator(
+                            const CircularProgressIndicator(
                               color: GatewayColors.buttonBgLight,
                               strokeWidth: 2,
                             ),
-                            const SizedBox(height: 8),
+                            SizedBox(height: 10.h),
                             Text(LocaleKeys.please_wait.tr(),
                                 style: TextStyle(
-                                    color: GatewayColors.blur_background,),),
+                                    color: Colors.black87),),
                           ],
                         ),
                       ),

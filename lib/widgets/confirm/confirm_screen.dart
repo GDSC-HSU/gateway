@@ -9,14 +9,8 @@ import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/generated/locale_keys.g.dart';
 import 'package:gateway/model/device_identity.dart';
 import 'package:gateway/model/device_info.dart';
-import 'package:gateway/screens/test/mqtt_connection.dart';
-import 'package:gateway/services/device_config_service.dart';
-import 'package:gateway/services/device_service.dart';
-import 'package:gateway/services/organization_service.dart';
 import 'package:gateway/widgets/common/button_custom.dart';
 import 'package:gateway/widgets/common/card_setup.dart';
-import 'package:gateway/widgets/common/dialog/alert_style.dart';
-import 'package:gateway/widgets/common/dialog/dialog.dart';
 import 'package:gateway/widgets/common/dialog/progress_dialog.dart';
 import 'package:gateway/widgets/confirm/guide_confirm.dart';
 import 'package:gateway/widgets/confirm/organization_confirm.dart';
@@ -39,6 +33,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
   bool confirmOrganization = false;
   late DeviceInfo deviceInfo;
   late QrScanCubit _cubit;
+  late String qrConfigCode = '';  
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -94,12 +89,12 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                             ),
                             suffixIcon: GestureDetector(
                               onTap: () async {
-                                final String? qrConfigCode =
-                                    await Navigator.of(context).push<String>(
+                                qrConfigCode =
+                                    (await Navigator.of(context).push<String>(
                                   MaterialPageRoute<String>(
                                       builder: (BuildContext context) =>
                                           const QRScanDialog()),
-                                );
+                                ))!;
                                 if (qrConfigCode != null) {
                                   await BlocProvider.of<QrScanCubit>(context)
                                       .getOrganization(qrConfigCode);
