@@ -44,5 +44,10 @@
     "content_congratulation": "Thiết bị đã được thêm vào tổ chức của bạn",
     "privacy_policy": "“Chính sách bảo mật”",
     "term_of_services": "“Thời hạn của dịch vụ”",
-    "please_rescan": "Vui lòng hãy quét lại"
+    "please_rescan": "Vui lòng hãy quét lại",
+    "notification": "Thông báo",
+    "content_permisstion": "Vui lòng truy cập hệ thống để cung cấp quyền",
+    "cancel": "Hủy bỏ",
+    "setting": "Cài đặt",
+    "please_wait": "Vui lòng chờ..."
 }

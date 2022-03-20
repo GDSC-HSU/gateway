@@ -16,4 +16,7 @@ class GatewayColors {
   static const Color successColor = Color(0xFF41E198);
   static const Color failColor = Color(0xFFFF4234);
   static const Color onlineColor = Color(0xFF00FF19);
+  static const Color cancelButton = Color(0xFFeef1f7);
+  static const Color txtcancelButton = Color(0xFF797d82);
 }
+// 7f8284

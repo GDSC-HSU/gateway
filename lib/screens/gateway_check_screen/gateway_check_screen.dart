@@ -20,6 +20,7 @@ import 'package:gateway/widgets/common/build_appbar.dart';
 import 'package:gateway/main.dart';
 import 'package:gateway/services/camera_service.dart';
 import 'package:gateway/widgets/common/dialog/loading_dialog.dart';
+import 'package:gateway/widgets/common/dialog/progress_dialog.dart';
 import 'package:gateway/widgets/common/info_check_card.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:rxdart/transformers.dart';
@@ -113,7 +114,7 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
                 // cameraService.stopImgStream();
               }
               if (state is GatewayCheckUploading) {
-                await showLoadingDialog(context);
+                await WalletProgressDialog.show(context);
               }
               if (state is GatewayCheckUploadedSuccessful) {
                 Navigator.of(context).pop();

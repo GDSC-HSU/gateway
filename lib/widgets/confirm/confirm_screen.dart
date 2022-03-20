@@ -15,6 +15,9 @@ import 'package:gateway/services/device_service.dart';
 import 'package:gateway/services/organization_service.dart';
 import 'package:gateway/widgets/common/button_custom.dart';
 import 'package:gateway/widgets/common/card_setup.dart';
+import 'package:gateway/widgets/common/dialog/alert_style.dart';
+import 'package:gateway/widgets/common/dialog/dialog.dart';
+import 'package:gateway/widgets/common/dialog/progress_dialog.dart';
 import 'package:gateway/widgets/confirm/guide_confirm.dart';
 import 'package:gateway/widgets/confirm/organization_confirm.dart';
 import 'package:gateway/widgets/confirm/qr_scan_dialog.dart';
@@ -133,10 +136,14 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                       BlocBuilder<QrScanCubit, QrScanState>(
                         builder: (context, state) {
                           if (state is QrScanLoading) {
-                            return Center(
+                            return Padding(
+                              padding: EdgeInsets.only(top: 100.h),
+                              child: const Center(
                                 child: CircularProgressIndicator(
-                              color: GatewayColors.buttonBgLight,
-                            ));
+                                  color: GatewayColors.buttonBgLight,
+                                ),
+                              ),
+                            );
                           }
                           if (state is QrScanSuccess) {
                             return OrganizationConfirm(
@@ -149,7 +156,11 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                             );
                           }
                           if (state is QrScanError) {
-                            return Center(child: Text(state.error.toString()));
+                            return Padding(
+                              padding: EdgeInsets.only(top: 100.h),
+                              child:
+                                  Center(child: Text(state.error.toString())),
+                            );
                           }
                           return GuideConfirm();
                         },
@@ -202,35 +213,12 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
       ),
     );
   }
-
-  // _handleQRConfig(String qrAsString) async {
-  //   try {
-  //     final json = jsonDecode(qrAsString);
-  //     final deviceIdentity = DeviceIdentity.fromJson(json);
-  //     await DeviceIdentityService.saveDeviceIdentityConfig(deviceIdentity);
-  //   } catch (e) {
-  //     throw "[DEV] error JSON Decode";
-  //   }
-  // }
-
-  // _deviceClaim() async {
-  //   final deviceInfo = await DeviceService.getDeviceInfo();
-  //   await DeviceService().postDeviceDetail(deviceInfo);
-  // }
-
-  // _getOrg() async {
-  //   final orgInfo = await OrganizationService().getOrgPreview();
-  //   print(orgInfo);
-  // }
 }
 
 extension StateHandler on _ConfirmScreenState {
   _stateListener(BuildContext context, QrScanState state) {
     if (state is ConfirmOrganizationWaiting) {
-      // deviceInfo = state.deviceInfo;
-      // _cubit.confirmOrganization();
-
-      return CircularProgressIndicator();
+      return WalletProgressDialog.show(context);
     }
     if (state is ConfirmOrganizationSuccessful) {
       final data = state.deviceInfo;
