@@ -31,7 +31,7 @@ We've been in those situation and manual "Guidance & Prevenence" of coronavirus 
 
 <p align=center style="background-color:whitesmoke; padding:10px"> <img src="https://img.shields.io/badge/ours--goal-cost--effected-critial"> <img src="https://img.shields.io/badge/open--source-techonlogy-red">
 
-Within ours scope we define an "cost effected" "self-hostable" solution, ours goal is widespread this solution - with that in mind. We're aim to support this solution Documentation, Wiki and configuration by doing so we could encourage learner in high school, collages students build up this solution by their own.
+Within ours scope we define an "cost effected" "self-hostable" solution, ours goal is widespread this solution - with that in mind. We're aim to support this solution Documentation, [Wiki](https://github.com/GDSC-HSU/gateway/wiki/TEAM-DEVELOPMENT-SETUP) and configuration by doing so we could encourage learner in high school, collages students build up this solution by their own.
 
 further detail are covered in this issue ref [link](https://github.com/GDSC-HSU/gateway/issues/11)
 
