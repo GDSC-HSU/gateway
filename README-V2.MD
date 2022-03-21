@@ -65,9 +65,9 @@ We also `encourage undergraduate, learner, students` who might found interesting
 Project compose 4 git submodule
 
 1. Mobile Application  [current directory](./)
-2. IoT Embedded device [./ble_devices/](./ble_devices/)
-3. Backend Infrastructure [./gateway-core](./gateway-core/)
-4. Web Configuration – Management Dashboard [./gateway-dashboard](./gateway-dashboard/)
+2. IoT Embedded device [./ble_devices/](https://github.com/GDSC-HSU/gateway-devices)
+3. Backend Infrastructure [./gateway-core](https://github.com/GDSC-HSU/gateway-core)
+4. Web Configuration – Management Dashboard [./gateway-dashboard](https://github.com/GDSC-HSU/gateway-dashboard)
 
 
 
