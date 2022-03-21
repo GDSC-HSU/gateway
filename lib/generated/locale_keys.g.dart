@@ -47,5 +47,10 @@ abstract class  LocaleKeys {
   static const privacy_policy = 'privacy_policy';
   static const term_of_services = 'term_of_services';
   static const please_rescan = 'please_rescan';
+  static const notification = 'notification';
+  static const content_permisstion = 'content_permisstion';
+  static const cancel = 'cancel';
+  static const setting = 'setting';
+  static const please_wait = 'please_wait';
 
 }

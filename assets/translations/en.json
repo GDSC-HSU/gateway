@@ -44,5 +44,10 @@
     "content_congratulation": "Device has been added to your oganization",
     "privacy_policy": "“Privacy policy”",
     "term_of_services": "“Term of services”",
-    "please_rescan": "Please rescan"
+    "please_rescan": "Please rescan",
+    "notification": "Notification",
+    "content_permisstion": "Please access the system to provide permissions",
+    "cancel": "Cancel",
+    "setting": "Setting",
+    "please_wait": "Please wait..."
 }
