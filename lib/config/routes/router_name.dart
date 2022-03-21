@@ -7,6 +7,7 @@ import 'package:gateway/screens/congratulation_screen/congratulation_screen.dart
 import 'package:gateway/screens/gateway_check_screen/gateway_check_screen.dart';
 import 'package:gateway/screens/introduction_screen/introduction_screen.dart';
 import 'package:gateway/screens/setup_screen/setup_screen.dart';
+import 'package:gateway/widgets/ble_reconnect/ble_reconnect.dart';
 import 'package:gateway/widgets/confirm/confirm_screen.dart';
 import 'package:gateway/widgets/connect/connect_screen.dart';
 import 'package:gateway/widgets/scan/scan_screen.dart';
@@ -27,8 +28,9 @@ class RouterName {
         return MaterialPageRoute(builder: (context) => SetupScreen());
       case AppRouting.gatewayCheck:
         return MaterialPageRoute(
-            builder: (context) =>
-                AppBLESensorDependencyProvider(child: GatewayCheckScreen()));
+            builder: (context) => const BLEReconnect(
+                child: AppBLESensorDependencyProvider(
+                    child: GatewayCheckScreen())));
       case AppRouting.congratulation:
         return MaterialPageRoute(
             settings: settings,
