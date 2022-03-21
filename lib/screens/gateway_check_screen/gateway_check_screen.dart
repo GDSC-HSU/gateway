@@ -114,7 +114,7 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
                 // cameraService.stopImgStream();
               }
               if (state is GatewayCheckUploading) {
-                await WalletProgressDialog.show(context);
+                await GatewayProgressDialog.show(context);
               }
               if (state is GatewayCheckUploadedSuccessful) {
                 Navigator.of(context).pop();

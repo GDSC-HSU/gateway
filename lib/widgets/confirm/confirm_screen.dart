@@ -213,7 +213,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
 extension StateHandler on _ConfirmScreenState {
   _stateListener(BuildContext context, QrScanState state) {
     if (state is ConfirmOrganizationWaiting) {
-      return WalletProgressDialog.show(context);
+      return GatewayProgressDialog.show(context);
     }
     if (state is ConfirmOrganizationSuccessful) {
       final data = state.deviceInfo;

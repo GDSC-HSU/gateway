@@ -7,7 +7,7 @@ import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/generated/locale_keys.g.dart';
 import 'package:overlay_dialog/overlay_dialog.dart';
 
-class WalletProgressDialog {
+class GatewayProgressDialog {
   static DialogWidget? _dialog;
 
   static _initIfNeeded() {
