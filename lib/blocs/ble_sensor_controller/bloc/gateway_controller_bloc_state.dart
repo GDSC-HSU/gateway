@@ -11,6 +11,8 @@ class GatewayCheckUploading extends GatewayControllerState {}
 
 class GatewayCheckUploadedSuccessful extends GatewayControllerState {}
 
+class GatewayCheckUploadError extends GatewayControllerState {}
+
 class BleSensorControllerInitial extends GatewayControllerState {}
 
 // class BleSensorControllerValidState extends GatewayControllerState {

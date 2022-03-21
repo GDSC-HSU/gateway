@@ -64,11 +64,15 @@ class GatewayControllerBloc
   _listFormEvent() {
     streamHexoStateSub = hexoState.form.statusChanged.listen((event) async {
       if (hexoState.customControllerStatusValid()) {
-        final data = hexoState.toSensorData();
-        hexoState.resetFrom();
-        emit(GatewayCheckUploading());
-        await deviceService.postDeviceData(data);
-        emit(GatewayCheckUploadedSuccessful());
+        try {
+          final data = hexoState.toSensorData();
+          hexoState.resetFrom();
+          emit(GatewayCheckUploading());
+          await deviceService.postDeviceData(data);
+          emit(GatewayCheckUploadedSuccessful());
+        } catch (e) {
+          emit(GatewayCheckUploadError());
+        }
       }
     });
   }
