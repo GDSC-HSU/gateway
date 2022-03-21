@@ -1,4 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:gateway/generated/locale_keys.g.dart';
+import 'package:gateway/widgets/common/dialog/alert_style.dart';
 import 'package:gateway/widgets/common/dialog/dialog.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
@@ -57,7 +60,8 @@ class PermissionUtils {
       print('Permission Permanently Denied');
       DialogUtils.showInformationDialog(
         context,
-        content: 'Please access the system to provide permissions',
+        type: AlertType.info,
+        content: LocaleKeys.content_permisstion.tr(),
         onPressed: () async {
           Navigator.of(context).pop();
           await openAppSettings();
@@ -70,7 +74,8 @@ class PermissionUtils {
       print('Permission Permanently Denied');
       DialogUtils.showInformationDialog(
         context,
-        content: 'Please access the system to provide permissions',
+        type: AlertType.info,
+        content: LocaleKeys.content_permisstion.tr(),
         onPressed: () async {
           Navigator.of(context).pop();
           await openAppSettings();

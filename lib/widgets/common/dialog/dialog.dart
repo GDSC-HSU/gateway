@@ -1,9 +1,12 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gateway/config/themes/gateway_color.dart';
+import 'package:gateway/generated/locale_keys.g.dart';
 
 import 'dart:async';
 import 'alert_style.dart';
@@ -135,12 +138,12 @@ class DialogUtils {
     Alert(
         style: AlertStyle(
             backgroundColor: Theme.of(context).dialogBackgroundColor,
-            titleStyle: Theme.of(context).textTheme.headline4!,
+            titleStyle: Theme.of(context).textTheme.headline5!,
             overlayColor: Colors.black38),
         context: context,
         barrierDismissible: barrierDismissible,
         showImageInDialog: true,
-        title: title ?? 'Notification',
+        title: title ?? LocaleKeys.notification.tr(),
         type: type,
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -159,27 +162,28 @@ class DialogUtils {
         buttons: [
           if (showCancelButton)
             DialogButton(
-              radius: BorderRadius.circular(16.r),
+              radius: BorderRadius.circular(10.r),
               margin: EdgeInsets.only(left: 16.h, right: 16.h),
               child: Text(
-                'Cancal',
+                LocaleKeys.cancel.tr(),
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.sp,
+                  color: GatewayColors.txtcancelButton,
+                  fontSize: 15.sp,
+                fontWeight: FontWeight.w500,
                 ),
               ),
-              color: Colors.redAccent,
+              color: GatewayColors.cancelButton,
               onPressed: onCancelPressed ?? () => Navigator.pop(context),
             ),
           DialogButton(
-            radius: BorderRadius.circular(16.r),
+            radius: BorderRadius.circular(10.r),
             margin: EdgeInsets.only(left: 16.h, right: 16.h),
             onPressed: onPressed ?? () => Navigator.pop(context),
             child: Text(
-              'Setting',
+              LocaleKeys.setting.tr(),
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 16.sp,
+                fontSize: 15.sp,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -261,7 +265,7 @@ class Alert {
 
   /// Alert dialog content widget
   Widget _buildDialog() {
-    var width = MediaQuery.of(context).size.width;
+    var width = MediaQuery.of(context).size.width*0.9;
     final Widget _child = ConstrainedBox(
       constraints: style.constraints ??
           BoxConstraints.expand(
@@ -327,7 +331,7 @@ class Alert {
               contentPadding: style.buttonAreaPadding,
               content: style.buttonsDirection == ButtonsDirection.row
                   ? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: _getButtons(),
                     )
                   : Column(
@@ -375,10 +379,8 @@ class Alert {
       if (buttons != null) {
         buttons!.forEach(
           (button) {
-            var buttonWidget = Padding(
-              padding: const EdgeInsets.only(left: 2, right: 2),
-              child: button,
-            );
+            var buttonWidget = button;
+            
             if ((button.width != null && buttons!.length == 1) ||
                 style.buttonsDirection == ButtonsDirection.column) {
               expandedButtons.add(buttonWidget);
@@ -429,7 +431,7 @@ class Alert {
         response = Icon(Icons.priority_high);
         break;
       case AlertType.info:
-        response = Icon(Icons.info);
+        response = Icon(Icons.info_outline, color: Colors.blueAccent,size: 22.sp,);
         break;
       case AlertType.warning:
         response = Icon(Icons.warning);
