@@ -32,6 +32,7 @@ class DeviceService {
         throw "[Dev] Error";
       }
     } catch (e) {
+      // incorrect data
       throw "[Dev] Error";
     }
   }

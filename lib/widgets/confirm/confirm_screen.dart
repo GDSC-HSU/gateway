@@ -9,12 +9,9 @@ import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/generated/locale_keys.g.dart';
 import 'package:gateway/model/device_identity.dart';
 import 'package:gateway/model/device_info.dart';
-import 'package:gateway/screens/test/mqtt_connection.dart';
-import 'package:gateway/services/device_config_service.dart';
-import 'package:gateway/services/device_service.dart';
-import 'package:gateway/services/organization_service.dart';
 import 'package:gateway/widgets/common/button_custom.dart';
 import 'package:gateway/widgets/common/card_setup.dart';
+import 'package:gateway/widgets/common/dialog/progress_dialog.dart';
 import 'package:gateway/widgets/confirm/guide_confirm.dart';
 import 'package:gateway/widgets/confirm/organization_confirm.dart';
 import 'package:gateway/widgets/confirm/qr_scan_dialog.dart';
@@ -36,16 +33,13 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
   bool confirmOrganization = false;
   late DeviceInfo deviceInfo;
   late QrScanCubit _cubit;
+  late String qrConfigCode = '';
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => QrScanCubit(),
       child: GestureDetector(
         onTap: () {
-          // FocusScopeNode currentFocus = FocusScope.of(context);
-          // if (!currentFocus.hasPrimaryFocus) {
-          //   currentFocus.unfocus();
-          // }
           FocusScope.of(context).unfocus();
         },
         child: SingleChildScrollView(
@@ -91,12 +85,12 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                             ),
                             suffixIcon: GestureDetector(
                               onTap: () async {
-                                final String? qrConfigCode =
-                                    await Navigator.of(context).push<String>(
+                                qrConfigCode =
+                                    (await Navigator.of(context).push<String>(
                                   MaterialPageRoute<String>(
                                       builder: (BuildContext context) =>
                                           const QRScanDialog()),
-                                );
+                                ))!;
                                 if (qrConfigCode != null) {
                                   await BlocProvider.of<QrScanCubit>(context)
                                       .getOrganization(qrConfigCode);
@@ -133,10 +127,14 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                       BlocBuilder<QrScanCubit, QrScanState>(
                         builder: (context, state) {
                           if (state is QrScanLoading) {
-                            return Center(
+                            return Padding(
+                              padding: EdgeInsets.only(top: 100.h),
+                              child: const Center(
                                 child: CircularProgressIndicator(
-                              color: GatewayColors.buttonBgLight,
-                            ));
+                                  color: GatewayColors.buttonBgLight,
+                                ),
+                              ),
+                            );
                           }
                           if (state is QrScanSuccess) {
                             return OrganizationConfirm(
@@ -149,7 +147,11 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                             );
                           }
                           if (state is QrScanError) {
-                            return Center(child: Text(state.error.toString()));
+                            return Padding(
+                              padding: EdgeInsets.only(top: 100.h),
+                              child:
+                                  Center(child: Text(state.error.toString())),
+                            );
                           }
                           return GuideConfirm();
                         },
@@ -202,38 +204,16 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
       ),
     );
   }
-
-  // _handleQRConfig(String qrAsString) async {
-  //   try {
-  //     final json = jsonDecode(qrAsString);
-  //     final deviceIdentity = DeviceIdentity.fromJson(json);
-  //     await DeviceIdentityService.saveDeviceIdentityConfig(deviceIdentity);
-  //   } catch (e) {
-  //     throw "[DEV] error JSON Decode";
-  //   }
-  // }
-
-  // _deviceClaim() async {
-  //   final deviceInfo = await DeviceService.getDeviceInfo();
-  //   await DeviceService().postDeviceDetail(deviceInfo);
-  // }
-
-  // _getOrg() async {
-  //   final orgInfo = await OrganizationService().getOrgPreview();
-  //   print(orgInfo);
-  // }
 }
 
 extension StateHandler on _ConfirmScreenState {
   _stateListener(BuildContext context, QrScanState state) {
     if (state is ConfirmOrganizationWaiting) {
-      // deviceInfo = state.deviceInfo;
-      // _cubit.confirmOrganization();
-
-      return CircularProgressIndicator();
+      GatewayProgressDialog.show(context);
     }
     if (state is ConfirmOrganizationSuccessful) {
       final data = state.deviceInfo;
+      GatewayProgressDialog.hide(context);
       Navigator.pushReplacementNamed(context, AppRouting.congratulation,
           arguments: data);
     }
