@@ -19,13 +19,15 @@ class BLERepository {
 
 // TODO BLE STAtUS CHECK SCREEN
 
-  Future<void> connect(String deviceID) async {
+  Future<void> connect(String deviceID, {bool isDelay = true}) async {
     try {
       if (isBLEPermissionEnable) {
         // deviceConnectionStream = BehaviorSubject();
         _subscription = ble.connectToDevice(id: deviceID).asyncMap((event) {
           if (event.connectionState == DeviceConnectionState.connected) {
-            return Future.delayed(BLETimer.scanDelay, () => event);
+            return isDelay
+                ? Future.delayed(BLETimer.scanDelay, () => event)
+                : Future.value(event);
           }
           return Future.value(event);
         }).listen((event) {

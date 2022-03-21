@@ -4,8 +4,10 @@ class BleDeviceConnectionState extends Equatable {
   final ConnectionStateUpdate? deviceConnectionState;
 
   get deviceId => deviceConnectionState!.deviceId;
-  DeviceConnectionState? get connectionSate =>
-      deviceConnectionState?.connectionState;
+
+  DeviceConnectionState get connectionSate =>
+      deviceConnectionState?.connectionState ??
+      DeviceConnectionState.disconnected;
 
   const BleDeviceConnectionState(this.deviceConnectionState);
 

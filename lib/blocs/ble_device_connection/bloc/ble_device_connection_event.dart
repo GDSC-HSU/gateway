@@ -16,8 +16,10 @@ class BLEDeviceConnectionUpdateEvent extends BleDeviceConnectionEvent {
 
 class BLEDeviceConnectionRequestEvent extends BleDeviceConnectionEvent {
   final String scannedDeviceId;
+  final bool isDelay;
 
-  const BLEDeviceConnectionRequestEvent(this.scannedDeviceId);
+  const BLEDeviceConnectionRequestEvent(this.scannedDeviceId,
+      {this.isDelay = true});
 
   @override
   // TODO: implement props

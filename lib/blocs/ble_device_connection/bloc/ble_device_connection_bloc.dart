@@ -31,7 +31,7 @@ class BleDeviceConnectionBloc
 
   _handleBLEDeviceConnectionRequest(BLEDeviceConnectionRequestEvent event,
       Emitter<BleDeviceConnectionState> emit) {
-    repository.connect(event.scannedDeviceId);
+    repository.connect(event.scannedDeviceId, isDelay: event.isDelay);
   }
 
   _handleBLEDeviceConnectionEventUpdate(BLEDeviceConnectionUpdateEvent event,
