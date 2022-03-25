@@ -7,4 +7,5 @@ class AppRouting {
   static const String gatewayCheck = "gatewayCheck";
   static const String settings = "settings";
   static const String congratulation = "congratulation";
+  static const String advScreen = "advScreen";
 }
