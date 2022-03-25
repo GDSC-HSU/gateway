@@ -103,6 +103,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                                   //   confirmOrganization = !confirmOrganization;
                                   // });
                                 }
+                                // GatewayProgressDialog.show(context);
                               },
                               child: Icon(
                                 Icons.filter_center_focus,
