@@ -9,7 +9,6 @@ import 'package:gateway/app.dart';
 import 'package:gateway/firebase_options.dart';
 import 'package:gateway/services/device_config_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter/services.dart';
 
 late List<CameraDescription> cameras;
 
