@@ -24,7 +24,13 @@ class BleSensorControllerInitial extends GatewayControllerState {}
 //   List<Object> get props => [hexoState];
 // }
 
-class GatewayNoMotionDetected extends GatewayControllerState {}
+class GatewayMotionDetected extends GatewayControllerState {
+  final bool isMotionAppear;
+
+  GatewayMotionDetected(this.isMotionAppear);
+  @override
+  List<Object> get props => [isMotionAppear];
+}
 
 class BleSensorControllerInValidState extends GatewayControllerState {
   final SensorType sensorTypeLocation;

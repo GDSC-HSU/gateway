@@ -6,6 +6,7 @@ import 'package:gateway/blocs/ble_sensor/ble_sensor.dart';
 import 'package:gateway/blocs/ble_sensor/bloc/ble_sensor_bloc.dart';
 import 'package:gateway/blocs/ble_sensor_controller/controller_state.dart';
 import 'package:gateway/blocs/ble_sensor_controller/controller_state_from.dart';
+import 'package:gateway/extension.dart';
 import 'package:gateway/services/device_service.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -37,14 +38,20 @@ class GatewayControllerBloc
 
     // listen and add data to hexo State
 
-    on<GatewayControllerBLESensorDataEvent>((event, emit) => {
-          if (event.sensorType != SensorType.radar)
-            {hexoState.addBLEDataToForm(event)}
-          else
-            {_ifNoMovementRestartFrom()}
-        });
+    on<GatewayControllerBLESensorDataEvent>(_hanldeOnDataEvent);
 
     on<BleSensorControllerResetEvent>((event, emit) => {hexoState.resetFrom()});
+  }
+
+  FutureOr<void> _hanldeOnDataEvent(GatewayControllerBLESensorDataEvent event,
+      Emitter<GatewayControllerState> emit) {
+    if (event.sensorType != SensorType.radar) {
+      hexoState.addBLEDataToForm(event);
+    } else {
+      var isMotion = int.parse(event.data.asBLEData) == 1 ? true : false;
+      _ifNoMovementRestartFrom();
+      emit(GatewayMotionDetected(isMotion));
+    }
   }
 
   _initListenSenorData() {
