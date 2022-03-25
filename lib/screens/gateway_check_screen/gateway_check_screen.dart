@@ -112,9 +112,14 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
             }
             return BlocListener<GatewayControllerBloc, GatewayControllerState>(
               listener: (context, state) async {
-                if (state is GatewayNoMotionDetected) {
-                  // TODO playAudio for user
-                  // cameraService.stopImgStream();
+                if (state is GatewayMotionDetected) {
+                  // if (state.isMotionAppear) {
+                  //   Navigator.of(context)
+                  //       .popUntil(ModalRoute.withName(AppRouting.gatewayCheck));
+                  // } else {
+                  //   await Navigator.of(context)
+                  //       .pushNamed(AppRouting.introduction);
+                  // }
                 }
                 if (state is GatewayCheckUploading) {
                   await GatewayProgressDialog.show(context);
