@@ -33,17 +33,13 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
   bool confirmOrganization = false;
   late DeviceInfo deviceInfo;
   late QrScanCubit _cubit;
-  late String qrConfigCode = '';  
+  late String qrConfigCode = '';
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => QrScanCubit(),
       child: GestureDetector(
         onTap: () {
-          // FocusScopeNode currentFocus = FocusScope.of(context);
-          // if (!currentFocus.hasPrimaryFocus) {
-          //   currentFocus.unfocus();
-          // }
           FocusScope.of(context).unfocus();
         },
         child: SingleChildScrollView(
@@ -214,10 +210,11 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
 extension StateHandler on _ConfirmScreenState {
   _stateListener(BuildContext context, QrScanState state) {
     if (state is ConfirmOrganizationWaiting) {
-      return GatewayProgressDialog.show(context);
+      GatewayProgressDialog.show(context);
     }
     if (state is ConfirmOrganizationSuccessful) {
       final data = state.deviceInfo;
+      GatewayProgressDialog.hide(context);
       Navigator.pushReplacementNamed(context, AppRouting.congratulation,
           arguments: data);
     }

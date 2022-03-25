@@ -1,15 +1,18 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/generated/locale_keys.g.dart';
 import 'package:gateway/model/organization_info.dart';
+import 'package:shimmer/shimmer.dart';
 
 class OrganizationConfirm extends StatefulWidget {
-  const OrganizationConfirm({Key? key, 
-  required this.organizationInfo, 
-  required this.callBack, 
- }) : super(key: key);
+  const OrganizationConfirm({
+    Key? key,
+    required this.organizationInfo,
+    required this.callBack,
+  }) : super(key: key);
   final Function callBack;
   final OrganizationInfo organizationInfo;
 
@@ -26,9 +29,19 @@ class _OrganizationConfirmState extends State<OrganizationConfirm> {
         SizedBox(
           width: 277.w,
           height: 138.h,
-          child: Image.network(
-            widget.organizationInfo.imageUrl.toString(),
+          child: CachedNetworkImage(
+            imageUrl: widget.organizationInfo.imageUrl.toString(),
             fit: BoxFit.cover,
+            placeholder: (context, url) {
+              return Shimmer.fromColors(
+                baseColor: Colors.grey[300]!,
+                highlightColor: Colors.grey[100]!,
+                child: Container(
+                  width: 277.w,
+                  height: 138.h,
+                ),
+              );
+            },
           ),
         ),
         Padding(
@@ -79,40 +92,41 @@ class _OrganizationConfirmState extends State<OrganizationConfirm> {
                 ],
               ),
               SizedBox(height: 24.h),
-              thisOrganization ?
-              Align(
-                alignment: Alignment.bottomRight,
-                child: InkWell(
-                  onTap: () {
-                    widget.callBack();
-                    setState(() {
-                      thisOrganization = !thisOrganization;
-                    });
-                  },
-                  child: Container(
-                    width: 186.w,
-                    height: 36.h,
-                    decoration: BoxDecoration(
-                      color: GatewayColors.bgButtonColorHaveBorder,
-                      borderRadius: BorderRadius.circular(8.r),
-                      border: Border.all(
-                        color: GatewayColors.buttonBgLight,
-                        width: 1.h,
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        LocaleKeys.this_is_my_organization.tr(),
-                        style: TextStyle(
-                          color: Colors.black87,
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w400,
+              thisOrganization
+                  ? Align(
+                      alignment: Alignment.bottomRight,
+                      child: InkWell(
+                        onTap: () {
+                          widget.callBack();
+                          setState(() {
+                            thisOrganization = !thisOrganization;
+                          });
+                        },
+                        child: Container(
+                          width: 186.w,
+                          height: 36.h,
+                          decoration: BoxDecoration(
+                            color: GatewayColors.bgButtonColorHaveBorder,
+                            borderRadius: BorderRadius.circular(8.r),
+                            border: Border.all(
+                              color: GatewayColors.buttonBgLight,
+                              width: 1.h,
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              LocaleKeys.this_is_my_organization.tr(),
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-              ): Container(),
+                    )
+                  : Container(),
             ],
           ),
         ),

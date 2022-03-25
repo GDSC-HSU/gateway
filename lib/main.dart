@@ -22,6 +22,7 @@ Future<void> main() async {
   // final share = await SharedPreferences.getInstance();
   // share.clear();
   await DeviceIdentityService.ensureInitialized();
+  final isDeviceBeenConfigure = DeviceIdentityService.isDeviceBeenConfigured;
   cameras = await availableCameras();
   _portraitModeOnly();
   runApp(
@@ -29,7 +30,7 @@ Future<void> main() async {
       supportedLocales: const [Locale('en'), Locale('vi')],
       path: 'assets/translations',
       fallbackLocale: const Locale('en'),
-      child: const MyApp(),
+      child: MyApp(isConfigured: isDeviceBeenConfigure),
     ),
   );
 }
