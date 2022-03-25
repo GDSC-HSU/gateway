@@ -7,21 +7,33 @@ class AdvScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     int _current = 0;
     final List<String> imgList = [
       'assets/images/INFO.png',
       'assets/images/FIND_A_FAC.png',
       'assets/images/TALK.png',
       'assets/images/Core_team.png',
     ];
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      backgroundColor: Colors.white,
+      body: Stack(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset('assets/images/Logo_Google-DSC-Lockup-Centered.png'),
-          SizedBox(height: 30.h),
-          CarouselWithDotsPage(imgList: imgList),
+          Positioned(
+            right: -10.h,
+            child: Image.asset('assets/images/giphy.gif',scale: 1.3,),),
+          Padding(
+            padding: EdgeInsets.only(top: size.height *0.4),
+            child: Image.asset('assets/images/Logo_Google-DSC-Lockup-Centered.png'),
+          ),
+          Positioned(
+            bottom: 350.h,
+            child: Image.asset('assets/images/giphy_star.gif',scale: 2.5,),),
+          Padding(
+            padding: EdgeInsets.only(top: size.height *0.6),
+            child: CarouselWithDotsPage(imgList: imgList),
+          ),
         ],
       ),
     );

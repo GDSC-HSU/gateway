@@ -85,6 +85,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                             ),
                             suffixIcon: GestureDetector(
                               onTap: () async {
+                                //Navigator.pushNamed(context, AppRouting.advScreen);
                                 qrConfigCode =
                                     (await Navigator.of(context).push<String>(
                                   MaterialPageRoute<String>(

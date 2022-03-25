@@ -30,7 +30,7 @@ class _CarouselWithDotsPageState extends State<CarouselWithDotsPage> {
                     Image.asset(
                       item,
                       fit: BoxFit.cover,
-                      width: 1000,
+                      width: 400.h,
                     ),
                     Positioned(
                       bottom: 0.0,
@@ -48,14 +48,14 @@ class _CarouselWithDotsPageState extends State<CarouselWithDotsPage> {
                           ),
                         ),
                         padding: EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 10,
+                          horizontal: 20.h,
+                          vertical: 10.h,
                         ),
                         child: Text(
                           'No. ${widget.imgList.indexOf(item)} image',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 20.0,
+                            fontSize: 20.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -103,14 +103,14 @@ class _CarouselWithDotsPageState extends State<CarouselWithDotsPage> {
           }).toList(),
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(20.h, 30.h, 20.h, 0),
+          padding: EdgeInsets.fromLTRB(20.h, 10.h, 20.h, 0),
           child: Text(
             LocaleKeys.contentAdv.tr(),
             textAlign: TextAlign.center,
             style: TextStyle(
               color: GatewayColors.buttonBgLight,
               fontWeight: FontWeight.bold,
-              fontSize: 18,
+              fontSize: 16.sp,
             ),
           ),
         ),
