@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gateway/config/routes/routing.dart';
 import 'package:gateway/di/di_ble_sensor.dart';
 import 'package:gateway/model/device_info.dart';
+import 'package:gateway/screens/adv_screen/advScreen.dart';
 import 'package:gateway/screens/congratulation_screen/congratulation_screen.dart';
 import 'package:gateway/screens/gateway_check_screen/gateway_check_screen.dart';
 import 'package:gateway/screens/introduction_screen/introduction_screen.dart';
@@ -37,6 +38,10 @@ class RouterName {
             builder: (context) => CongratulationScreen(
                   deviceInfo: settings.arguments as DeviceInfo,
                 ));
+      case AppRouting.advScreen:
+        return MaterialPageRoute(
+          builder: (context) => AdvScreen(),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) {

@@ -52,5 +52,6 @@ abstract class  LocaleKeys {
   static const cancel = 'cancel';
   static const setting = 'setting';
   static const please_wait = 'please_wait';
+  static const contentAdv = 'contentAdv';
 
 }

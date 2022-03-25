@@ -19,8 +19,8 @@ Future<void> main() async {
   );
   await EasyLocalization.ensureInitialized();
   await FlutterReactiveBle().initialize();
-  // final share = await SharedPreferences.getInstance();
-  // share.clear();
+  final share = await SharedPreferences.getInstance();
+  share.clear();
   await DeviceIdentityService.ensureInitialized();
   final isDeviceBeenConfigure = DeviceIdentityService.isDeviceBeenConfigured;
   cameras = await availableCameras();
