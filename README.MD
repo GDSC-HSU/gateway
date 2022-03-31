@@ -104,3 +104,5 @@ Made with [contrib.rocks](https://contrib.rocks).
 
   ```flutter run```
 
+- More document run project with [Flutter](https://docs.flutter.dev/)
+
