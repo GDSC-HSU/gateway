@@ -106,3 +106,11 @@ Made with [contrib.rocks](https://contrib.rocks).
 
 - More document run project with [Flutter](https://docs.flutter.dev/)
 
+#### Gateway(main) UI tour
+
+
+
+https://user-images.githubusercontent.com/42218324/161300916-a2926435-dd75-46ed-95bf-829e779f6ab0.mp4
+
+
+
