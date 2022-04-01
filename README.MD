@@ -83,3 +83,26 @@ README.MD : are covered in each module for clearer explanation
 </a>
 
 Made with [contrib.rocks](https://contrib.rocks).
+
+#### How to run this project
+
+- Clone project to local machine:
+
+  ```git clone https://github.com/GDSC-HSU/gateway```
+
+- Open your terminal and run:
+
+  ```flutter pub get```
+
+- Connect real device (this app using camera and bluetooth so you should connect to real device)
+  
+  Follow this for connect your real device [Android](https://developer.android.com/studio/run/device) or [IOS](https://developer.apple.com/documentation/xcode/running-your-app-in-the-simulator-or-on-a-device)
+
+  We tested on: Iphone 6s (IOS 15.2) and Niko C20 (Android 10)
+
+- Finally run command and enjoy 🎉✨🎉✨:
+
+  ```flutter run```
+
+- More document run project with [Flutter](https://docs.flutter.dev/)
+
