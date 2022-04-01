@@ -69,7 +69,6 @@ class _CarouselWithDotsPageState extends State<CarouselWithDotsPage> {
 
     return Column(
       children: [
-        
         CarouselSlider(
           items: imageSliders,
           options: CarouselOptions(
@@ -103,7 +102,7 @@ class _CarouselWithDotsPageState extends State<CarouselWithDotsPage> {
           }).toList(),
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(20.h, 10.h, 20.h, 0),
+          padding: EdgeInsets.fromLTRB(20.h, 5.h, 20.h, 0),
           child: Text(
             LocaleKeys.contentAdv.tr(),
             textAlign: TextAlign.center,

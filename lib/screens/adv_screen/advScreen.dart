@@ -22,16 +22,26 @@ class AdvScreen extends StatelessWidget {
         children: [
           Positioned(
             right: -10.h,
-            child: Image.asset('assets/images/giphy.gif',scale: 1.3,),),
+            top: -35.h,
+            child: Image.asset(
+              'assets/images/giphy.gif',
+              scale: 1.3,
+            ),
+          ),
           Padding(
-            padding: EdgeInsets.only(top: size.height *0.4),
-            child: Image.asset('assets/images/Logo_Google-DSC-Lockup-Centered.png'),
+            padding: EdgeInsets.only(top: size.height * 0.4),
+            child: Image.asset(
+                'assets/images/Logo_Google-DSC-Lockup-Centered.png'),
           ),
           Positioned(
             bottom: 350.h,
-            child: Image.asset('assets/images/giphy_star.gif',scale: 2.5,),),
+            child: Image.asset(
+              'assets/images/giphy_star.gif',
+              scale: 2.5,
+            ),
+          ),
           Padding(
-            padding: EdgeInsets.only(top: size.height *0.6),
+            padding: EdgeInsets.only(top: size.height * 0.6),
             child: CarouselWithDotsPage(imgList: imgList),
           ),
         ],
