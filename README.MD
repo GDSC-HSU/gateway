@@ -78,20 +78,13 @@ Project compose 4 git submodule
 
 
 
-README.MD : are covered in each module for clearer explanation
+README.MD : are covered in each module for clearer explanation + installation + self-host solution
 
 
 ---
 
-#### Contributor:
-
-<a href="https://github.com/GDSC-HSU/gateway/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=GDSC-HSU/gateway" />
-</a>
-
-Made with [contrib.rocks](https://contrib.rocks).
-
 #### How to run this project
+**Bellow steps are required** to run fully gateway application which include Flutter - IOT - Web dashboard.
 
 - Clone project to local machine:
 
@@ -111,13 +104,28 @@ Made with [contrib.rocks](https://contrib.rocks).
 
   ```flutter run```
 
+- `Web dashboard` you need to sign-up and create organization for device configuration our public domain https://gdsc-gateway.web.app/ that will be required in Flutter for QRScan
+- `IoT device` you need an device for the application, detail how the device installation will be found [here](https://github.com/GDSC-HSU/gateway-devices#installation) device also required sensor if don't have those part please refer to our docs [how to mock BLE data over serial](https://github.com/GDSC-HSU/gateway-devices#dont-have-board-sensor-problem-solved)
 - More document run project with [Flutter](https://docs.flutter.dev/)
 
 #### Gateway(main) UI tour
-
-<img width=250px src="./docs/video/gateway-ui-tour.gif">
+<div style="display:flex;flex-direction:row">
+  <img width=250px src="./docs/video/gateway-ui-tour.gif">
+  <div style="margin-left:15px">
+    <h6 style="margin:0px">Minimal ui-flow</h6>
+    <div>1. Mobile required permission (BLE, camera)</div>
+    <div>2. IoT Device Scanning</div>
+    <div>3. Config Mobile device link to an organization via QR configure code</div>
+    <div>4. Main page (gateway check) <a href="https://github.com/GDSC-HSU/gateway/issues/51">detail here</a></div>
+  </div>
+</div>
 
 https://user-images.githubusercontent.com/42218324/161300916-a2926435-dd75-46ed-95bf-829e779f6ab0.mp4
 
+#### Contributor:
 
+<a href="https://github.com/GDSC-HSU/gateway/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=GDSC-HSU/gateway" />
+</a>
 
+Made with [contrib.rocks](https://contrib.rocks).
