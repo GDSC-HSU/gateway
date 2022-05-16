@@ -79,7 +79,8 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
       hexoState.addHardWareSensorToForm(event, FromType.qrCamera);
     });
     faceMaskDetectorServiceSub = faceMaskDetectorService.stream
-        // .debounceTime(Duration(milliseconds: 200))
+        .where((isWearMask) => isWearMask)
+        .throttleTime(const Duration(seconds: 1))
         .listen((event) {
       hexoState.addHardWareSensorToForm(event, FromType.maskCamera);
     });

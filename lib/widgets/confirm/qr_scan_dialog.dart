@@ -29,7 +29,9 @@ class _QRScanDialogState extends State<QRScanDialog> {
     // OMG :>
     _initializeControllerFuture = Future.wait([
       googleMLKitQRService.initModel(),
-      cameraService.initialize(cameraDescription: cameras.last)
+      cameraService.initialize(
+          cameraDescription: cameras.first,
+          cameraResolution: ResolutionPreset.high)
     ]).then((value) => cameraService.controller.startImageStream(
         (image) => googleMLKitQRService.inference(image.toInputImage())));
     super.initState();
@@ -72,6 +74,7 @@ class _QRScanDialogState extends State<QRScanDialog> {
                           builder: (builder, snapshot) {
                             var isLoading = true;
                             if (snapshot.hasData) {
+                              // TODO validate JSON format before pop
                               isLoading = false;
                             }
                             final qrString = snapshot.data;
