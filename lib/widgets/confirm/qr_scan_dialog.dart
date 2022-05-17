@@ -22,19 +22,32 @@ class QRScanDialog extends StatefulWidget {
 class _QRScanDialogState extends State<QRScanDialog> {
   CameraService cameraService = CameraService();
   GoogleMLKitQRService googleMLKitQRService = GoogleMLKitQRService();
+  var selectedCamera = 0;
   late Future<void> _initializeControllerFuture;
 
   @override
   void initState() {
     // OMG :>
+    _initCamera(selectedCamera);
+    super.initState();
+  }
+
+  _initCamera(int cameraIndex) {
     _initializeControllerFuture = Future.wait([
       googleMLKitQRService.initModel(),
       cameraService.initialize(
-          cameraDescription: cameras.first,
-          cameraResolution: ResolutionPreset.high)
+          cameraDescription: cameras[cameraIndex],
+          cameraResolution: ResolutionPreset.medium)
     ]).then((value) => cameraService.controller.startImageStream(
         (image) => googleMLKitQRService.inference(image.toInputImage())));
-    super.initState();
+  }
+
+  _takePicture() {}
+  _changeCamera() {
+    setState(() => {
+          selectedCamera = selectedCamera == 0 ? 1 : 0,
+          _initCamera(selectedCamera)
+        });
   }
 
   @override
@@ -64,6 +77,18 @@ class _QRScanDialogState extends State<QRScanDialog> {
                 children: [
                   Positioned.fill(
                       child: CameraPreview(cameraService.controller)),
+                  Align(
+                      alignment: Alignment.centerRight,
+                      child: ElevatedButton(
+                        onPressed: () => {_changeCamera()},
+                        child: const Icon(Icons.flip_camera_ios),
+                        style: ElevatedButton.styleFrom(
+                          shape: const CircleBorder(),
+                          padding: const EdgeInsets.all(20),
+                          primary: Colors.white,
+                          onPrimary: Colors.black,
+                        ),
+                      )),
                   Positioned(
                     bottom: 16.h,
                     right: 0,
@@ -85,7 +110,9 @@ class _QRScanDialogState extends State<QRScanDialog> {
                                   : GatewayColors.buttonBgLight,
                               title: "OK",
                               onFunction: () {
-                                Navigator.of(context).pop(qrString);
+                                if (!isLoading) {
+                                  Navigator.of(context).pop(qrString);
+                                }
                                 // Navigator.of(context).push<String>(
                                 //   MaterialPageRoute<String>(
                                 //       builder: (BuildContext context) =>
