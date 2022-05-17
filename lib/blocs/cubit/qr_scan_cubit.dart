@@ -16,7 +16,7 @@ part 'qr_scan_state.dart';
 
 class QrScanCubit extends Cubit<QrScanState> {
   QrScanCubit() : super(QrScanInitial());
-  _handleQRConfig(String qrAsString) async {
+  Future<void> _handleQRConfig(String qrAsString) async {
     try {
       final json = jsonDecode(qrAsString);
       final deviceIdentity = DeviceIdentity.fromJson(json);
@@ -53,10 +53,5 @@ class QrScanCubit extends Cubit<QrScanState> {
     emit(ConfirmOrganizationWaiting());
     DeviceInfo deviceInfo = await _deviceClaim();
     emit(ConfirmOrganizationSuccessful(deviceInfo: deviceInfo));
-  }
-
-  Future<void> getDeviceInfo() async {
-    DeviceInfo deviceInfo = await _deviceClaim();
-    emit(InfoDeviceSuccess(deviceInfo: deviceInfo));
   }
 }
