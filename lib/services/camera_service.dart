@@ -29,13 +29,14 @@ class CameraService {
     await controller.initialize();
   }
 
-  startImgStream() async {
+  // THIS function get the Camera out of callback are not do able, it could be stream notifier
+  Future<void> startImgStream() async {
     if (!isImgBeenStream) {
       await controller.startImageStream((image) => cameraImage = image);
     }
   }
 
-  stopImgStream() async {
+  Future<void> stopImgStream() async {
     if (isImgBeenStream) {
       await controller.stopImageStream();
       cameraImage = null;

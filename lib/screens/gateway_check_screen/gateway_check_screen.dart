@@ -12,6 +12,7 @@ import 'package:gateway/config/themes/gateway_color.dart';
 import 'package:gateway/di/di_ble_sensor.dart';
 import 'package:gateway/generated/locale_keys.g.dart';
 import 'package:gateway/model/language.dart';
+import 'package:gateway/screens/adv_screen/advScreen.dart';
 import 'package:gateway/services/tensorflow_service/extension.dart';
 import 'package:gateway/services/tensorflow_service/face_mask_detector_service.dart';
 import 'package:gateway/services/tensorflow_service/qr_code_service.dart';
@@ -64,13 +65,17 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
         cameraResolution: ResolutionPreset.low,
         cameraDescription: cameras.last,
       )
-    ]).then((value) => {
+    ]).then((value) async => {
           _mlServiceListener(),
           //TODO auto re-start
-          cameraService.controller.startImageStream((image) => {
-                googleMLKitQRService.inference(image.toInputImage()),
-                faceMaskDetectorService.inference(image)
-              })
+          await _startCameraImgStream()
+        });
+  }
+
+  Future<void> _startCameraImgStream() async {
+    await cameraService.controller.startImageStream((image) => {
+          googleMLKitQRService.inference(image.toInputImage()),
+          faceMaskDetectorService.inference(image)
         });
   }
 
@@ -84,6 +89,27 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
         .listen((event) {
       hexoState.addHardWareSensorToForm(event, FromType.maskCamera);
     });
+  }
+
+  Future<void> _navigateToAdScreen() async {
+    await Navigator.of(context).push(MaterialPageRoute(
+        settings: const RouteSettings(name: AppRouting.advScreen),
+        builder: (_) {
+          return BlocProvider.value(
+            value: bloc,
+            child: const AdvScreen(),
+          );
+        }));
+  }
+
+  Future<void> _resumeCamera() async {
+    await cameraService.controller.resumePreview();
+    await _startCameraImgStream();
+  }
+
+  Future<void> _pauseCamera() async {
+    await cameraService.controller.pausePreview();
+    await cameraService.controller.stopImageStream();
   }
 
   @override
@@ -114,13 +140,12 @@ class _GatewayCheckScreenState extends State<GatewayCheckScreen> {
             return BlocListener<GatewayControllerBloc, GatewayControllerState>(
               listener: (context, state) async {
                 if (state is GatewayMotionDetected) {
-                  // if (state.isMotionAppear) {
-                  //   Navigator.of(context)
-                  //       .popUntil(ModalRoute.withName(AppRouting.gatewayCheck));
-                  // } else {
-                  //   await Navigator.of(context)
-                  //       .pushNamed(AppRouting.introduction);
-                  // }
+                  if (!state.isMotionAppear) {
+                    await _pauseCamera();
+                    await _navigateToAdScreen();
+                  } else {
+                    await _resumeCamera();
+                  }
                 }
                 if (state is GatewayCheckUploading) {
                   await GatewayProgressDialog.show(context);
