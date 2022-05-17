@@ -65,7 +65,7 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/gateway_logo.png"
+  image_path: "assets/images/logo_launcher_gateway.png"
   adaptive_icon_background: "#ffffff"
   adaptive_icon_foreground: "assets/images/logo_launcher_gateway.png"
 
