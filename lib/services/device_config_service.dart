@@ -66,7 +66,8 @@ class DeviceIdentityService {
 
   static Future<void> _updateState({required bool isCached}) async {
     final _preferences = await SharedPreferences.getInstance();
-    _preferences.setBool(_isLocalBeenCachedKey, isCached);
+    _isLocalBeenCached = true;
+    await _preferences.setBool(_isLocalBeenCachedKey, isCached);
   }
 
   static Future<void> ensureInitialized() async {
