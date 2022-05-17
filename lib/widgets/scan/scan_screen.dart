@@ -22,6 +22,7 @@ class _ScanScreenState extends State<ScanScreen> {
     return SingleChildScrollView(
       child: BlocBuilder<BleScanBloc, BleScanState>(
         builder: (context, state) {
+          final isLoadingState = state == BleScanState.load();
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -42,13 +43,18 @@ class _ScanScreenState extends State<ScanScreen> {
               ),
               SizedBox(height: 25.h),
               AppBottomButton(
-                bgColor: GatewayColors.buttonBgLight,
+                bgColor: isLoadingState
+                    ? GatewayColors.disableButtonBgLight
+                    : GatewayColors.buttonBgLight,
                 leftIconButton: const Icon(
                   Icons.flip,
                   color: Colors.white,
                 ),
                 title: LocaleKeys.scan.tr(),
                 onFunction: () {
+                  if (bloc.state == BleScanState.load()) {
+                    return;
+                  }
                   bloc.add(BLEScanRequestEvent());
                 },
               ),
