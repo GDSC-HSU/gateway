@@ -61,8 +61,10 @@ class GatewayControllerBloc
     for (var sensor in listOfSensor) {
       sensor.stream.where((event) => event is BleSensorOnData).listen((sensor) {
         sensor = sensor as BleSensorOnData;
-        add(GatewayControllerBLESensorDataEvent(
-            sensor.data, sensor.sensorType));
+        if (!isClosed) {
+          add(GatewayControllerBLESensorDataEvent(
+              sensor.data, sensor.sensorType));
+        }
       });
       // .pipe(streamBleSensorDataConsumer);
     }
