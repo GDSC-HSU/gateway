@@ -18,9 +18,9 @@ Gateway is an open-source solution for covid 19 situation. Ours goal is provide 
 #### ```SOLUTION IN ACTION```
 We submit our solution in GDSC Solution challenge 2022 base on 17 Sustainable Development Goals of the United Nations more info could be found [here](https://developers.google.com/community/gdsc-solution-challenge) 
 
-Youtube : https://www.youtube.com/watch?v=W5LBuIvWCd8
+Youtube : https://www.youtube.com/watch?v=Kp13HX58oo4
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=W5LBuIvWCd8" target="_blank"><img src="http://img.youtube.com/vi/W5LBuIvWCd8/0.jpg" 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=Kp13HX58oo4" target="_blank"><img src="http://img.youtube.com/vi/Kp13HX58oo4/0.jpg" 
 alt="Gateway - GDSC Solution Challenge 2022"/></a>
 
 `An quick introduce of ours scope - TLDR`**`picture`**`is worth a thousand words ⬇️`
